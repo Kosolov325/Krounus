@@ -1,8 +1,12 @@
-53
+57
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
-qstr_Welcome_{s2}__GUID:_ Welcome_{s2}_(GUID:_{reg1},_PIN:_{s0})._{s1}
+qstr_s0:_{s0} s0:_{s0}
+qstr_s1:_{s1} s1:_{s1}
+qstr_s2:_{s2} s2:_{s2}
+qstr_s3:_{s3} s3:_{s3}
+qstr_Welcome_{s3}__GUID:_ Welcome_{s3}_(GUID:_{reg1},_PIN:_{s0})._{s1}
 qstr_You_have_{reg3}_gold You_have_{reg3}_gold_in_the_bank.
 qstr_Withdrawn_{reg2}_gol Withdrawn_{reg2}_gold._You_have_{reg3}_gold_left_in_the_bank.
 qstr_You_have_no_gold_in_ You_have_no_gold_in_the_bank_to_withdraw.
