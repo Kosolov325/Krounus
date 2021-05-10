@@ -228,11 +228,6 @@ scripts.extend([
      (try_end),
 
       #koso
-      (server_add_message_to_log, "@s0: {s0}"),
-      (server_add_message_to_log, "@s1: {s1}"),
-      (server_add_message_to_log, "@s2: {s2}"),
-      (server_add_message_to_log, "@s3: {s3}"),
-     
       (player_get_unique_id, reg1, ":player_id"),
       (str_store_player_username, s3, ":player_id"),
       (call_script, "script_log_equipment", ":player_id"),
@@ -442,7 +437,7 @@ scripts.extend([
     
       (else_try),
        (assign, reg24, 0),
-       (str_store_string, s1, "@null"),
+       (str_store_string, s1, 0),
       (try_end), #koso
     
       (player_get_unique_id, reg0, ":player_id"),
@@ -10299,10 +10294,6 @@ scripts.extend([
    
     (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
     (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
-         (server_add_message_to_log, "@s0: {s0}"),
-      (server_add_message_to_log, "@s1: {s1}"),
-      (server_add_message_to_log, "@s2: {s2}"),
-      (server_add_message_to_log, "@s3: {s3}"),
     (server_add_message_to_log, "@The player {s3} has connect with these items inside item banking: {s2}"),
     (str_regex_get_matches, ":amount", s1, s2, "str_regex", 20),
     (val_sub, ":amount", ":amount"), #just to prevent warnings

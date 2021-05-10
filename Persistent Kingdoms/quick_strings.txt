@@ -1,11 +1,7 @@
-57
+52
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
-qstr_s0:_{s0} s0:_{s0}
-qstr_s1:_{s1} s1:_{s1}
-qstr_s2:_{s2} s2:_{s2}
-qstr_s3:_{s3} s3:_{s3}
 qstr_Welcome_{s3}__GUID:_ Welcome_{s3}_(GUID:_{reg1},_PIN:_{s0})._{s1}
 qstr_You_have_{reg3}_gold You_have_{reg3}_gold_in_the_bank.
 qstr_Withdrawn_{reg2}_gol Withdrawn_{reg2}_gold._You_have_{reg3}_gold_left_in_the_bank.
@@ -21,7 +17,6 @@ qstr_SERVER_ADDRESS/servera SERVER_ADDRESS/serverapi/loadplayer?serverID=SERVER_
 qstr_SERVER_ADDRESS/serverap SERVER_ADDRESS/serverapi/loadgear?serverID=SERVER_ID&apiKey=SERVER_API_KEY&playerID={reg0}&guid={reg1}
 qstr_You_are_logged_in_as You_are_logged_in_as_an_admin,_your_stats_will_not_be_loaded,_or_saved_when_you_leave.
 qstr_SERVER_ADDRESS/serverapi SERVER_ADDRESS/serverapi/stripgear?serverID=SERVER_ID&apiKey=SERVER_API_KEY&guid={reg0}&pouchGold={reg1}
-qstr_null null
 qstr_The_player_{s0}_has_ The_player_{s0}_has_disconnect_with_these_items_inside_item_banking:{s1}
 qstr_SERVER_ADDRESS/serverapi/ SERVER_ADDRESS/serverapi/saveplayer?serverID=SERVER_ID&apiKey=SERVER_API_KEY&guid={reg0}&name={s0}&factionID={reg1}&classID={reg2}&pouchGold={reg3}&health={reg4}&food={reg5}&poison={reg6}&headArmour={reg7}&bodyArmour={reg8}&footArmour={reg9}&handArmour={reg10}&firstItem={reg11}&secondItem={reg12}&thirdItem={reg13}&forthItem={reg14}&firstAmmo={reg15}&secondAmmo={reg16}&thirdAmmo={reg17}&forthAmmo={reg18}&horse={reg19}&horseHealth={reg20}&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&ibankID={reg24}&ibank={s1}&alive
 qstr_SERVER_ADDRESS/serverapi/s SERVER_ADDRESS/serverapi/saveplayer?serverID=SERVER_ID&apiKey=SERVER_API_KEY&guid={reg0}&name={s0}&factionID={reg1}&classID={reg2}
