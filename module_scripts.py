@@ -2145,7 +2145,7 @@ scripts.extend([
             (str_store_player_username, s1, ":sender_player_id"),
             (try_begin), #Kosolov start
               (str_starts_with, s0, "@/"),
-              (call_script, "script_chat_commands", s0, ":sender_player_id"),
+              (call_script, "script_chat_commands", ":sender_player_id"),
             (else_try),
             (str_store_string, s0, "str_chat_format"),
             (server_add_message_to_log, "str_local_chat_log_format"),
@@ -9686,8 +9686,7 @@ scripts.extend([
     ]),
   #Kosolov
   ("cf_phs_give",
-   [(store_script_param, s0, 1),
-    (store_script_param, ":player_id", 2),
+   [(store_script_param, ":player_id", 1),
     
     (str_store_substring, s0, s0, 9),
 
@@ -9712,6 +9711,7 @@ scripts.extend([
           (assign, ":giveable", 1),
         (try_end),
       (try_end),
+    
        (eq, ":giveable", 1),
        (try_begin),
         (eq, ":give_owner", 1),
@@ -9741,6 +9741,7 @@ scripts.extend([
       (try_end),
        (assign, reg0, ":error"),
     ]),
+  
   ("phs_info",
    [(store_script_param, ":player_id", 1),
      (try_begin),
@@ -9756,8 +9757,7 @@ scripts.extend([
      ]),
   
   ("chat_commands",
-  [(store_script_param, s0, 1),
-   (store_script_param, ":player_id", 2),
+  [(store_script_param, ":player_id", 1),
 
    (str_store_substring, s0, s0, 1),
    (assign, ":failure", 0),
@@ -9767,7 +9767,7 @@ scripts.extend([
    (else_try),
      (str_starts_with, s0, "@phs give ", 1),
      (assign, reg0, 1),
-     (call_script, "script_cf_phs_give", s0, ":player_id"),
+     (call_script, "script_cf_phs_give", ":player_id"),
      (assign, ":failure", reg0),
    (else_try),
      (str_equals, s0, "@id", 1),
