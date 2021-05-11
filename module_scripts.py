@@ -9689,10 +9689,11 @@ scripts.extend([
    [(store_script_param, s0, 1),
     (store_script_param, ":player_id", 2),
     
-    (str_store_substring, s0, s0, 8),
-   
-    (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 3),
+    (str_store_substring, s0, s0, 9),
+
+    (assign, ":error", 0),
     (str_clear, s1),
+    (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 3),
     (str_to_num, ":target_player_id", s1),
     (str_to_num, ":target_door_id", s2),
     (str_to_num, ":give_owner", s3),
@@ -9764,7 +9765,7 @@ scripts.extend([
       (str_equals, s0, "@phs", 1),
       (call_script, "script_phs_info", ":player_id"),
    (else_try),
-     (str_starts_with, s0, "@phs give"),
+     (str_starts_with, s0, "@phs give ", 1),
      (assign, reg0, 1),
      (call_script, "script_cf_phs_give", s0, ":player_id"),
      (assign, ":failure", reg0),

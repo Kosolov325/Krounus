@@ -51,7 +51,7 @@ qstr___/phs_give__player_ _'/phs_give_(player_id)_(door_id)'_gives_someone's_acc
 qstr___/phs_remove__playe _'/phs_remove_(player_id)_(door_id)'_removes_someone's_access.
 qstr___/id__seek_for_some _'/id'_seek_for_someone's_id_or_yours.
 qstr_phs phs
-qstr_phs_give phs_give
+qstr_phs_give_ phs_give_
 qstr_id id
 qstr_That_s_your_ID:_{reg That's_your_ID:_{reg0}
 qstr_ERROR:_Inexistent_co ERROR:_Inexistent_command_or_something_went_wrong!
