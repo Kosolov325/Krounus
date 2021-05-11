@@ -2143,6 +2143,10 @@ scripts.extend([
             (gt, ":agent_id", -1),
             (agent_is_alive, ":agent_id"),
             (str_store_player_username, s1, ":sender_player_id"),
+            (try_begin), #Kosolov start
+              (str_starts_with, s0, "@/"),
+              (call_script, "script_chat_commands", s0, ":sender_player_id"),
+            (else_try),
             (str_store_string, s0, "str_chat_format"),
             (server_add_message_to_log, "str_local_chat_log_format"),
             (try_begin),
@@ -2171,6 +2175,7 @@ scripts.extend([
               (position_has_line_of_sight_to_position, pos1, pos2),
               (multiplayer_send_string_to_player, ":other_player_id", ":server_event", s0),
             (try_end),
+            (try_end), #Kosolov end
           (else_try), # event type to change a faction's name (not really a chat message, but uses the system for more reliability)
             (eq, ":chat_event_type", chat_event_type_set_faction_name),
             (player_get_slot, ":faction_id", ":sender_player_id", slot_player_faction_id),
@@ -9679,19 +9684,146 @@ scripts.extend([
     (prop_instance_animate_to_position, ":instance_id", pos2, 100),
     (scene_prop_set_slot, ":instance_id", slot_scene_prop_target_position, 0),
     ]),
+  #Kosolov
+  ("cf_phs_give",
+   [(store_script_param, s0, 1),
+    (store_script_param, ":player_id", 2),
+    
+    (str_store_substring, s0, s0, 8),
+   
+    (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 3),
+    (str_clear, s1),
+    (str_to_num, ":target_player_id", s1),
+    (str_to_num, ":target_door_id", s2),
+    (str_to_num, ":give_owner", s3),
+   
+    (player_is_active, ":target_player_id"),
+   
+      (try_begin),
+        (player_is_admin, ":player_id"),
+        (assign, ":giveable", 1),
+        (assign, ":give_owner_bypass", 1),
+      (else_try),
+         (neg|player_is_admin, ":player_id"),
+         (eq, ":amount", 2),
+         (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id_ow, slot_player_pdoor_ow_end),
+          (player_slot_eq, ":player_id", ":pdoor_slot_id", ":target_door_id"),
+          (assign, ":giveable", 1),
+        (try_end),
+      (try_end),
+       (eq, ":giveable", 1),
+       (try_begin),
+        (eq, ":give_owner", 1),
+        (eq, ":give_owner_bypass", 1),
+        (assign, ":end", slot_player_pdoor_end),
+         (try_for_range, ":slot_loop", slot_player_pdoor_id, ":end"),
+          (player_slot_eq, ":target_player_id", ":slot_loop", 0),
+          (player_set_slot, ":target_player_id", ":slot_loop", ":target_door_id"),
+          (assign, ":end", slot_player_pdoor_id),
+         (try_end),
 
+         (assign, ":end", slot_player_pdoor_ow_end),
+         (try_for_range, ":slot_loop_2", slot_player_pdoor_id_ow, ":end"),
+          (player_slot_eq, ":target_player_id", ":slot_loop_2", 0),
+          (player_set_slot, ":target_player_id", ":slot_loop_2", ":target_door_id"),
+          (assign, ":end",  slot_player_pdoor_id_ow),
+         (try_end),
+       (else_try),
+         (assign, ":end", slot_player_pdoor_end),
+         (try_for_range, ":slot_loop", slot_player_pdoor_id, ":end"),
+           (player_slot_eq, ":target_player_id", ":slot_loop", 0),
+           (player_set_slot, ":target_player_id", ":slot_loop", ":target_door_id"),
+           (assign, ":end", slot_player_pdoor_id),
+         (try_end),
+      (else_try),
+         (assign, ":error", 1),
+      (try_end),
+       (assign, reg0, ":error"),
+    ]),
+  ("phs_info",
+   [(store_script_param, ":player_id", 1),
+     (try_begin),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@------------------------------------------------------------------------------"),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@                         Private Housing System                               "),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ '/phs give (player_id) (door_id)' gives someone's access."),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ '/phs remove (player_id) (door id)' removes someone's access."),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ '/id' seek for someone's id or yours."),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@------------------------------------------------------------------------------"),
+     (try_end),
+    
+     ]),
+  
+  ("chat_commands",
+  [(store_script_param, s0, 1),
+   (store_script_param, ":player_id", 2),
+
+   (str_store_substring, s0, s0, 1),
+   (assign, ":failure", 0),
+   (try_begin),
+      (str_equals, s0, "@phs", 1),
+      (call_script, "script_phs_info", ":player_id"),
+   (else_try),
+     (str_starts_with, s0, "@phs give"),
+     (assign, reg0, 1),
+     (call_script, "script_cf_phs_give", s0, ":player_id"),
+     (assign, ":failure", reg0),
+   (else_try),
+     (str_equals, s0, "@id", 1),
+     (try_begin),
+       (assign, reg0, ":player_id"),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@That's your ID: {reg0}"),
+     (try_end),
+   (else_try),
+        (assign, ":failure", 1),
+   (try_end),
+   
+   (try_begin),
+     (eq, ":failure", 1),
+     (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ERROR: Inexistent command or something went wrong!"),
+     (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
+   (try_end),
+   ]),
+               
+  ("cf_use_pdoor", #Koso, private housing stuff, please someone kill me 
+  [(store_script_param, ":player_id", 1), # must be valid
+    (store_script_param, ":instance_id", 2), # must be valid
+    (store_script_param, reg0, 3), # the private door unique ID
+    (store_script_param, ":left", 4), # 1 makes the door rotate the other way, for matching left and right doors
+
+    (try_begin),
+    (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Private Housing System: - Door id: {reg0}"),
+    (assign, ":fail", 1),
+     (try_begin),
+       (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id, slot_player_pdoor_end),
+        (player_slot_eq, ":player_id", ":pdoor_slot_id", reg0),
+        (assign, ":fail", 0),
+       (try_end),
+     (else_try),
+       (multiplayer_send_2_int_to_player, ":player_id", server_event_preset_message, "str_pdoor_locked",  preset_message_fail_sound),
+     (try_end),
+   
+      (eq, ":fail", 0),
+      (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
+    (try_end),
+   ]),
+  
   ("cf_use_rotate_door", # server: handle opening and closing a rotating door
    [(store_script_param, ":agent_id", 1), # must be valid
     (store_script_param, ":instance_id", 2), # must be valid
     (store_script_param, ":left", 3), # 1 makes the door rotate the other way, for matching left and right doors
 
+    (prop_instance_get_variation_id, ":val_1", ":instance_id"), #Koso_begin
+    (prop_instance_get_variation_id_2, ":is_bolted", ":instance_id"), 
     (scene_prop_slot_eq, ":instance_id", slot_scene_prop_state, scene_prop_state_active),
     (agent_get_player_id, ":player_id", ":agent_id"),
     (player_is_active, ":player_id"),
+    (try_begin), #Koso (this will makes the usage of the door be switched for private housing system, instead of the default ones)
+      (eq, ":val_1", 100), #If the door has val_1 equals to 100, then do the switch
+      (call_script, "script_cf_use_pdoor", ":player_id", ":instance_id", ":is_bolted", ":left"),
+    (else_try), #Koso_end
     (player_get_slot, ":player_faction_id", ":player_id", slot_player_faction_id),
     (call_script, "script_scene_prop_get_owning_faction", ":instance_id"),
     (assign, ":faction_id", reg0),
-    (prop_instance_get_variation_id_2, ":is_bolted", ":instance_id"),
     (val_and, ":is_bolted", 0x2),
     (assign, ":fail_string_id", 0),
     (try_begin),
@@ -9736,6 +9868,7 @@ scripts.extend([
     (try_end),
     (eq, ":fail_string_id", 0),
     (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
+    (try_end), #Koso
     ]),
 
   ("cf_rotate_door", # server: helper script to rotate doors

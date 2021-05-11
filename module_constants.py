@@ -125,6 +125,18 @@ slot_player_pkjs_last_bank            = 67
 
 #koso
 slot_player_ibank_id                  = 68
+
+slot_player_pdoor_id                  = 69
+slot_player_pdoor_id_2                  = 70
+slot_player_pdoor_id_3                  = 71
+slot_player_pdoor_id_4                  = 72
+slot_player_pdoor_end                   = 73
+
+slot_player_pdoor_id_ow                 = 74
+slot_player_pdoor_id_2_ow                  = 75
+slot_player_pdoor_id_3_ow                  = 76
+slot_player_pdoor_id_4_ow                  = 77
+slot_player_pdoor_ow_end                   = 78
 ########################################################
 ##  AGENT SLOTS            #############################
 ########################################################

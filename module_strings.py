@@ -1156,6 +1156,8 @@ Poisonous herbs can also sometimes be found, which are then applied to the blade
   #koso
   ("regex", "(\d+)"),
   ("regex_string", "A"),
+  ("regex_target", "(\w+)"),
+  ("pdoor_locked", "You don't have the key."),
   ("message_ib", "A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A{reg9}A{reg10}A{reg11}A{reg12}A{reg13}A{reg14}A{reg15}A{reg16}A{reg17}A{reg18}A{reg19}A{reg20}A"),
   ("message_ib_ammo", "A{reg21}A{reg22}A{reg23}A{reg24}A{reg25}A{reg26}A{reg27}A{reg28}A{reg29}A{reg30}A{reg31}A{reg32}A{reg33}A{reg34}A{reg35}A{reg36}A{reg37}A{reg38}A{reg39}A{reg40}A"),
 ]
