@@ -9743,6 +9743,7 @@ scripts.extend([
   ("phs_info",
    [(store_script_param, ":player_id", 1),
      (try_begin),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@"),
        (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@------------------------------------------------------------------------------"),
        (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@                         Private Housing System                               "),
        (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ '/phs give (player_id) (door_id)' gives someone's access."),
@@ -9771,6 +9772,7 @@ scripts.extend([
      (str_equals, s0, "@id", 1),
      (try_begin),
        (assign, reg0, ":player_id"),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@"),
        (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@That's your ID: {reg0}"),
      (try_end),
    (else_try),
@@ -9779,6 +9781,7 @@ scripts.extend([
    
    (try_begin),
      (eq, ":failure", 1),
+     (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@"),
      (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ERROR: Inexistent command or something went wrong!"),
      (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
    (try_end),
@@ -9818,8 +9821,8 @@ scripts.extend([
     (agent_get_player_id, ":player_id", ":agent_id"),
     (player_is_active, ":player_id"),
     (try_begin), #Koso (this will makes the usage of the door be switched for private housing system, instead of the default ones)
-      (eq, ":val_1", 100), #If the door has val_1 equals to 100, then do the switch
-      (call_script, "script_cf_use_pdoor", ":player_id", ":instance_id", ":is_bolted", ":left"),
+      (gt, ":val_1", 9), #If the door has val_1 great than 9, then do the switch
+      (call_script, "script_cf_use_pdoor", ":player_id", ":instance_id", ":val_1", ":left"),
     (else_try), #Koso_end
     (player_get_slot, ":player_faction_id", ":player_id", slot_player_faction_id),
     (call_script, "script_scene_prop_get_owning_faction", ":instance_id"),
