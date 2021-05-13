@@ -1109,6 +1109,13 @@ skybox_update_interval = (5, 0, 0, [], [
   (call_script, "script_skybox_send_info_to_players"),
 ])
 
+#koso
+save_ibank = (0, 0, 60, [],
+   [
+    (gt, "$g_ibank_qnt", 0),
+    (call_script, "script_cf_save_ibank"),
+           ])
+
 def common_triggers(self):
 	return [(ti_before_mission_start, 0, 0, [(assign, "$g_game_type", "mt_" + self)], []),
     before_mission_start_setup,
@@ -1178,6 +1185,7 @@ def common_triggers(self):
     render_weather_effects,
     
     skybox_update_interval,
+    save_ibank,
     ]
 
 mission_templates = [
