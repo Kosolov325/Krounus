@@ -10334,7 +10334,7 @@ scripts.extend([
     (prop_instance_set_position, ":platform_instance_id", pos1),
     ]),
 
-  ("cf_save_ibank",
+  ("save_ibank",
    [
      (try_for_prop_instances, ":instance_id"),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),
@@ -10413,6 +10413,7 @@ scripts.extend([
        (try_end),
        (try_end),
         (send_message_to_url, pkjs_script_server + "/ibanksave" + pkjs_querystring + "&ibankid={reg0}&ibankit={s1}"),
+         (server_add_message_to_log, "@s1: {s1}"),
      (try_end),
      ]),
      

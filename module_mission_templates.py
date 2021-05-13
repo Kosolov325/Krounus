@@ -1113,7 +1113,7 @@ skybox_update_interval = (5, 0, 0, [], [
 save_ibank = (0, 0, 60, [],
    [
     (gt, "$g_ibank_qnt", 0),
-    (call_script, "script_cf_save_ibank"),
+    (call_script, "script_save_ibank"),
            ])
 
 def common_triggers(self):
