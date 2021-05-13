@@ -281,10 +281,6 @@ scripts.extend([
        (assign, ":ibank_id", reg1),
        (assign, ":instance_id", reg2),
 
-       (server_add_message_to_log, "@reg1: {reg1}"),
-       (server_add_message_to_log, "@reg2: {reg2}"),
-       (server_add_message_to_log, "@s0: {s0}"),
-
        (prop_instance_get_variation_id_2, ":val2", ":instance_id"),
        (eq, ":ibank_id", ":val2"),
        (call_script, "script_fill_ibank", ":instance_id"),
@@ -588,7 +584,7 @@ scripts.extend([
         (prop_instance_get_position, pos2, ":corpse_instance_id"),
         (get_sq_distance_between_positions, ":sq_distance", pos1, pos2),
         (le, ":sq_distance", sq(max_distance_to_loot)),
-        #(call_script, "script_cf_use_inventory", ":agent_id", ":corpse_instance_id", 0),
+        #(call_script, "script_", ":agent_id", ":corpse_instance_id", 0),
         (multiplayer_send_int_to_player, ":player_id", server_event_inventory_ready, ":corpse_instance_id"),
       (else_try), # otherwise spawn a new corpse item
         (set_spawn_position, pos1),
@@ -10550,6 +10546,8 @@ scripts.extend([
       (player_slot_eq, ":player_id", slot_player_has_faction_item_key, 1),
     (else_try),
       (call_script, "script_cf_pick_chest_lock", ":agent_id", ":instance_id", ":probability_multiplier"),
+    (else_try),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),
     (else_try),
       (assign, ":fail", 1),
     (try_end),
