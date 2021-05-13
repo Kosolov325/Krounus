@@ -281,9 +281,13 @@ scripts.extend([
        (assign, ":ibank_id", reg1),
        (assign, ":instance_id", reg2),
 
+       (server_add_message_to_log, "@reg1: {reg1}"),
+       (server_add_message_to_log, "@reg2: {reg2}"),
+       (server_add_message_to_log, "@s0: {s0}"),
+
        (prop_instance_get_variation_id_2, ":val2", ":instance_id"),
        (eq, ":ibank_id", ":val2"),
-       (call_script, "script_fill_ibank", ":instance_id", s0),
+       (call_script, "script_fill_ibank", ":instance_id"),
      (try_end),
    ]),
 
@@ -10419,7 +10423,6 @@ scripts.extend([
      
   ("fill_ibank", #koso
   [(store_script_param, ":instance_id", 1),
-   (store_script_param, s0, 2),
    
     (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
     (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
