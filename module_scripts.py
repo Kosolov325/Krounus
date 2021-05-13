@@ -283,7 +283,7 @@ scripts.extend([
 
        (prop_instance_get_variation_id_2, ":val2", ":instance_id"),
        (eq, ":ibank_id", ":val2"),
-       (call_script, "script_cf_fill_ibank", ":instance_id", s0),
+       (call_script, "script_fill_ibank", ":instance_id", s0),
      (try_end),
    ]),
 
@@ -10416,7 +10416,7 @@ scripts.extend([
      (try_end),
      ]),
      
-  ("cf_fill_ibank", #koso
+  ("fill_ibank", #koso
   [(store_script_param, ":instance_id", 1),
    (store_script_param, s0, 2),
    
