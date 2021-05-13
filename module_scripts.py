@@ -6235,6 +6235,11 @@ scripts.extend([
    [(store_script_param, ":instance_id", 1), # must be valid
 
     (prop_instance_get_variation_id, ":scene_prop_owner_slot", ":instance_id"),
+    (try_begin), #koso
+      (eq,":scene_prop_owner_slot", 100),
+      (assign, ":scene_prop_owner_slot", 0),
+    (try_end), #koso
+    
     (val_mod, ":scene_prop_owner_slot", 10), # stored in the first digit of scene prop value 1, set with the scene editor
     (try_begin),
       (neg|scene_prop_slot_eq, ":instance_id", slot_scene_prop_is_mercenary, 1),
@@ -10523,15 +10528,13 @@ scripts.extend([
     (call_script, "script_agent_remove_empty_ammo_stacks", ":agent_id"),
     (assign, ":fail", 0),
     (try_begin),
-      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 0),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),
       (assign, reg0, ":instance_id"),
       (prop_instance_get_variation_id_2, reg1, ":instance_id"),
       (send_message_to_url, pkjs_script_server + "/ibankload" + pkjs_querystring + "&instanceid={reg0}&ibankid={reg1}"),
     (else_try),
     (try_begin),
-      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),
-     (else_try),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_full_hit_points, 0),
     (else_try),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_unlocked, 1),
@@ -10608,8 +10611,6 @@ scripts.extend([
       (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
       (gt, ":inventory_count", 0),
       (try_begin),
-        (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),
-      (else_try),
         (scene_prop_slot_eq, ":instance_id", slot_scene_prop_full_hit_points, 0),
       (else_try),
         (scene_prop_slot_eq, ":instance_id", slot_scene_prop_unlocked, 1),
