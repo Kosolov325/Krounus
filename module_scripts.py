@@ -280,11 +280,10 @@ scripts.extend([
        (eq, ":action", action_ibank_load),
        (assign, ":ibank_id", reg1),
        (assign, ":instance_id", reg2),
-       #s0 will be the storage
 
        (prop_instance_get_variation_id_2, ":val2", ":instance_id"),
        (eq, ":ibank_id", ":val2"),
-       (call_script, "script_cf_fill_ibank", ":instance_id"),
+       (call_script, "script_cf_fill_ibank", ":instance_id", s0),
      (try_end),
    ]),
 
@@ -10413,12 +10412,13 @@ scripts.extend([
          (val_add, ":loop", 1),
        (try_end),
        (try_end),
-        (send_message_to_url, pkjs_script_server + "/ibanksave" + pkjs_querystring + "&ibankID={reg0}&ibank={s1}"),
+        (send_message_to_url, pkjs_script_server + "/ibanksave" + pkjs_querystring + "&ibankid={reg0}&ibankit={s1}"),
      (try_end),
      ]),
      
   ("cf_fill_ibank", #koso
   [(store_script_param, ":instance_id", 1),
+   (store_script_param, s0, 2),
    
     (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
     (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
@@ -10506,10 +10506,10 @@ scripts.extend([
            (eq, ":loop", 20),
            (str_to_num, ":item_id", s20),
            (scene_prop_set_slot, ":instance_id", ":inventory_slot", ":item_id"),
-           (scene_prop_set_slot, ":instance_id", slot_scene_prop_loaded, 1),
          (try_end),
          (val_add, ":loop", 1),
        (try_end),
+        (scene_prop_set_slot, ":instance_id", slot_scene_prop_loaded, 1),
     ]),
   
   ("cf_use_inventory", # server: reply with inventory contents of a scene prop when requested by a player
@@ -10527,7 +10527,7 @@ scripts.extend([
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 0),
       (assign, reg0, ":instance_id"),
       (prop_instance_get_variation_id_2, reg1, ":instance_id"),
-      (send_message_to_url, pkjs_script_server + "/ibankload" + pkjs_querystring + "&instanceID={reg0}&ibankID={reg1}"),
+      (send_message_to_url, pkjs_script_server + "/ibankload" + pkjs_querystring + "&instanceid={reg0}&ibankid={reg1}"),
     (else_try),
     (try_begin),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_full_hit_points, 0),
