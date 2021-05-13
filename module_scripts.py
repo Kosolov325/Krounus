@@ -10341,7 +10341,7 @@ scripts.extend([
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 1),
       (try_begin), #koso
-      (assign, reg24, ":instance_id"),
+      (assign, reg0, ":instance_id"),
        
       (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
       (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
@@ -10412,11 +10412,7 @@ scripts.extend([
          (try_end),
          (val_add, ":loop", 1),
        (try_end),
-    
-      (else_try),
-       (assign, reg0, 0),
-       (str_store_string, s1, 0),
-      (try_end),
+       (try_end),
         (send_message_to_url, pkjs_script_server + "/ibanksave" + pkjs_querystring + "&ibankID={reg0}&ibank={s1}"),
      (try_end),
      ]),
