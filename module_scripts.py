@@ -8392,8 +8392,6 @@ scripts.extend([
     (try_for_range, ":begin_scene_prop_no", 0, ":num_instances"), # iterate over all scene props of the specified kind
       (scene_prop_get_instance, ":begin_instance_id", ":scene_prop_id", ":begin_scene_prop_no"),
       (scene_prop_slot_eq, ":begin_instance_id", slot_scene_prop_linked_scene_prop, 0),
-      (prop_instance_get_variation_id, ":begin_var_1", ":begin_instance_id"), #Koso
-      (neq, ":begin_var_1", 100), #koso
       (prop_instance_get_variation_id_2, ":begin_var_2", ":begin_instance_id"),
       (prop_instance_get_position, pos1, ":begin_instance_id"),
       (try_for_range, ":linked_scene_prop_no", 0, linked_scene_prop_slot_count), # iterate over all scene prop kinds required to link
@@ -10515,6 +10513,7 @@ scripts.extend([
          (val_add, ":loop", 1),
        (try_end),
         (scene_prop_set_slot, ":instance_id", slot_scene_prop_loaded, 1),
+        (scene_prop_set_slot, ":instance_id", slot_scene_prop_linked_scene_prop, 0),
     ]),
   
   ("cf_use_inventory", # server: reply with inventory contents of a scene prop when requested by a player
@@ -10615,11 +10614,8 @@ scripts.extend([
       (else_try),
         (scene_prop_slot_eq, ":instance_id", slot_scene_prop_unlocked, 1),
       (else_try),
-        (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 0), #koso
         (call_script, "script_scene_prop_get_owning_faction", ":instance_id"),
         (eq, reg1, -1),
-      (else_try),
-         (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1), #koso
       (else_try),
         (player_slot_eq, ":player_id", slot_player_faction_id, reg0),
         (player_slot_eq, ":player_id", slot_player_has_faction_item_key, 1),
@@ -10629,19 +10625,17 @@ scripts.extend([
       (gt, ":inventory_count", 0),
       (scene_prop_get_slot, ":linked_scene_prop", ":instance_id", slot_scene_prop_linked_scene_prop),
       (try_begin), # for horse carts, use the specialized distance check
-        (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 0), #koso
         (eq, ":linked_scene_prop", 0),
         (neg|scene_prop_slot_eq, ":instance_id", slot_scene_prop_required_horse, 0),
         (call_script, "script_cart_choose_action", ":agent_id", ":instance_id"),
         (neq, reg0, 0),
-      (else_try),
-        (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 0), #koso
       (else_try), # for normal storage props
         (agent_get_position, pos1, ":agent_id"),
         (prop_instance_get_position, pos2, ":instance_id"),
         (eq, ":linked_scene_prop", 0),
         (get_sq_distance_between_positions, ":sq_distance", pos1, pos2),
         (le, ":sq_distance", sq(max_distance_to_use)),
+      (else_try), # for ships, check agent is on board
         (gt, ":linked_scene_prop", 0),
         (prop_instance_is_valid, ":linked_scene_prop"),
         (neg|scene_prop_slot_eq, ":linked_scene_prop", slot_scene_prop_collision_kind, 0),
