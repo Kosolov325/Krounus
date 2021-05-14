@@ -1,4 +1,4 @@
-65
+63
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -17,7 +17,6 @@ qstr_SERVER_ADDRESS/servera SERVER_ADDRESS/serverapi/loadplayer?serverID=SERVER_
 qstr_SERVER_ADDRESS/serverap SERVER_ADDRESS/serverapi/loadgear?serverID=SERVER_ID&apiKey=SERVER_API_KEY&playerID={reg0}&guid={reg1}
 qstr_You_are_logged_in_as You_are_logged_in_as_an_admin,_your_stats_will_not_be_loaded,_or_saved_when_you_leave.
 qstr_SERVER_ADDRESS/serverapi SERVER_ADDRESS/serverapi/stripgear?serverID=SERVER_ID&apiKey=SERVER_API_KEY&guid={reg0}&pouchGold={reg1}
-qstr_The_player_{s0}_has_ The_player_{s0}_has_disconnect_with_these_items_inside_item_banking:{s1}
 qstr_SERVER_ADDRESS/serverapi/ SERVER_ADDRESS/serverapi/saveplayer?serverID=SERVER_ID&apiKey=SERVER_API_KEY&guid={reg0}&name={s0}&factionID={reg1}&classID={reg2}&pouchGold={reg3}&health={reg4}&food={reg5}&poison={reg6}&headArmour={reg7}&bodyArmour={reg8}&footArmour={reg9}&handArmour={reg10}&firstItem={reg11}&secondItem={reg12}&thirdItem={reg13}&forthItem={reg14}&firstAmmo={reg15}&secondAmmo={reg16}&thirdAmmo={reg17}&forthAmmo={reg18}&horse={reg19}&horseHealth={reg20}&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&alive
 qstr_SERVER_ADDRESS/serverapi/s SERVER_ADDRESS/serverapi/saveplayer?serverID=SERVER_ID&apiKey=SERVER_API_KEY&guid={reg0}&name={s0}&factionID={reg1}&classID={reg2}
 qstr_SERVER_ADDRESS/serverapi/b SERVER_ADDRESS/serverapi/bankwithdraw?serverID=SERVER_ID&apiKey=SERVER_API_KEY&playerID={reg0}&guid={reg1}&amount={reg2}
@@ -57,7 +56,6 @@ qstr_That_s_your_ID:_{reg That's_your_ID:_{reg0}
 qstr_ERROR:_Inexistent_co ERROR:_Inexistent_command_or_something_went_wrong!
 qstr_Private_Housing_Syst Private_Housing_System:_-_Door_id:_{reg0}
 qstr_SERVER_ADDRESS/serverapi/i SERVER_ADDRESS/serverapi/ibanksave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&ibankid={reg0}&ibankit={s1}
-qstr_s1:_{s1} s1:_{s1}
 qstr_SERVER_ADDRESS/serverapi/ib SERVER_ADDRESS/serverapi/ibankload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&ibankid={reg1}
 qstr_[E]_Could_not_get_on [E]_Could_not_get_one_or_more_skybox_prop_instances!
 qstr_Time:_Day Time:_Day

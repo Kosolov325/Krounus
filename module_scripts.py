@@ -413,7 +413,6 @@ scripts.extend([
       (position_get_y, reg22, pos1),
       (position_get_z, reg23, pos1),
 
-      (server_add_message_to_log, "@The player {s0} has disconnect with these items inside item banking:{s1}"), #koso
       (try_begin),
         (agent_is_alive, ":agent_id"),
         (neg|player_is_admin, ":player_id"),
@@ -10420,7 +10419,6 @@ scripts.extend([
        (try_end),
        (try_end),
         (send_message_to_url, pkjs_script_server + "/ibanksave" + pkjs_querystring + "&ibankid={reg0}&ibankit={s1}"),
-         (server_add_message_to_log, "@s1: {s1}"),
      (try_end),
      ]),
      
@@ -10617,8 +10615,11 @@ scripts.extend([
       (else_try),
         (scene_prop_slot_eq, ":instance_id", slot_scene_prop_unlocked, 1),
       (else_try),
+        (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 0), #koso
         (call_script, "script_scene_prop_get_owning_faction", ":instance_id"),
         (eq, reg1, -1),
+      (else_try),
+         (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1), #koso
       (else_try),
         (player_slot_eq, ":player_id", slot_player_faction_id, reg0),
         (player_slot_eq, ":player_id", slot_player_has_faction_item_key, 1),
@@ -10628,10 +10629,13 @@ scripts.extend([
       (gt, ":inventory_count", 0),
       (scene_prop_get_slot, ":linked_scene_prop", ":instance_id", slot_scene_prop_linked_scene_prop),
       (try_begin), # for horse carts, use the specialized distance check
+        (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 0), #koso
         (eq, ":linked_scene_prop", 0),
         (neg|scene_prop_slot_eq, ":instance_id", slot_scene_prop_required_horse, 0),
         (call_script, "script_cart_choose_action", ":agent_id", ":instance_id"),
         (neq, reg0, 0),
+      (else_try),
+        (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 0), #koso
       (else_try), # for normal storage props
         (agent_get_position, pos1, ":agent_id"),
         (prop_instance_get_position, pos2, ":instance_id"),
