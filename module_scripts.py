@@ -8393,6 +8393,8 @@ scripts.extend([
     (try_for_range, ":begin_scene_prop_no", 0, ":num_instances"), # iterate over all scene props of the specified kind
       (scene_prop_get_instance, ":begin_instance_id", ":scene_prop_id", ":begin_scene_prop_no"),
       (scene_prop_slot_eq, ":begin_instance_id", slot_scene_prop_linked_scene_prop, 0),
+      (prop_instance_get_variation_id, ":begin_var_1", ":begin_instance_id"), #Koso
+      (neq, ":begin_var_1", 100), #koso
       (prop_instance_get_variation_id_2, ":begin_var_2", ":begin_instance_id"),
       (prop_instance_get_position, pos1, ":begin_instance_id"),
       (try_for_range, ":linked_scene_prop_no", 0, linked_scene_prop_slot_count), # iterate over all scene prop kinds required to link
