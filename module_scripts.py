@@ -9626,7 +9626,7 @@ scripts.extend([
     (try_end),
    
     (player_is_active, ":target_player_id"),
-   
+    (neq, ":target_door_id", 0),
       (try_begin),
         (this_or_next|player_is_admin, ":player_id"),
         (eq, ":server", 1),
@@ -9702,7 +9702,8 @@ scripts.extend([
     (try_end),
     
     (player_is_active, ":target_player_id"),
-   
+    (neq, ":target_door_id", 0),
+    
       (try_begin),
         (this_or_next|player_is_admin, ":player_id"),
         (eq, ":server", 1),
