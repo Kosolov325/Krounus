@@ -33,7 +33,8 @@ pkjs_action_bank_withdraw                   = 10
 pkjs_action_bank_deposit                    = 11
 action_ibank_save                           = 12
 action_ibank_load                           = 13
-
+action_pdoor_save                           = 15
+action_pdoor_load                           = 16
 ## PK.js SCRIPTS END ##
 
 ########################################################
@@ -327,6 +328,10 @@ slot_animal_carcass_hide_count        = 101
 slot_scene_prop_loaded                = 102
 slot_scene_prop_ibank                 = 103
 slot_scene_prop_ibank_id              = 104
+slot_scene_prop_pdoor                 = 105
+slot_scene_prop_pdoor_owner           = 106
+slot_scene_prop_pdoor_default_cost    = 107
+slot_scene_prop_pdoor_id              = 108
 ########################################################
 ##  ITEM SLOTS             #############################
 ########################################################

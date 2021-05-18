@@ -1,4 +1,4 @@
-63
+76
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -43,18 +43,31 @@ qstr_{s0}^Herding:_{reg10 {s0}^Herding:_{reg10}
 qstr_{s0}^Musician:_{reg1 {s0}^Musician:_{reg10}
 qstr_^ ^
 qstr_/ /
+qstr_You_removed_access_f You_removed_access_for_{s4}
+qstr_You_can_t_give_keys_ You_can't_give_keys_for_Door_ID:{s2}_anymore_by_{s5}
+qstr_You_access_for_Door_ You_access_for_Door_ID:{s2}_was_removed_by_{s5}
+qstr_You_gave_access_for_ You_gave_access_for_{s5}
+qstr_Now_you_can_give_key Now_you_can_give_keys_for_Door_ID:{s2}_by_{s4}
+qstr_You_received_access_ You_received_access_for_Door_ID:{s2}_by_{s4}
+qstr_SERVER_ADDRESS/serverapi/p SERVER_ADDRESS/serverapi/pdoorsave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&pdoorID={s1}&pdoorOW={reg2}
 qstr__ _
 qstr_____________________ ------------------------------------------------------------------------------
-qstr______________________ _________________________Private_Housing_System_______________________________
-qstr___/phs_give__player_ _'/phs_give_(player_id)_(door_id)'_gives_someone's_access.
-qstr___/phs_remove__playe _'/phs_remove_(player_id)_(door_id)'_removes_someone's_access.
+qstr______________________ _________________________list_of_commands_______________________________
+qstr___/givekey__player_i _'/givekey_(player_id)_(door_id)'_gives_someone's_access.
+qstr___/removekey__player _'/removekey_(player_id)_(door_id)'_removes_someone's_access.
+qstr___/buy_house__door_i _'/buy_house_(door_id)'_buy_a_house.
+qstr___/sell_house__door_ _'/sell_house_(door_id)'_sell_a_house.
 qstr___/id__seek_for_some _'/id'_seek_for_someone's_id_or_yours.
-qstr_phs phs
-qstr_phs_give_ phs_give_
+qstr_help help
+qstr_givekey_ givekey_
+qstr_removekey_ removekey_
+qstr_buy_house_ buy_house_
+qstr_sell_house_ sell_house_
 qstr_id id
 qstr_That_s_your_ID:_{reg That's_your_ID:_{reg0}
 qstr_ERROR:_Inexistent_co ERROR:_Inexistent_command_or_something_went_wrong!
 qstr_Private_Housing_Syst Private_Housing_System:_-_Door_id:_{reg0}
+qstr_SERVER_ADDRESS/serverapi/pd SERVER_ADDRESS/serverapi/pdoorload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&pdoorID={reg1}
 qstr_SERVER_ADDRESS/serverapi/i SERVER_ADDRESS/serverapi/ibanksave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&ibankid={reg0}&ibankit={s1}
 qstr_SERVER_ADDRESS/serverapi/ib SERVER_ADDRESS/serverapi/ibankload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&ibankid={reg1}
 qstr_[E]_Could_not_get_on [E]_Could_not_get_one_or_more_skybox_prop_instances!
