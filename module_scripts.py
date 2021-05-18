@@ -9756,10 +9756,10 @@ scripts.extend([
 
      (str_store_substring, s0, s0, 10),
 
+    (str_clear, s1),
     (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 1),
 
     (eq, ":amount", 1),
-    (str_clear, s1),
     (str_to_num, ":door_id", s1),
     (try_for_prop_instances, ":instance_id"),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor_id, ":door_id"),
@@ -9780,10 +9780,10 @@ scripts.extend([
 
      (str_store_substring, s0, s0, 11),
 
+     (str_clear, s1),
     (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 1),
 
     (eq, ":amount", 1),
-    (str_clear, s1),
     (str_to_num, ":door_id", s1),
     (player_get_unique_id, reg2, ":player_id"),
     (try_for_prop_instances, ":instance_id"),
