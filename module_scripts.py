@@ -117,6 +117,19 @@ scripts.extend([
         (player_add_spawn_item, ":player_id", 8, reg4),
       (try_end),
 
+      (try_begin),
+        (str_regex_get_matches, ":amount", s0, s1, "str_regex", 8),
+        (val_sub, ":amount", ":amount"),
+        (player_set_slot, ":player_id", slot_player_pdoor_id, s1),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_2, s2),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_3, s3),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_4, s4),
+
+        (player_set_slot, ":player_id", slot_player_pdoor_id_ow, s5),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_2_ow, s6),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_3_ow, s7),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_4_ow, s8),
+      (try_end),
      (else_try),
        (eq, ":action", pkjs_action_load_admin),
        (assign, ":player_id", reg1),
@@ -354,7 +367,17 @@ scripts.extend([
     (store_script_param, ":player_id", 1),
 
     (try_begin),
-    
+      (try_begin),
+         (player_get_slot, reg1, ":player_id", slot_player_pdoor_id),
+         (player_get_slot, reg2, ":player_id", slot_player_pdoor_id_2),
+         (player_get_slot, reg3, ":player_id", slot_player_pdoor_id_3),
+         (player_get_slot, reg4, ":player_id", slot_player_pdoor_id_4),
+         (player_get_slot, reg5, ":player_id", slot_player_pdoor_id_ow),
+         (player_get_slot, reg6, ":player_id", slot_player_pdoor_id_2_ow),
+         (player_get_slot, reg7, ":player_id", slot_player_pdoor_id_3_ow),
+         (player_get_slot, reg8, ":player_id", slot_player_pdoor_id_4_ow),
+         (str_store_string, s1, "str_message_ib"),
+      (try_end),
       (player_get_unique_id, reg0, ":player_id"),
       (str_store_player_username, s0, ":player_id"),
       (player_get_slot, reg1, ":player_id", slot_player_faction_id),
@@ -430,7 +453,7 @@ scripts.extend([
          "&firstItem={reg11}&secondItem={reg12}&thirdItem={reg13}&forthItem={reg14}" +
          "&firstAmmo={reg15}&secondAmmo={reg16}&thirdAmmo={reg17}&forthAmmo={reg18}" +
          "&horse={reg19}&horseHealth={reg20}" +
-         "&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&alive"),
+         "&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&keys={s1}alive"),
       (else_try),
         (neg|player_is_admin, ":player_id"),
         (send_message_to_url,
