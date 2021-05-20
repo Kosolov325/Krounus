@@ -1,7 +1,10 @@
-76
+78
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
+qstr_{s0} {s0}
+qstr_{s1} {s1}
+qstr_{s2} {s2}
 qstr_Welcome_{s2}__GUID:_ Welcome_{s2}_(GUID:_{reg1},_PIN:_{s0})._{s1}
 qstr_You_have_{reg3}_gold You_have_{reg3}_gold_in_the_bank.
 qstr_Withdrawn_{reg2}_gol Withdrawn_{reg2}_gold._You_have_{reg3}_gold_left_in_the_bank.
@@ -9,7 +12,6 @@ qstr_You_have_no_gold_in_ You_have_no_gold_in_the_bank_to_withdraw.
 qstr_Player_{s1}___GUID:_ Player_{s1}__(GUID:_{reg4})_withdrew_{reg2}_gold._{reg3}_gold_in_the_bank.
 qstr_Deposited_{reg2}_gol Deposited_{reg2}_gold._You_now_have_{reg3}_gold_in_the_bank.
 qstr_Player_{s1}___GUID:_{ Player_{s1}__(GUID:_{reg5})_deposited_{reg2}_gold._{reg3}_gold_in_the_bank.
-qstr_{s0} {s0}
 qstr_SERVER_ADDRESS/serve SERVER_ADDRESS/serverapi/ping?serverID=SERVER_ID&apiKey=SERVER_API_KEY
 qstr_Attempting_to_connec Attempting_to_connect_with_the_script_server.
 qstr_SERVER_ADDRESS/server SERVER_ADDRESS/serverapi/loadplayer?serverID=SERVER_ID&apiKey=SERVER_API_KEY&playerID={reg0}&guid={reg1}&ip={s0}&name={s1}&admin

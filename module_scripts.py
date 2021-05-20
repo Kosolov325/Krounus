@@ -105,6 +105,9 @@ scripts.extend([
       (eq, ":action", pkjs_action_load_player),
       (assign, ":player_id", reg1),
 
+      (server_add_message_to_log, "@{s0}"),
+      (server_add_message_to_log, "@{s1}"),
+      (server_add_message_to_log, "@{s2}"),
       (try_begin), #koso
         (str_regex_get_matches, ":amount", s1, s0, "str_regex", 8),
         (val_sub, ":amount", ":amount"),
