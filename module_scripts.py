@@ -229,18 +229,15 @@ scripts.extend([
      (try_end),
 
 
+      #koso
+      (call_script, "script_cf_player_load_keys", ":player_id"),
+     
       (str_store_player_username, s2, ":player_id"),
       (player_get_unique_id, reg1, ":player_id"),
       (call_script, "script_log_equipment", ":player_id"),
       (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@Welcome {s2} (GUID: {reg1}, PIN: {s0}). {s1}"),
       (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You have {reg3} gold in the bank."),
 
-      #koso
-      (server_add_message_to_log, "@{s1}"),
-      (server_add_message_to_log, "@{s2}"),
-      (server_add_message_to_log, "@{s3}"),
-      (server_add_message_to_log, "@{s4}"),
-      (call_script, "script_cf_player_load_keys", ":player_id"),
 
      (else_try),
       (eq, ":action", pkjs_action_load_fail_kick),
@@ -10539,7 +10536,7 @@ scripts.extend([
   ("cf_player_load_keys", #koso
    [(store_script_param, ":player_id", 1),
 
-        (str_regex_get_matches, ":amount", s10, s3, "str_regex", 8),
+        (str_regex_get_matches, ":amount", s10, s2, "str_regex", 8),
         (val_sub, ":amount", ":amount"),
 
         (assign, ":end", slot_player_pdoor_end),
