@@ -378,6 +378,7 @@ scripts.extend([
          (player_get_slot, reg7, ":player_id", slot_player_pdoor_id_3_ow),
          (player_get_slot, reg8, ":player_id", slot_player_pdoor_id_4_ow),
          (str_store_string, s1, "str_message_ib"),
+         (assign, s2, s1),
       (try_end),
       (player_get_unique_id, reg0, ":player_id"),
       (str_store_player_username, s0, ":player_id"),
@@ -454,7 +455,7 @@ scripts.extend([
          "&firstItem={reg11}&secondItem={reg12}&thirdItem={reg13}&forthItem={reg14}" +
          "&firstAmmo={reg15}&secondAmmo={reg16}&thirdAmmo={reg17}&forthAmmo={reg18}" +
          "&horse={reg19}&horseHealth={reg20}" +
-         "&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&keys={s1}&alive"),
+         "&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&keys={s2}&alive"),
       (else_try),
         (neg|player_is_admin, ":player_id"),
         (send_message_to_url,
@@ -9898,23 +9899,22 @@ scripts.extend([
   ("cf_use_pdoor", #Koso, private housing stuff, please someone kill me 
   [(store_script_param, ":player_id", 1), # must be valid
     (store_script_param, ":instance_id", 2), # must be valid
-    (store_script_param, reg0, 3), # the private door unique ID
-    (store_script_param, ":left", 4), # 1 makes the door rotate the other way, for matching left and right doors
+    (store_script_param, ":left", 3), # 1 makes the door rotate the other way, for matching left and right doors
 
     (try_begin),
     (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Private Housing System: - Door id: {reg0}"),
     (assign, ":fail", 1),
-     (try_begin),
        (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id, slot_player_pdoor_end),
         (player_slot_eq, ":player_id", ":pdoor_slot_id", reg0),
         (assign, ":fail", 0),
        (try_end),
-     (else_try),
-       (multiplayer_send_2_int_to_player, ":player_id", server_event_preset_message, "str_pdoor_locked",  preset_message_fail_sound),
-     (try_end),
-   
-      (eq, ":fail", 0),
-      (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
+     
+      (try_begin),
+       (eq, ":fail", 0),
+       (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
+      (else_try),
+         (multiplayer_send_2_int_to_player, ":player_id", server_event_preset_message, "str_pdoor_locked",  preset_message_fail_sound),
+      (try_end),
     (try_end),
    ]),
   
@@ -9935,7 +9935,7 @@ scripts.extend([
        (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 0),
        (send_message_to_url, pkjs_script_server + "/pdoorload" + pkjs_querystring + "&instanceid={reg0}&pdoorID={reg1}"),
       (else_try),
-        (call_script, "script_cf_use_pdoor", ":player_id", ":instance_id", reg1, ":left"),
+        (call_script, "script_cf_use_pdoor", ":player_id", ":instance_id", ":left"),
      (try_end),
     (else_try), #Koso_end
     (player_get_slot, ":player_faction_id", ":player_id", slot_player_faction_id),
