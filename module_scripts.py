@@ -104,23 +104,6 @@ scripts.extend([
      (else_try),
       (eq, ":action", pkjs_action_load_player),
       (assign, ":player_id", reg1),
-
-      (server_add_message_to_log, "@{s0}"),
-      (server_add_message_to_log, "@{s1}"),
-      (server_add_message_to_log, "@{s2}"),
-      (try_begin), #koso
-        (str_regex_get_matches, ":amount", s1, s0, "str_regex", 8),
-        (val_sub, ":amount", ":amount"),
-        (player_set_slot, ":player_id", slot_player_pdoor_id, s1),
-        (player_set_slot, ":player_id", slot_player_pdoor_id_2, s2),
-        (player_set_slot, ":player_id", slot_player_pdoor_id_3, s3),
-        (player_set_slot, ":player_id", slot_player_pdoor_id_4, s4),
-
-        (player_set_slot, ":player_id", slot_player_pdoor_id_ow, s5),
-        (player_set_slot, ":player_id", slot_player_pdoor_id_2_ow, s6),
-        (player_set_slot, ":player_id", slot_player_pdoor_id_3_ow, s7),
-        (player_set_slot, ":player_id", slot_player_pdoor_id_4_ow, s8),
-      (try_end),
      
       (try_begin),
         (is_between, reg2, factions_begin, factions_end),
@@ -251,6 +234,20 @@ scripts.extend([
       (call_script, "script_log_equipment", ":player_id"),
       (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@Welcome {s2} (GUID: {reg1}, PIN: {s0}). {s1}"),
       (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You have {reg3} gold in the bank."),
+
+      (try_begin), #koso
+        (str_regex_get_matches, ":amount", s10, s3, "str_regex", 8),
+        (val_sub, ":amount", ":amount"),
+        (player_set_slot, ":player_id", slot_player_pdoor_id, s10),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_2, s11),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_3, s12),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_4, s13),
+
+        (player_set_slot, ":player_id", slot_player_pdoor_id_ow, s14),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_2_ow, s15),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_3_ow, s16),
+        (player_set_slot, ":player_id", slot_player_pdoor_id_4_ow, s17),
+      (try_end),
 
      (else_try),
       (eq, ":action", pkjs_action_load_fail_kick),
