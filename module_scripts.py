@@ -118,7 +118,7 @@ scripts.extend([
       (try_end),
 
       (try_begin),
-        (str_regex_get_matches, ":amount", s0, s1, "str_regex", 8),
+        (str_regex_get_matches, ":amount", s1, s0, "str_regex", 8),
         (val_sub, ":amount", ":amount"),
         (player_set_slot, ":player_id", slot_player_pdoor_id, s1),
         (player_set_slot, ":player_id", slot_player_pdoor_id_2, s2),
@@ -130,6 +130,7 @@ scripts.extend([
         (player_set_slot, ":player_id", slot_player_pdoor_id_3_ow, s7),
         (player_set_slot, ":player_id", slot_player_pdoor_id_4_ow, s8),
       (try_end),
+     
      (else_try),
        (eq, ":action", pkjs_action_load_admin),
        (assign, ":player_id", reg1),
@@ -453,7 +454,7 @@ scripts.extend([
          "&firstItem={reg11}&secondItem={reg12}&thirdItem={reg13}&forthItem={reg14}" +
          "&firstAmmo={reg15}&secondAmmo={reg16}&thirdAmmo={reg17}&forthAmmo={reg18}" +
          "&horse={reg19}&horseHealth={reg20}" +
-         "&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&keys={s1}alive"),
+         "&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&keys={s1}&alive"),
       (else_try),
         (neg|player_is_admin, ":player_id"),
         (send_message_to_url,
@@ -9630,31 +9631,35 @@ scripts.extend([
    [(store_script_param, ":player_id", 1),
     (store_script_param, ":target_player_id", 2),
     (store_script_param, ":target_door_id", 3),
-    (store_script_param, ":give_owner", 4),
+    (store_script_param, ":remove_owner", 4),
 
-    (try_begin),
+   (try_begin), #Do that for remove
     (neq, ":player_id", 0),
-    (str_store_substring, s0, s0, 10),
+    (str_store_substring, s0, s0, 8),
 
     (assign, ":error", 0),
-     (str_clear, s1),
-     (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 3),
-     (str_to_num, ":target_player_id", s1),
-     (str_to_num, ":target_door_id", s2),
-     (str_to_num, ":give_owner", s3),
-     (str_store_player_username, s4, ":player_id"),
-     (str_store_player_username, s5, ":target_player_id"),
+    (str_clear, s1),
+    (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 3),
+    (str_to_num, ":target_player_id", s1),
+    (str_to_num, ":target_door_id", s2),
+    (str_to_num, ":remove_owner", s3),
+    (assign, ":server", 0),
+    (str_store_player_username, s4, ":player_id"),
+    (str_store_player_username, s5, ":target_player_id"),
     (else_try),
-       (assign, ":server", 1),
+     (assign, ":server", 1),
+     (assign, ":error", 0),
     (try_end),
-   
+    
     (player_is_active, ":target_player_id"),
     (neq, ":target_door_id", 0),
+    (neq, ":target_player_id", 0),
+    
       (try_begin),
         (this_or_next|player_is_admin, ":player_id"),
         (eq, ":server", 1),
         (assign, ":giveable", 1),
-        (assign, ":give_owner_bypass", 1),
+        (assign, ":remove_owner_bypass", 1),
       (else_try),
          (neg|player_is_admin, ":player_id"),
          (eq, ":amount", 2),
@@ -9666,8 +9671,8 @@ scripts.extend([
     
        (eq, ":giveable", 1),
        (try_begin),
-        (eq, ":give_owner", 1),
-        (eq, ":give_owner_bypass", 1),
+        (eq, ":remove_owner", 1),
+        (eq, ":remove_owner_bypass", 1),
         (assign, ":end", slot_player_pdoor_end),
          (try_for_range, ":slot_loop", slot_player_pdoor_id, ":end"),
           (player_slot_eq, ":target_player_id", ":slot_loop", ":target_door_id"),
@@ -9707,7 +9712,7 @@ scripts.extend([
     (store_script_param, ":target_door_id", 3),
     (store_script_param, ":give_owner", 4),
     
-    (try_begin),
+    (try_begin), #Do that for givekeys
     (neq, ":player_id", 0),
     (str_store_substring, s0, s0, 8),
 
@@ -9722,10 +9727,12 @@ scripts.extend([
     (str_store_player_username, s5, ":target_player_id"),
     (else_try),
      (assign, ":server", 1),
+     (assign, ":error", 0),
     (try_end),
     
     (player_is_active, ":target_player_id"),
     (neq, ":target_door_id", 0),
+    (neq, ":target_player_id", 0),
     
       (try_begin),
         (this_or_next|player_is_admin, ":player_id"),
@@ -9793,10 +9800,11 @@ scripts.extend([
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor_owner, 0),
       (scene_prop_get_slot, ":cost", ":instance_id", slot_scene_prop_pdoor_default_cost),
       (call_script, "script_cf_check_enough_gold", ":player_id", ":cost"),
+      (call_script, "script_cf_phs_give", 0, ":player_id", ":door_id", 1),
+      (eq, reg0, 0),
       (call_script, "script_player_adjust_gold", ":player_id", ":cost", -1),
       (player_get_unique_id, reg2, ":player_id"),
       (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_owner, reg2),
-      (call_script, "script_cf_phs_give", 0, ":player_id", ":door_id", 1),
       (send_message_to_url, pkjs_script_server + "/pdoorsave" + pkjs_querystring + "&pdoorID={s1}&pdoorOW={reg2}"),
     (try_end),
     ]),
@@ -9860,10 +9868,12 @@ scripts.extend([
      (assign, ":failure", reg0),
    (else_try),
      (str_starts_with, s0, "@buy house ", 1),
+     (assign, reg0, 1),
      (call_script, "script_cf_phs_buy", ":player_id"),
      (assign, ":failure", reg0),
    (else_try),
       (str_starts_with, s0, "@sell house ", 1),
+     (assign, reg0, 1),
      (call_script, "script_cf_phs_sell", ":player_id"),
      (assign, ":failure", reg0),
    (else_try),
