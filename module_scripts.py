@@ -236,6 +236,10 @@ scripts.extend([
       (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You have {reg3} gold in the bank."),
 
       #koso
+      (server_add_message_to_log, "@{s1}"),
+      (server_add_message_to_log, "@{s2}"),
+      (server_add_message_to_log, "@{s3}"),
+      (server_add_message_to_log, "@{s4}"),
       (call_script, "script_cf_player_load_keys", ":player_id"),
 
      (else_try),
