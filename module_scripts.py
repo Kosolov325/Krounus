@@ -9892,7 +9892,7 @@ scripts.extend([
     (store_script_param, ":left", 3), # 1 makes the door rotate the other way, for matching left and right doors
 
     (try_begin),
-    (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Private Housing System: - Door id: {reg0}"),
+    (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Private Housing System: - Door id: {reg1}"),
     (assign, ":fail", 1),
        (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id, slot_player_pdoor_end),
         (player_slot_eq, ":player_id", ":pdoor_slot_id", reg1),
@@ -9903,8 +9903,11 @@ scripts.extend([
        (eq, ":fail", 0),
        (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
       (else_try),
-         (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_announce, "str_pdoor_locked",  preset_message_fail_sound),
+         (eq, ":fail", 1),
+         (multiplayer_send_string_to_player, ":player_id", server_event_script_message_announce, "str_pdoor_locked"),
+         (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
       (try_end),
+   
     (try_end),
    ]),
   
