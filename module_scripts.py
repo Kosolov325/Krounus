@@ -9627,7 +9627,7 @@ scripts.extend([
 
    (try_begin), #Do that for remove
     (neq, ":player_id", 0),
-    (str_store_substring, s0, s0, 8),
+    (str_store_substring, s0, s0, 7),
 
     (assign, ":error", 0),
     (str_clear, s1),
@@ -9897,9 +9897,17 @@ scripts.extend([
     (assign, ":fail", 1),
        (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id, slot_player_pdoor_end),
         (player_slot_eq, ":player_id", ":pdoor_slot_id", reg1),
-        (assign, ":fail", 0),
-       (try_end),
-     
+        (scene_prop_get_slot, ":owner", ":instance_id", slot_scene_prop_pdoor_owner),
+   
+        (try_begin),
+           (neq, ":owner", 0),
+           (assign, ":fail", 0),
+        (else_try),
+          (player_set_slot, ":player_id", ":pdoor_slot_id", 0),
+        (try_end),
+   
+       (try_end), 
+
       (try_begin),
        (eq, ":fail", 0),
        (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
