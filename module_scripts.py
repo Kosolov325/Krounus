@@ -104,7 +104,7 @@ scripts.extend([
      (else_try),
       (eq, ":action", pkjs_action_load_player),
       (assign, ":player_id", reg1),
-     
+
       (try_begin),
         (is_between, reg2, factions_begin, factions_end),
         (call_script, "script_change_faction", ":player_id", reg2, change_faction_type_respawn),
@@ -115,7 +115,7 @@ scripts.extend([
       (try_end),
       (try_begin),
         (neq, reg4, -1),
-        (player_add_spawn_item, ":player_id", 8, reg4),
+        (player_add_spawn_item, ":player_id", ek_horse, reg4),
       (try_end),
      
      (else_try),
@@ -230,7 +230,8 @@ scripts.extend([
 
 
       #koso
-      (call_script, "script_cf_player_load_keys", ":player_id"),
+      (call_script, "script_cf_player_load_keys", ":player_id", s2),
+      (str_clear, s2),
      
       (str_store_player_username, s2, ":player_id"),
       (player_get_unique_id, reg1, ":player_id"),
@@ -10543,8 +10544,9 @@ scripts.extend([
 
   ("cf_player_load_keys", #koso
    [(store_script_param, ":player_id", 1),
-
-        (str_regex_get_matches, ":amount", s10, s2, "str_regex", 8),
+    (store_script_param, s2, 2),
+    
+        (str_regex_get_matches, ":amount", s10, s3, "str_regex", 8),
         (val_sub, ":amount", ":amount"),
 
         (assign, ":end", slot_player_pdoor_end),
