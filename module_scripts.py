@@ -105,6 +105,7 @@ scripts.extend([
       (eq, ":action", pkjs_action_load_player),
       (assign, ":player_id", reg1),
       (try_begin),
+        (server_add_message_to_log, "@{reg2}"),
         (is_between, reg2, factions_begin, factions_end),
         (call_script, "script_change_faction", ":player_id", reg2, change_faction_type_respawn),
       (try_end),
@@ -226,16 +227,15 @@ scripts.extend([
        (agent_set_hit_points, ":horse_agent_id", reg19, 0),
      (try_end),
 
-
-      #koso
-      (call_script, "script_cf_player_load_keys", ":player_id", s2),
-      (str_clear, s2),
      
-      (str_store_player_username, s2, ":player_id"),
+      (str_store_player_username, s3, ":player_id"),
       (player_get_unique_id, reg1, ":player_id"),
       (call_script, "script_log_equipment", ":player_id"),
-      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@Welcome {s2} (GUID: {reg1}, PIN: {s0}). {s1}"),
+      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@Welcome {s3} (GUID: {reg1}, PIN: {s0}). {s1}"),
       (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You have {reg3} gold in the bank."),
+
+      #koso
+      (call_script, "script_cf_player_load_keys", ":player_id"),
 
 
      (else_try),
@@ -10542,9 +10542,8 @@ scripts.extend([
 
   ("cf_player_load_keys", #koso
    [(store_script_param, ":player_id", 1),
-    (store_script_param, s3, 2),
     
-        (str_regex_get_matches, ":amount", s10, s3, "str_regex", 8),
+        (str_regex_get_matches, ":amount", s10, s2, "str_regex", 8),
         (val_sub, ":amount", ":amount"),
 
         (assign, ":end", slot_player_pdoor_end),
