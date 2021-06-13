@@ -105,7 +105,6 @@ scripts.extend([
       (eq, ":action", pkjs_action_load_player),
       (assign, ":player_id", reg1),
       (try_begin),
-        (server_add_message_to_log, "@{reg2}"),
         (is_between, reg2, factions_begin, factions_end),
         (call_script, "script_change_faction", ":player_id", reg2, change_faction_type_respawn),
       (try_end),
@@ -9912,7 +9911,7 @@ scripts.extend([
        (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
       (else_try),
          (eq, ":fail", 1),
-         (multiplayer_send_string_to_player, ":player_id", server_event_script_message_announce, "str_pdoor_locked"),
+         (multiplayer_send_string_to_player, ":player_id", server_event_script_message_announce, "@You don't have the key"),
          (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
       (try_end),
    
@@ -9924,6 +9923,20 @@ scripts.extend([
     (store_script_param, ":instance_id", 2), # must be valid
     (store_script_param, ":left", 3), # 1 makes the door rotate the other way, for matching left and right doors
 
+      (try_begin), #koso
+         (prop_instance_get_variation_id, ":val_1", ":instance_id"),
+         (gt, ":val_1", 9),
+         (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor, 1),
+         (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_id, ":val_1"),
+         (try_begin),
+          (is_between, ":val_1", 10, 31),
+          (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_default_cost, 500000),
+         (else_try),
+          (is_between, ":val_1", 31, 51),
+          (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_default_cost, 600000),
+         (try_end),
+      (try_end), #koso_end
+  
     (prop_instance_get_variation_id_2, ":is_bolted", ":instance_id"), 
     (scene_prop_slot_eq, ":instance_id", slot_scene_prop_state, scene_prop_state_active),
     (agent_get_player_id, ":player_id", ":agent_id"),
@@ -10777,12 +10790,25 @@ scripts.extend([
    [(store_script_param, ":agent_id", 1), # must be valid
     (store_script_param, ":instance_id", 2), # must be valid
     (store_script_param, ":probability_multiplier", 3), # used for lock picking if the scene prop is destructible and locked
-
+   
     (agent_get_player_id, ":player_id", ":agent_id"),
     (player_is_active, ":player_id"),
     (agent_is_alive, ":agent_id"),
     (call_script, "script_agent_remove_empty_ammo_stacks", ":agent_id"),
+    
     (assign, ":fail", 0),
+      (try_begin),  #koso
+           (prop_instance_get_variation_id, ":val1", ":instance_id"),
+           (prop_instance_get_variation_id_2, ":val2", ":instance_id"),
+           (eq, ":val1", 100),
+           (gt, ":val2", 0),
+           (scene_prop_set_slot, ":instance_id", slot_scene_prop_ibank, 1),
+           (scene_prop_set_slot, ":instance_id", slot_scene_prop_ibank_id, ":val2"),
+           (val_add, "$g_ibank_qnt", 1),
+          (else_try),
+            (scene_prop_set_slot, ":instance_id", slot_scene_prop_ibank, 0),
+      (try_end),
+    
     (try_begin),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 0),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),

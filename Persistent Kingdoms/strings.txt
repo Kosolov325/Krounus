@@ -1,5 +1,5 @@
 stringsfile version 1
-807
+806
 str_no_string NO_STRING!
 str_empty_string _
 str_yes Yes.
@@ -805,5 +805,4 @@ str_s2_outlawed_you_from_the_faction {s2}_outlawed_you_from_the_faction!
 str_regex (\d+)
 str_regex_string A
 str_regex_target (\w+)
-str_pdoor_locked You_don't_have_the_key.
 str_message_ib A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A

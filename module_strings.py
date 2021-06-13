@@ -1157,6 +1157,5 @@ Poisonous herbs can also sometimes be found, which are then applied to the blade
   ("regex", "(\d+)"),
   ("regex_string", "A"),
   ("regex_target", "(\w+)"),
-  ("pdoor_locked", "You don't have the key."),
   ("message_ib", "A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A"),
 ]
