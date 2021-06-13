@@ -234,7 +234,7 @@ scripts.extend([
       (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You have {reg3} gold in the bank."),
 
       #koso
-     # (call_script, "script_cf_player_load_keys", ":player_id"),
+      (call_script, "script_player_load_keys", ":player_id"),
 
 
      (else_try),
@@ -10553,7 +10553,7 @@ scripts.extend([
     (prop_instance_set_position, ":platform_instance_id", pos1),
     ]),
 
-  ("cf_player_load_keys", #koso
+  ("player_load_keys", #koso
    [(store_script_param, ":player_id", 1),
     
         (str_regex_get_matches, ":amount", s10, s2, "str_regex", 8),
