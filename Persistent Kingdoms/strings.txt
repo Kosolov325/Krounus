@@ -619,7 +619,7 @@ str_scene_name_9 Dormarsh_Mountains
 str_scene_name_10 Reykjarvik
 str_scene_name_11 Rhadaron
 str_scene_name_12 War_Of_The_Three_Monarchs
-str_scene_name_13 Westeros
+str_scene_name_13 Avalon
 str_scene_name_14 Blank_Scene_14
 str_scene_name_15 Blank_Scene_15
 str_scene_name_16 Blank_Scene_16
@@ -636,7 +636,7 @@ str_scene_name_26 Blank_Scene_26
 str_scene_name_27 Blank_Scene_27
 str_scene_name_28 Blank_Scene_28
 str_scene_name_29 Blank_Scene_29
-str_scene_name_30 Blank_Scene_30
+str_scene_name_30 Hundred_Years_War
 str_scene_names_end scene_names_end
 str_castle_name_0 Laszloburg_Castle
 str_castle_name_1 Vornneston_Castle
@@ -804,5 +804,5 @@ str_s2_kicked_you_from_the_faction {s2}_kicked_you_from_the_faction!
 str_s2_outlawed_you_from_the_faction {s2}_outlawed_you_from_the_faction!
 str_regex (\d+)
 str_regex_string A
-str_regex_target (\w+)
-str_message_ib A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A
+str_message_ib A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A{reg9}A{reg10}A{reg11}A{reg12}A{reg13}A{reg14}A{reg15}A{reg16}A{reg17}A{reg18}A{reg19}A{reg20}A
+str_message_ib_ammo A{reg21}A{reg22}A{reg23}A{reg24}A{reg25}A{reg26}A{reg27}A{reg28}A{reg29}A{reg30}A{reg31}A{reg32}A{reg33}A{reg34}A{reg35}A{reg36}A{reg37}A{reg38}A{reg39}A{reg40}A

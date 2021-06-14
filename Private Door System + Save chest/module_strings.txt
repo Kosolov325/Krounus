@@ -956,7 +956,7 @@ Poisonous herbs can also sometimes be found, which are then applied to the blade
   ("scene_name_10", "Reykjarvik"),
   ("scene_name_11", "Rhadaron"),
   ("scene_name_12", "War Of The Three Monarchs"),
-  ("scene_name_13", "Avalon"),
+  ("scene_name_13", "Westeros"),
   ("scene_name_14", "Blank Scene 14"),
   ("scene_name_15", "Blank Scene 15"),
   ("scene_name_16", "Blank Scene 16"),
@@ -973,7 +973,7 @@ Poisonous herbs can also sometimes be found, which are then applied to the blade
   ("scene_name_27", "Blank Scene 27"),
   ("scene_name_28", "Blank Scene 28"),
   ("scene_name_29", "Blank Scene 29"),
-  ("scene_name_30", "Hundred Years War"),
+  ("scene_name_30", "Blank Scene 30"),
   ("scene_names_end", "scene_names_end"),
 
   ("castle_name_0", "Laszloburg Castle"),
@@ -1147,16 +1147,15 @@ Poisonous herbs can also sometimes be found, which are then applied to the blade
 
   #Shield Log
   ("shield_hit_log", "{s12} attacked {s11}'s shield with {s10} dealing {reg31} damage."),
-
+  
   ("log_equipment", "{s11} had these items: H:{reg31}, B:{reg32}, G:{reg33}, F:{reg34}, HO:{reg39}, 1:{reg35}, 2:{reg36}, 3:{reg37}, 4:{reg38}"),
   ("s1_kicked_s2_from_s3", "{s1} kicked {s2} from {s3}."),
   ("s1_outlawed_s2_from_s3", "{s1} outlawed {s2} from {s3}."),
   ("s2_kicked_you_from_the_faction", "{s2} kicked you from the faction!"),
   ("s2_outlawed_you_from_the_faction", "{s2} outlawed you from the faction!"),
-
   #koso
   ("regex", "(\d+)"),
   ("regex_string", "A"),
-  ("message_ib", "A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A{reg9}A{reg10}A{reg11}A{reg12}A{reg13}A{reg14}A{reg15}A{reg16}A{reg17}A{reg18}A{reg19}A{reg20}A"),
-  ("message_ib_ammo", "A{reg21}A{reg22}A{reg23}A{reg24}A{reg25}A{reg26}A{reg27}A{reg28}A{reg29}A{reg30}A{reg31}A{reg32}A{reg33}A{reg34}A{reg35}A{reg36}A{reg37}A{reg38}A{reg39}A{reg40}A"),
+  ("regex_target", "(\w+)"),
+  ("message_ib", "A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A"),
 ]

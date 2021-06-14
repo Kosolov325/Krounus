@@ -31,10 +31,7 @@ pkjs_action_save_player_and_gear            = 9
 
 pkjs_action_bank_withdraw                   = 10
 pkjs_action_bank_deposit                    = 11
-action_ibank_save                           = 12
-action_ibank_load                           = 13
-action_pdoor_save                           = 15
-action_pdoor_load                           = 16
+
 ## PK.js SCRIPTS END ##
 
 ########################################################
@@ -126,20 +123,9 @@ slot_player_custom_banner_mesh_id     = 66
 slot_player_pkjs_last_bank            = 67
 ## PK.js SCRIPTS END ##
 
+
 #koso
 slot_player_ibank_id                  = 68
-
-slot_player_pdoor_id                  = 69
-slot_player_pdoor_id_2                  = 70
-slot_player_pdoor_id_3                  = 71
-slot_player_pdoor_id_4                  = 72
-slot_player_pdoor_end                   = 73
-
-slot_player_pdoor_id_ow                 = 74
-slot_player_pdoor_id_2_ow                  = 75
-slot_player_pdoor_id_3_ow                  = 76
-slot_player_pdoor_id_4_ow                  = 77
-slot_player_pdoor_ow_end                   = 78
 ########################################################
 ##  AGENT SLOTS            #############################
 ########################################################
@@ -211,11 +197,17 @@ slot_agent_rest_use_start_time        = 68
 
 slot_agent_walk_mode                  = 73
 
-
+#Kosolov 
+slot_agent_reward                    = 74
+slot_agent_druken_time               = 75
+slot_agent_druken                    = 76
+slot_agent_drunk_amount              = 77
+slot_agent_druken_amnt_time          = 78
+slot_agent_hungry_time_damage        = 0
+slot_agent_hungry_time               = 0
 ########################################################
 ##  SCENE PROP SLOTS       #############################
 ########################################################
-
 slot_scene_prop_item_id               = 0 # main associated item id, for stockpiles and similar
 slot_scene_prop_gold_value            = 1 # preset gold value, or cached value of the associated item
 slot_scene_prop_gold_multiplier       = 2 # cached price multiplier of the associated item
@@ -325,13 +317,9 @@ slot_animal_carcass_meat_count        = 100
 slot_animal_carcass_hide_count        = 101
 
 #Kosolov
-slot_scene_prop_loaded                = 102
+slot_scene_prop_reward                = 102
 slot_scene_prop_ibank                 = 103
-slot_scene_prop_ibank_id              = 104
-slot_scene_prop_pdoor                 = 105
-slot_scene_prop_pdoor_owner           = 106
-slot_scene_prop_pdoor_default_cost    = 107
-slot_scene_prop_pdoor_id              = 108
+slot_scene_prop_ibank_owner           = 104
 ########################################################
 ##  ITEM SLOTS             #############################
 ########################################################
