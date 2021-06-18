@@ -578,7 +578,7 @@ agent_hungry_system = (0, 0, 1, # server: loop over all agents, doing all common
                (agent_get_slot, ":food_amount", ":agent_id", slot_agent_food_amount),
               (val_add, ":hungry_cooldown", 1),
               (try_begin),
-                (eq, ":hungry_cooldown", 360),
+                (eq, ":hungry_cooldown", 600),
                 (store_agent_hit_points, ":health_percent", ":agent_id", 0),
                 (val_sub, ":food_amount", 10),
                 (val_max, ":food_amount", 0),
