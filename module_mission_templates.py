@@ -246,6 +246,15 @@ agent_spawn = (ti_on_agent_spawn, 0, 0, [], # server and clients: set up new age
     (call_script, "script_on_agent_spawned", ":agent_id"),
     (call_script, "script_death_cam_off", ":agent_id"),
 
+    #koso
+    (try_begin),
+     (multiplayer_is_server),
+     (neg|agent_is_non_player, ":agent_id"),
+     (agent_get_player_id, ":player_id", ":agent_id"),
+     (agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
+     (multiplayer_send_3_int_to_player, ":player_id", server_event_agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
+    (try_end),
+
     ## PK.js SCRIPTS START ##
     (call_script, "script_pkjs_load_gear", ":agent_id"),
     ## PK.js SCRIPTS END ##
@@ -253,7 +262,6 @@ agent_spawn = (ti_on_agent_spawn, 0, 0, [], # server and clients: set up new age
     (try_begin),
       (multiplayer_is_server),
       (neg|agent_is_non_player, ":agent_id"),
-      (agent_get_player_id, ":player_id", ":agent_id"),
 
       (player_get_slot, ":first_spawn_occured", ":player_id", slot_player_first_spawn_occured),
       (neq, ":first_spawn_occured", 1),
@@ -1174,6 +1182,7 @@ skybox_update_interval = (5, 0, 0, [], [
   (call_script, "script_skybox_send_info_to_players"),
 ])
 
+#koso
 agent_is_druken = (1, 0, 0, [],
       [
         (try_for_players, ":player_id"),
@@ -1213,6 +1222,13 @@ server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_message
             (val_add,"$server_message",1),             
         (try_end),
          ])
+
+save_ibank = (0, 0, 60, [],
+   [
+    (gt, "$g_ibank_np_qnt", 0),
+    (call_script, "script_save_ibank"),
+           ])
+
 def common_triggers(self):
 	return [(ti_before_mission_start, 0, 0, [(assign, "$g_game_type", "mt_" + self)], []),
     before_mission_start_setup,
@@ -1287,6 +1303,7 @@ def common_triggers(self):
     agent_is_druken,
     server_announces, 
     agent_hungry_system,
+    save_ibank,
     ]
 
 mission_templates = [

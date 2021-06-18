@@ -228,14 +228,17 @@ scripts.extend([
 
       #Koso
       (player_get_unique_id, reg1, ":player_id"),
-      (str_store_player_username, s3, ":player_id"),
+      (str_store_player_username, s4, ":player_id"),
       (call_script, "script_log_equipment", ":player_id"),
-      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@Welcome {s3} (GUID: {reg1}, PIN: {s0}). {s1}"),
+      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@Welcome {s4} (GUID: {reg1}, PIN: {s0}). {s1}"),
       (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You have {reg3} gold in the bank."),
      
       (player_get_slot, ":faction_id", ":player_id", slot_player_faction_id),
       (call_script, "script_initial_items",":agent_id", ":player_id", ":faction_id"),
 
+      #koso
+      (call_script, "script_player_load_keys", ":player_id"),
+     
       (try_begin), #koso
          (assign, ":generate_needed", 0),
          (try_begin),
@@ -294,7 +297,21 @@ scripts.extend([
         (call_script, "script_player_adjust_gold", ":player_id", reg4, 1),
         (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@{s0}"),
       (try_end),
+     
+     (else_try), #koso
+       (eq, ":action", action_ibank_load),
+       (assign, ":ibank_id", reg1),
+       (assign, ":instance_id", reg2),
 
+       (prop_instance_get_variation_id_2, ":val2", ":instance_id"),
+       (eq, ":ibank_id", ":val2"),
+       (call_script, "script_cf_fill_ibank", ":instance_id", 1),
+     (else_try), 
+       (eq, ":action", action_pdoor_load),
+       (assign, ":instance_id", reg1),
+        
+       (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_owner, reg2),
+       (scene_prop_set_slot, ":instance_id", slot_scene_prop_loaded, 1),
      (try_end),
    ]),
 
@@ -5468,7 +5485,229 @@ scripts.extend([
       (multiplayer_send_2_int_to_player, ":player_id", server_event_play_sound_at_position, ":sound_id", ":packed_position"),
     (try_end),
     ]),
+  
+    #Kosolov
+  ("cf_phs_remove",
+   [(store_script_param, ":player_id", 1),
+    (store_script_param, ":target_player_id", 2),
+    (store_script_param, ":target_door_id", 3),
+    (store_script_param, ":remove_owner", 4),
 
+   (try_begin), #Do that for remove
+    (neq, ":player_id", 0),
+    (str_store_substring, s0, s0, 7),
+
+    (assign, ":error", 0),
+    (str_clear, s1),
+    (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 3),
+    (str_to_num, ":target_player_id", s1),
+    (str_to_num, ":target_door_id", s2),
+    (str_to_num, ":remove_owner", s3),
+    (assign, ":server", 0),
+    (str_store_player_username, s4, ":player_id"),
+    (str_store_player_username, s5, ":target_player_id"),
+    (else_try),
+     (assign, ":server", 1),
+     (assign, ":error", 0),
+    (try_end),
+    
+    (player_is_active, ":target_player_id"),
+    (neq, ":target_door_id", 0),
+    (neq, ":target_player_id", 0),
+    
+      (try_begin),
+        (this_or_next|player_is_admin, ":player_id"),
+        (eq, ":server", 1),
+        (assign, ":giveable", 1),
+        (assign, ":remove_owner_bypass", 1),
+      (else_try),
+         (neg|player_is_admin, ":player_id"),
+         (eq, ":amount", 2),
+         (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id_ow, slot_player_pdoor_ow_end),
+          (player_slot_eq, ":player_id", ":pdoor_slot_id", ":target_door_id"),
+          (assign, ":giveable", 1),
+        (try_end),
+      (try_end),
+    
+       (eq, ":giveable", 1),
+       (try_begin),
+        (eq, ":remove_owner", 1),
+        (eq, ":remove_owner_bypass", 1),
+        (assign, ":end", slot_player_pdoor_end),
+         (try_for_range, ":slot_loop", slot_player_pdoor_id, ":end"),
+          (player_slot_eq, ":target_player_id", ":slot_loop", ":target_door_id"),
+          (player_set_slot, ":target_player_id", ":slot_loop", 0),
+          (assign, ":end", slot_player_pdoor_id),
+         (try_end),
+
+         (assign, ":end", slot_player_pdoor_ow_end),
+         (try_for_range, ":slot_loop_2", slot_player_pdoor_id_ow, ":end"),
+          (player_slot_eq, ":target_player_id", ":slot_loop_2", ":target_door_id"),
+          (player_set_slot, ":target_player_id", ":slot_loop_2", 0),
+          (try_begin),
+           (eq, ":server", 0),
+           (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@You removed access for {s4}"),
+           (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@You can't give keys for Door ID:{s2} anymore by {s5}"),
+          (try_end),
+          (assign, ":end",  slot_player_pdoor_id_ow),
+         (try_end),
+       (else_try),
+         (assign, ":end", slot_player_pdoor_end),
+         (try_for_range, ":slot_loop", slot_player_pdoor_id, ":end"),
+           (player_slot_eq, ":target_player_id", ":slot_loop", ":target_door_id"),
+           (player_set_slot, ":target_player_id", ":slot_loop", 0),
+           (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@You removed access for {s4}"),
+           (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@You access for Door ID:{s2} was removed by {s5}"),
+           (assign, ":end", slot_player_pdoor_id),
+         (try_end),
+      (else_try),
+         (assign, ":error", 1),
+      (try_end),
+       (assign, reg0, ":error"),
+    ]),
+  
+  ("cf_phs_give", #Koso 
+   [(store_script_param, ":player_id", 1),
+    (store_script_param, ":target_player_id", 2),
+    (store_script_param, ":target_door_id", 3),
+    (store_script_param, ":give_owner", 4),
+    
+    (try_begin), #Do that for givekeys
+    (neq, ":player_id", 0),
+    (str_store_substring, s0, s0, 8),
+
+    (assign, ":error", 0),
+    (str_clear, s1),
+    (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 3),
+    (str_to_num, ":target_player_id", s1),
+    (str_to_num, ":target_door_id", s2),
+    (str_to_num, ":give_owner", s3),
+    (assign, ":server", 0),
+    (str_store_player_username, s4, ":player_id"),
+    (str_store_player_username, s5, ":target_player_id"),
+    (else_try),
+     (assign, ":server", 1),
+     (assign, ":error", 0),
+    (try_end),
+    
+    (player_is_active, ":target_player_id"),
+    (neq, ":target_door_id", 0),
+    (neq, ":target_player_id", 0),
+    
+      (try_begin),
+        (this_or_next|player_is_admin, ":player_id"),
+        (eq, ":server", 1),
+        (assign, ":giveable", 1),
+        (assign, ":give_owner_bypass", 1),
+      (else_try),
+         (neg|player_is_admin, ":player_id"),
+         (eq, ":amount", 2),
+         (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id_ow, slot_player_pdoor_ow_end),
+          (player_slot_eq, ":player_id", ":pdoor_slot_id", ":target_door_id"),
+          (assign, ":giveable", 1),
+        (try_end),
+      (try_end),
+    
+       (eq, ":giveable", 1),
+       (try_begin),
+        (eq, ":give_owner", 1),
+        (eq, ":give_owner_bypass", 1),
+        (assign, ":end", slot_player_pdoor_end),
+         (try_for_range, ":slot_loop", slot_player_pdoor_id, ":end"),
+          (player_slot_eq, ":target_player_id", ":slot_loop", 0),
+          (player_set_slot, ":target_player_id", ":slot_loop", ":target_door_id"),
+          (assign, ":end", slot_player_pdoor_id),
+         (try_end),
+
+         (assign, ":end", slot_player_pdoor_ow_end),
+         (try_for_range, ":slot_loop_2", slot_player_pdoor_id_ow, ":end"),
+          (player_slot_eq, ":target_player_id", ":slot_loop_2", 0),
+          (player_set_slot, ":target_player_id", ":slot_loop_2", ":target_door_id"),
+          (try_begin),
+           (eq, ":server", 0),
+           (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@You gave access for {s5}"),
+           (multiplayer_send_string_to_player,":target_player_id", server_event_script_message, "@Now you can give keys for Door ID:{s2} by {s4}"),
+          (try_end),
+          (assign, ":end",  slot_player_pdoor_id_ow),
+         (try_end),
+       (else_try),
+         (assign, ":end", slot_player_pdoor_end),
+         (try_for_range, ":slot_loop", slot_player_pdoor_id, ":end"),
+           (player_slot_eq, ":target_player_id", ":slot_loop", 0),
+           (player_set_slot, ":target_player_id", ":slot_loop", ":target_door_id"),
+           (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@You gave access for {s5}"),
+           (multiplayer_send_string_to_player,":target_player_id", server_event_script_message, "@You received access for Door ID:{s2} by {s4}"),
+           (assign, ":end", slot_player_pdoor_id),
+         (try_end),
+      (else_try),
+         (assign, ":error", 1),
+      (try_end),
+       (assign, reg0, ":error"),
+    ]),
+  ("cf_phs_buy", #Koso
+   [(store_script_param, ":player_id", 1),
+
+     (str_store_substring, s0, s0, 10),
+
+    (str_clear, s1),
+    (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 1),
+
+    (eq, ":amount", 1),
+    (str_to_num, ":door_id", s1),
+    (try_for_prop_instances, ":instance_id"),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor_id, ":door_id"),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 1),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor_owner, 0),
+      (scene_prop_get_slot, ":cost", ":instance_id", slot_scene_prop_pdoor_default_cost),
+      (call_script, "script_cf_check_enough_gold", ":player_id", ":cost"),
+      (call_script, "script_cf_phs_give", 0, ":player_id", ":door_id", 1),
+      (eq, reg0, 0),
+      (call_script, "script_player_adjust_gold", ":player_id", ":cost", -1),
+      (player_get_unique_id, reg2, ":player_id"),
+      (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_owner, reg2),
+      (send_message_to_url, pkjs_script_server + "/pdoorsave" + pkjs_querystring + "&pdoorID={s1}&pdoorOW={reg2}"),
+    (try_end),
+    ]),
+
+    ("cf_phs_sell", #Koso
+   [(store_script_param, ":player_id", 1),
+
+     (str_store_substring, s0, s0, 11),
+
+     (str_clear, s1),
+    (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 1),
+
+    (eq, ":amount", 1),
+    (str_to_num, ":door_id", s1),
+    (player_get_unique_id, reg2, ":player_id"),
+    (try_for_prop_instances, ":instance_id"),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor_id, ":door_id"),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 1),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor_owner, reg2),
+      (scene_prop_get_slot, ":cost", ":instance_id", slot_scene_prop_pdoor_default_cost),
+      (call_script, "script_player_adjust_gold", ":player_id", ":cost", 1),
+      (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_owner, 0),
+      (call_script, "script_cf_phs_remove", 0, ":player_id", ":door_id", 1),
+      (send_message_to_url, pkjs_script_server + "/pdoorsave" + pkjs_querystring + "&pdoorID={s1}&pdoorOW={reg2}"),
+    (try_end),
+    ]),
+  
+  ("info",
+   [(store_script_param, ":player_id", 1),
+     (try_begin),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ "),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@------------------------------------------------------------------------------"),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@                         list of commands                               "),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ '/givekey (player_id) (door_id)' gives someone's access."),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ '/removekey (player_id) (door id)' removes someone's access."),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ '/buy house (door id)' buy a house."),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ '/sell house (door id)' sell a house."),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ '/id' seek for someone's id or yours."),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@------------------------------------------------------------------------------"),
+     (try_end),
+    
+     ]),
+  
    #Kosolov start
   ("chat_commands",
   [(store_script_param, s0, 1),
@@ -5532,6 +5771,36 @@ scripts.extend([
            (assign, ":failure", 1),
         (try_end),
    (else_try),
+      (str_equals, s0, "@help", 1),
+      (call_script, "script_info", ":player_id"),
+   (else_try),
+     (str_starts_with, s0, "@givekey ", 1),
+     (assign, reg0, 1),
+     (call_script, "script_cf_phs_give", ":player_id", 0, 0, 0),
+     (assign, ":failure", reg0),
+   (else_try),
+     (str_starts_with, s0, "@removekey ", 1),
+     (assign, reg0, 1),
+     (call_script, "script_cf_phs_remove", ":player_id", 0, 0, 0),
+     (assign, ":failure", reg0),
+   (else_try),
+     (str_starts_with, s0, "@buy house ", 1),
+     (assign, reg0, 1),
+     (call_script, "script_cf_phs_buy", ":player_id"),
+     (assign, ":failure", reg0),
+   (else_try),
+      (str_starts_with, s0, "@sell house ", 1),
+     (assign, reg0, 1),
+     (call_script, "script_cf_phs_sell", ":player_id"),
+     (assign, ":failure", reg0),
+   (else_try),
+     (str_equals, s0, "@id", 1),
+     (try_begin),
+       (assign, reg0, ":player_id"),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ "),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@That's your ID: {reg0}"),
+     (try_end),
+  (else_try),
        #if theres none valid command
       (assign, ":failure", 1),
    (try_end),
@@ -6408,6 +6677,11 @@ scripts.extend([
    [(store_script_param, ":instance_id", 1), # must be valid
 
     (prop_instance_get_variation_id, ":scene_prop_owner_slot", ":instance_id"),
+    (try_begin), #koso
+      (eq,":scene_prop_owner_slot", 100),
+      (assign, ":scene_prop_owner_slot", 0),
+    (try_end), #koso
+    
     (val_mod, ":scene_prop_owner_slot", 10), # stored in the first digit of scene prop value 1, set with the scene editor
     (try_begin),
       (neg|scene_prop_slot_eq, ":instance_id", slot_scene_prop_is_mercenary, 1),
@@ -9790,19 +10064,77 @@ scripts.extend([
     (prop_instance_animate_to_position, ":instance_id", pos2, 100),
     (scene_prop_set_slot, ":instance_id", slot_scene_prop_target_position, 0),
     ]),
+           
+  ("cf_use_pdoor", #Koso, private housing stuff, please someone kill me 
+  [(store_script_param, ":player_id", 1), # must be valid
+    (store_script_param, ":instance_id", 2), # must be valid
+    (store_script_param, ":left", 3), # 1 makes the door rotate the other way, for matching left and right doors
 
+    (try_begin),
+    (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Private Housing System: - Door id: {reg1}"),
+    (assign, ":fail", 1),
+       (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id, slot_player_pdoor_end),
+        (player_slot_eq, ":player_id", ":pdoor_slot_id", reg1),
+        (scene_prop_get_slot, ":owner", ":instance_id", slot_scene_prop_pdoor_owner),
+   
+        (try_begin),
+           (neq, ":owner", 0),
+           (assign, ":fail", 0),
+        (else_try),
+          (player_set_slot, ":player_id", ":pdoor_slot_id", 0),
+        (try_end),
+   
+       (try_end), 
+
+      (try_begin),
+       (eq, ":fail", 0),
+       (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
+      (else_try),
+         (eq, ":fail", 1),
+         (multiplayer_send_string_to_player, ":player_id", server_event_script_message_announce, "@You don't have the key"),
+         (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
+      (try_end),
+   
+    (try_end),
+   ]),
+  
   ("cf_use_rotate_door", # server: handle opening and closing a rotating door
    [(store_script_param, ":agent_id", 1), # must be valid
     (store_script_param, ":instance_id", 2), # must be valid
     (store_script_param, ":left", 3), # 1 makes the door rotate the other way, for matching left and right doors
 
+      (try_begin), #koso
+         (prop_instance_get_variation_id, ":val_1", ":instance_id"),
+         (gt, ":val_1", 9),
+         (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor, 1),
+         (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_id, ":val_1"),
+         (try_begin),
+          (is_between, ":val_1", 10, 31),
+          (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_default_cost, 500000),
+         (else_try),
+          (is_between, ":val_1", 31, 51),
+          (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_default_cost, 600000),
+         (try_end),
+      (try_end), #koso_end
+  
+    (prop_instance_get_variation_id_2, ":is_bolted", ":instance_id"), 
     (scene_prop_slot_eq, ":instance_id", slot_scene_prop_state, scene_prop_state_active),
     (agent_get_player_id, ":player_id", ":agent_id"),
     (player_is_active, ":player_id"),
+    (try_begin), #Koso (this will makes the usage of the door be switched for private housing system, instead of the default ones)
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor, 1), #If the door has val_1 great than 9, then do the switch
+      (scene_prop_get_slot, reg1, ":instance_id", slot_scene_prop_pdoor_id),
+      (assign, reg0, ":instance_id"),
+      (try_begin),
+       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 0),
+       (send_message_to_url, pkjs_script_server + "/pdoorload" + pkjs_querystring + "&instanceid={reg0}&pdoorID={reg1}"),
+      (else_try),
+        (call_script, "script_cf_use_pdoor", ":player_id", ":instance_id", ":left"),
+     (try_end),
+    (else_try), #Koso_end
     (player_get_slot, ":player_faction_id", ":player_id", slot_player_faction_id),
     (call_script, "script_scene_prop_get_owning_faction", ":instance_id"),
     (assign, ":faction_id", reg0),
-    (prop_instance_get_variation_id_2, ":is_bolted", ":instance_id"),
     (val_and, ":is_bolted", 0x2),
     (assign, ":fail_string_id", 0),
     (try_begin),
@@ -9847,6 +10179,7 @@ scripts.extend([
     (try_end),
     (eq, ":fail_string_id", 0),
     (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
+    (try_end), #Koso
     ]),
 
   ("cf_rotate_door", # server: helper script to rotate doors
@@ -10372,6 +10705,38 @@ scripts.extend([
     (try_end),
     ]),
 
+  
+  ("player_load_keys", #koso
+   [(store_script_param, ":player_id", 1),
+    
+        (str_regex_get_matches, ":amount", s10, s3, "str_regex", 8),
+        (val_sub, ":amount", ":amount"),
+
+          (str_to_num, ":id", s10),
+          (player_set_slot, ":player_id", slot_player_pdoor_id , ":id"),
+         
+          (str_to_num, ":id", s11),
+          (player_set_slot, ":player_id", slot_player_pdoor_id_2, ":id"),
+  
+          (str_to_num, ":id", s12),
+          (player_set_slot, ":player_id", slot_player_pdoor_id_3, ":id"),
+
+          (str_to_num, ":id", s13),
+         (player_set_slot, ":player_id", slot_player_pdoor_id_4, ":id"),
+    
+         (str_to_num, ":id", s14),
+         (player_set_slot, ":player_id", slot_player_pdoor_id_ow, ":id"),
+
+         (str_to_num, ":id", s15),
+         (player_set_slot, ":player_id", slot_player_pdoor_id_2_ow, ":id"),
+
+         (str_to_num, ":id", s16),
+         (player_set_slot, ":player_id", slot_player_pdoor_id_3_ow, ":id"),
+
+         (str_to_num, ":id", s17),
+         (player_set_slot, ":player_id", slot_player_pdoor_id_4_ow, ":id"),
+     ]),
+  
   ("cf_init_lift_platform", # server: calculate range of motion for a lift platform at mission start
    [(multiplayer_is_server),
     (store_script_param, ":platform_instance_id", 1), # must be valid
@@ -10446,12 +10811,18 @@ scripts.extend([
        setItem("itm_club"),
     (try_end),
      ]),
+
+  
   ("cf_fill_ibank", #koso
   [(store_script_param, ":instance_id", 1),
-   
+   (store_script_param, ":action", 2),
+
+    (try_begin),
+      (eq, ":action", 1),
+      (str_store_string_reg, s2, s0),
+    (try_end),
     (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
     (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
-    (server_add_message_to_log, "@The player {s3} has connect with these items inside item banking: {s2}"),
     (str_regex_get_matches, ":amount", s1, s2, "str_regex", 20),
     (val_sub, ":amount", ":amount"), #just to prevent warnings
     (assign, ":loop", 1),
@@ -10539,6 +10910,9 @@ scripts.extend([
          (try_end),
          (val_add, ":loop", 1),
        (try_end),
+        (eq, ":action", 1),
+        (scene_prop_set_slot, ":instance_id", slot_scene_prop_loaded, 1),
+        (scene_prop_set_slot, ":instance_id", slot_scene_prop_linked_scene_prop, 0),
     ]),
   ("new_ibank", #koso
    [(store_script_param, ":player_id", 1),
@@ -10639,15 +11013,105 @@ scripts.extend([
     (try_end),
    ]),
   
+  ("save_ibank",
+   [
+     (try_for_prop_instances, ":instance_id"),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 1),
+      (try_begin), #koso
+      (assign, reg0, ":instance_id"),
+       
+      (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
+      (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
+      (assign, ":loop", 1),
+      (try_for_range, ":inventory_slot", slot_scene_prop_inventory_begin, ":inventory_end"),
+        (scene_prop_get_slot, ":item_id", ":instance_id", ":inventory_slot"),
+         (try_begin),
+           (eq, ":loop", 1),
+           (assign, reg1, ":item_id"),
+         (else_try),
+           (eq, ":loop", 2),              
+           (assign, reg2, ":item_id"),
+         (else_try),
+           (eq, ":loop", 3),  
+           (assign, reg3, ":item_id"),
+         (else_try),
+           (eq, ":loop", 4),  
+           (assign, reg4, ":item_id"),
+         (else_try),
+           (eq, ":loop", 5),  
+           (assign, reg5, ":item_id"),
+         (else_try),
+           (eq, ":loop", 6),  
+           (assign, reg6, ":item_id"),
+         (else_try),
+           (eq, ":loop", 7),  
+           (assign, reg7, ":item_id"),
+         (else_try),
+           (eq, ":loop", 8),  
+           (assign, reg8, ":item_id"),
+         (else_try),
+           (eq, ":loop", 9),  
+           (assign, reg9, ":item_id"),
+         (else_try),
+           (eq, ":loop", 10),  
+           (assign, reg10, ":item_id"), 
+         (else_try),
+           (eq, ":loop", 11),  
+           (assign, reg11, ":item_id"),
+         (else_try),
+           (eq, ":loop", 12),  
+           (assign, reg12, ":item_id"),
+         (else_try),
+           (eq, ":loop", 13),  
+           (assign, reg13, ":item_id"), 
+         (else_try),
+           (eq, ":loop", 14),
+           (assign, reg14, ":item_id"), 
+         (else_try),
+           (eq, ":loop", 15),
+           (assign, reg15, ":item_id"), 
+         (else_try),
+           (eq, ":loop", 16),
+           (assign, reg16, ":item_id"),
+         (else_try),
+           (eq, ":loop", 17),
+           (assign, reg17, ":item_id"), 
+         (else_try),
+           (eq, ":loop", 18),
+           (assign, reg18, ":item_id"), 
+         (else_try),
+           (eq, ":loop", 19),
+           (assign, reg19, ":item_id"),
+         (else_try),
+           (eq, ":loop", 20),
+           (assign, reg20, ":item_id"),
+           (str_store_string, s1, "str_message_ib"),
+         (try_end),
+         (val_add, ":loop", 1),
+       (try_end),
+       (try_end),
+        (send_message_to_url, pkjs_script_server + "/ibanksave" + pkjs_querystring + "&ibankid={reg0}&ibankit={s1}"),
+     (try_end),
+     ]),
+     
   ("cf_use_inventory", # server: reply with inventory contents of a scene prop when requested by a player
    [(store_script_param, ":agent_id", 1), # must be valid
     (store_script_param, ":instance_id", 2), # must be valid
     (store_script_param, ":probability_multiplier", 3), # used for lock picking if the scene prop is destructible and locked
 
     (try_begin),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank_npersonal, 0),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),
       (agent_get_player_id, ":player_id", ":agent_id",),
       (call_script, "script_use_ibank", ":player_id", ":agent_id"),
+    (else_try),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank_npersonal, 1),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 0),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 1),
+      (assign, reg0, ":instance_id"),
+      (prop_instance_get_variation_id_2, reg1, ":instance_id"),
+      (send_message_to_url, pkjs_script_server + "/ibankload" + pkjs_querystring + "&instanceid={reg0}&ibankid={reg1}"),
     (else_try),
     (agent_get_player_id, ":player_id", ":agent_id"),
     (player_is_active, ":player_id"),

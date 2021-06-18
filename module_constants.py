@@ -31,7 +31,10 @@ pkjs_action_save_player_and_gear            = 9
 
 pkjs_action_bank_withdraw                   = 10
 pkjs_action_bank_deposit                    = 11
-
+action_ibank_save                           = 12
+action_ibank_load                           = 13
+action_pdoor_save                           = 15
+action_pdoor_load                           = 16
 ## PK.js SCRIPTS END ##
 
 ########################################################
@@ -126,6 +129,18 @@ slot_player_pkjs_last_bank            = 67
 
 #koso
 slot_player_ibank_id                  = 68
+
+slot_player_pdoor_id                  = 69
+slot_player_pdoor_id_2                  = 70
+slot_player_pdoor_id_3                  = 71
+slot_player_pdoor_id_4                  = 72
+slot_player_pdoor_end                   = 73
+
+slot_player_pdoor_id_ow                 = 74
+slot_player_pdoor_id_2_ow                  = 75
+slot_player_pdoor_id_3_ow                  = 76
+slot_player_pdoor_id_4_ow                  = 77
+slot_player_pdoor_ow_end                   = 78
 ########################################################
 ##  AGENT SLOTS            #############################
 ########################################################
@@ -318,8 +333,18 @@ slot_animal_carcass_hide_count        = 101
 
 #Kosolov
 slot_scene_prop_reward                = 102
+
 slot_scene_prop_ibank                 = 103
 slot_scene_prop_ibank_owner           = 104
+slot_scene_prop_ibank_id              = 105
+slot_scene_prop_ibank_npersonal       = 106
+
+slot_scene_prop_loaded                = 107
+
+slot_scene_prop_pdoor                 = 108
+slot_scene_prop_pdoor_owner           = 109
+slot_scene_prop_pdoor_default_cost    = 110
+slot_scene_prop_pdoor_id              = 111
 ########################################################
 ##  ITEM SLOTS             #############################
 ########################################################
