@@ -357,7 +357,6 @@ scripts.extend([
     (store_script_param, ":player_id", 1),
 
     (try_begin),
-      (try_begin),
          (player_get_slot, reg1, ":player_id", slot_player_pdoor_id),
          (player_get_slot, reg2, ":player_id", slot_player_pdoor_id_2),
          (player_get_slot, reg3, ":player_id", slot_player_pdoor_id_3),

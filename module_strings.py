@@ -1159,4 +1159,5 @@ Poisonous herbs can also sometimes be found, which are then applied to the blade
   ("regex_string", "A"),
   ("regex_target", "(\w+)"),
   ("message_ib", "A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A{reg9}A{reg10}A{reg11}A{reg12}A{reg13}A{reg14}A{reg15}A{reg16}A{reg17}A{reg18}A{reg19}A{reg20}A"),
+  ("message_keys", "A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A"),
  ]

@@ -464,6 +464,20 @@ scripts.extend([
        (assign, reg24, 0),
        (str_store_string, s1, "@null"),
       (try_end), #koso
+
+      (try_begin), #koso
+         (str_clear, s1),
+         (player_get_slot, reg1, ":player_id", slot_player_pdoor_id),
+         (player_get_slot, reg2, ":player_id", slot_player_pdoor_id_2),
+         (player_get_slot, reg3, ":player_id", slot_player_pdoor_id_3),
+         (player_get_slot, reg4, ":player_id", slot_player_pdoor_id_4),
+         (player_get_slot, reg5, ":player_id", slot_player_pdoor_id_ow),
+         (player_get_slot, reg6, ":player_id", slot_player_pdoor_id_2_ow),
+         (player_get_slot, reg7, ":player_id", slot_player_pdoor_id_3_ow),
+         (player_get_slot, reg8, ":player_id", slot_player_pdoor_id_4_ow),
+         (str_store_string, s1, "str_message_keys"),
+         (str_store_string_reg, s2, s1),
+      (try_end),
     
       (player_get_unique_id, reg0, ":player_id"),
       (str_store_player_username, s0, ":player_id"),
@@ -541,7 +555,7 @@ scripts.extend([
          "&firstItem={reg11}&secondItem={reg12}&thirdItem={reg13}&forthItem={reg14}" +
          "&firstAmmo={reg15}&secondAmmo={reg16}&thirdAmmo={reg17}&forthAmmo={reg18}" +
          "&horse={reg19}&horseHealth={reg20}" +
-         "&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&ibankID={reg24}&ibank={s1}&alive"),
+         "&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&ibankID={reg24}&ibank={s1}&keys={s2}&alive"),
       (else_try),
         (neg|player_is_admin, ":player_id"),
         (send_message_to_url,
@@ -2170,7 +2184,7 @@ scripts.extend([
             (str_store_player_username, s1, ":sender_player_id"), 
             (try_begin), #Kosolov start
               (str_starts_with, s0, "@/"),
-              (call_script, "script_chat_commands", s0, ":sender_player_id"),
+              (call_script, "script_chat_commands", ":sender_player_id"),
             (else_try),
             (str_store_string, s0, "str_chat_format"),
             (server_add_message_to_log, "str_local_chat_log_format"),
@@ -5710,8 +5724,7 @@ scripts.extend([
   
    #Kosolov start
   ("chat_commands",
-  [(store_script_param, s0, 1),
-   (store_script_param, ":player_id", 2),
+  [(store_script_param, ":player_id", 1),
    
    (str_store_substring, s0, s0, 1),
    (assign, ":failure", 0),

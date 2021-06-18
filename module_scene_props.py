@@ -791,6 +791,7 @@ def spr_item_chest_triggers(inventory_count=6, max_item_length=100, use_string="
           (scene_prop_set_slot, ":instance_id", slot_scene_prop_store_only_ammo, store_only_ammo),
           (scene_prop_set_slot, ":instance_id", slot_scene_prop_reward, 0),
           (scene_prop_set_slot, ":instance_id", slot_scene_prop_ibank_owner, 0),
+          
           (try_begin),  #koso
            (prop_instance_get_variation_id, ":val1", ":instance_id"),
            (prop_instance_get_variation_id_2, ":val2", ":instance_id"),
@@ -800,8 +801,6 @@ def spr_item_chest_triggers(inventory_count=6, max_item_length=100, use_string="
            (eq, ":val1", ":val2"),
            (scene_prop_set_slot, ":instance_id", slot_scene_prop_ibank_npersonal, 1),
            (val_add, "$g_ibank_np_qnt", 1),
-          (else_try),
-            (scene_prop_set_slot, ":instance_id", slot_scene_prop_ibank, 0),
           (try_end),
           ]),
         (ti_on_scene_prop_hit,
