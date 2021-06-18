@@ -9896,22 +9896,31 @@ scripts.extend([
         (player_slot_eq, ":player_id", ":pdoor_slot_id", reg1),
         (scene_prop_get_slot, ":owner", ":instance_id", slot_scene_prop_pdoor_owner),
    
-        (try_begin),
-           (neq, ":owner", 0),
-           (assign, ":fail", 0),
-        (else_try),
-          (player_set_slot, ":player_id", ":pdoor_slot_id", 0),
+         (try_begin),
+            (neq, ":owner", 0),
+            (assign, ":fail", 0),
+         (else_try),
+           (player_set_slot, ":player_id", ":pdoor_slot_id", 0),
+         (try_end),
         (try_end),
    
-       (try_end), 
+      (try_begin),
 
       (try_begin),
        (eq, ":fail", 0),
        (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
+       (str_store_player_username, s1, ":player_id"),
+       (server_add_message_to_log, "{s1} used Door: {reg1}"),
+   
       (else_try),
          (eq, ":fail", 1),
          (multiplayer_send_string_to_player, ":player_id", server_event_script_message_announce, "@You don't have the key"),
          (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
+      (else_try),
+         (eq, ":fail", 2),
+         (multiplayer_send_string_to_player, ":player_id", server_event_script_message_announce, "@You can't do it while in war"),
+         (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
+   
       (try_end),
    
     (try_end),
@@ -9923,6 +9932,7 @@ scripts.extend([
     (store_script_param, ":left", 3), # 1 makes the door rotate the other way, for matching left and right doors
 
       (try_begin), #koso
+         (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor, 0),
          (prop_instance_get_variation_id, ":val_1", ":instance_id"),
          (gt, ":val_1", 9),
          (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor, 1),

@@ -314,8 +314,6 @@ g_loop_animal_herd_leader
 g_loop_animal_herd_begin
 g_time_last_herd_animal_disappeared
 g_recent_nearby_deaths_factor
-allow_server_messages
-server_message_interval
 g_edit_scene
 g_ibank_pos_x
 g_ibank_pos_y
@@ -333,6 +331,8 @@ g_current_fog_green
 g_current_fog_blue
 g_last_lighting_update_time
 skybox_current
+server_message_interval
+allow_server_messages
 message_timer
 server_message
 g_fire_place_instance_no

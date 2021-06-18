@@ -1,4 +1,4 @@
-100
+91
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -45,6 +45,8 @@ qstr_{s0}^Herding:_{reg10 {s0}^Herding:_{reg10}
 qstr_{s0}^Musician:_{reg1 {s0}^Musician:_{reg10}
 qstr_^ ^
 qstr_/ /
+qstr_You_ve_been_paid_{re You've_been_paid_{reg5}_denars_for_your_cooking_work.
+qstr_You_ve_been_paid_200 You've_been_paid_200_denars_for_repairing_costs.
 qstr_You_removed_access_f You_removed_access_for_{s4}
 qstr_You_can_t_give_keys_ You_can't_give_keys_for_Door_ID:{s2}_anymore_by_{s5}
 qstr_You_access_for_Door_ You_access_for_Door_ID:{s2}_was_removed_by_{s5}
@@ -60,18 +62,6 @@ qstr___/removekey__player _'/removekey_(player_id)_(door_id)'_removes_someone's_
 qstr___/buy_house__door_i _'/buy_house_(door_id)'_buy_a_house.
 qstr___/sell_house__door_ _'/sell_house_(door_id)'_sell_a_house.
 qstr___/id__seek_for_some _'/id'_seek_for_someone's_id_or_yours.
-qstr_servermessage servermessage
-qstr_Use__/servermessage_ Use_'/servermessage_1_or_0'_to_enable/disable_server_announces.
-qstr_servermessage_ servermessage_
-qstr_The_server_announcem The_server_announcements_have_been_disabled.
-qstr_The_server_announceme The_server_announcements_have_been_enabled.
-qstr_The_value_can_only_b The_value_can_only_be_0_or_1.
-qstr_servermessagetimer servermessagetimer
-qstr_Use__/servermessaget Use_'/servermessagetimer_number'_to_set_the_server_messages_timer_(Only_integer_numbers).
-qstr_The_maximum_value_is The_maximum_value_is_10.
-qstr_servermessagetimer_ servermessagetimer_
-qstr_The_server_announcemen The_server_announcements_timer_have_been_changed_for_{reg10}_minutes.
-qstr_ERROR:The_value_can_ ERROR:The_value_can_only_be_between_1-10.
 qstr_help help
 qstr_givekey_ givekey_
 qstr_removekey_ removekey_
@@ -80,10 +70,11 @@ qstr_sell_house_ sell_house_
 qstr_id id
 qstr_That_s_your_ID:_{reg That's_your_ID:_{reg0}
 qstr_ERROR:_Inexistent_co ERROR:_Inexistent_command_or_something_went_wrong!
-qstr_You_ve_been_paid_{re You've_been_paid_{reg5}_denars_for_your_cooking_work.
-qstr_You_ve_been_paid_200 You've_been_paid_200_denars_for_repairing_costs.
 qstr_Private_Housing_Syst Private_Housing_System:_-_Door_id:_{reg1}
+qstr_House_Price:_{reg2}_ House_Price:_{reg2}_Golds
+qstr_{s1}_used_Door:_{reg {s1}_used_Door:_{reg1}
 qstr_You_don_t_have_the_k You_don't_have_the_key
+qstr_You_can_t_do_it_whil You_can't_do_it_while_in_war
 qstr_SERVER_ADDRESS/serverapi/pd SERVER_ADDRESS/serverapi/pdoorload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&pdoorID={reg1}
 qstr_You_ve_opened_a_Bank You've_opened_a_Bank_account_with_success!_Ibank_id:_{reg0}
 qstr_You_have_to_register You_have_to_register_a_Bank_account_on_any_bank_first
