@@ -252,6 +252,7 @@ agent_spawn = (ti_on_agent_spawn, 0, 0, [], # server and clients: set up new age
      (neg|agent_is_non_player, ":agent_id"),
      (agent_get_player_id, ":player_id", ":agent_id"),
      (agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
+     (player_set_slot, ":player_id", slot_player_spawn_food_amount, 35),
      (multiplayer_send_3_int_to_player, ":player_id", server_event_agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
     (try_end),
 
@@ -578,7 +579,7 @@ agent_hungry_system = (0, 0, 1, # server: loop over all agents, doing all common
                (agent_get_slot, ":food_amount", ":agent_id", slot_agent_food_amount),
               (val_add, ":hungry_cooldown", 1),
               (try_begin),
-                (eq, ":hungry_cooldown", 600),
+                (eq, ":hungry_cooldown", 30),
                 (store_agent_hit_points, ":health_percent", ":agent_id", 0),
                 (val_sub, ":food_amount", 10),
                 (val_max, ":food_amount", 0),
