@@ -9770,7 +9770,7 @@ scripts.extend([
 
    (try_begin), #Do that for remove
     (neq, ":player_id", 0),
-    (str_store_substring, s0, s0, 7),
+    (str_store_substring, s0, s0, 10),
 
     (assign, ":error", 0),
     (str_clear, s1),
@@ -9789,7 +9789,7 @@ scripts.extend([
     (player_is_active, ":target_player_id"),
     (neq, ":target_door_id", 0),
     (neq, ":target_player_id", 0),
-    
+    (neq, ":target_player_id", ":player_id"),
       (try_begin),
         (this_or_next|player_is_admin, ":player_id"),
         (eq, ":server", 1),
@@ -9879,6 +9879,7 @@ scripts.extend([
     (player_is_active, ":target_player_id"),
     (neq, ":target_door_id", 0),
     (neq, ":target_player_id", 0),
+    (neq, ":target_player_id", ":player_id"),
     
       (try_begin),
         (this_or_next|player_is_admin, ":player_id"),
