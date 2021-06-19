@@ -1,4 +1,4 @@
-95
+96
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -70,15 +70,16 @@ qstr_sell_house_ sell_house_
 qstr_id id
 qstr_That_s_your_ID:_{reg That's_your_ID:_{reg0}
 qstr_id_ id_
-qstr_Player_Name:{s1}_ID: Player_Name:{s1},_ID:{reg0}
-qstr_Match:_{reg1}} Match:_{reg1}}
+qstr_Player_Name:_{s1}_ID Player_Name:_{s1},_ID:_{reg0}
+qstr_Match:_{reg1} Match:_{reg1}
 qstr_ERROR:_Inexistent_co ERROR:_Inexistent_command_or_something_went_wrong!
-qstr_Private_Housing_Syst Private_Housing_System:_-_Door_id:_{reg1}
-qstr_House_Price:_{reg2}_ House_Price:_{reg2}_Golds
+qstr_Private_Housing_Syst Private_Housing_System_-_House_id_{reg1}
+qstr_This_house_{reg1}_is This_house_{reg1}_is_for_sale!
+qstr_Price_is_{reg2}_Dena Price_is_{reg2}_Denars
 qstr_{s1}_used_Door:_{reg {s1}_used_Door:_{reg1}
-qstr_You_don_t_have_the_k You_don't_have_the_key
-qstr_You_can_t_do_it_whil You_can't_do_it_while_in_war
-qstr_Ask_the_tavern_keepe Ask_the_tavern_keeper_for_keys
+qstr_Ask_the_owner_for_ke Ask_the_owner_for_keys_to_access_this_house!
+qstr_You_can_t_do_it_whil You_can't_do_it_while_in_war!
+qstr_Ask_the_tavern_keepe Ask_the_tavern_keeper_for_keys_to_access_this_room!
 qstr_SERVER_ADDRESS/serverapi/pd SERVER_ADDRESS/serverapi/pdoorload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&pdoorID={reg1}
 qstr_You_ve_opened_a_Bank You've_opened_a_Bank_account_with_success!_Ibank_id:_{reg0}
 qstr_You_have_to_register You_have_to_register_a_Bank_account_on_any_bank_first
