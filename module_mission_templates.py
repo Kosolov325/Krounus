@@ -544,8 +544,8 @@ player_check_loop = (0, 0, 0.5, # server: check all players to see if any need a
     ], [])
 
 agent_hungry_system = (1, 0, 0, [],
-  [(multiplayer_is_server),
-        (try_for_players, ":player_id"),
+  [
+          (try_for_players, ":player_id"),
            (player_is_active,":player_id"),
            (player_get_agent_id, ":agent_id", ":player_id"),
            (gt, ":agent_id", -1),
@@ -568,6 +568,8 @@ agent_hungry_system = (1, 0, 0, [],
                (agent_get_slot, ":hungry_cooldown", ":agent_id", slot_agent_hungry_time),
                (agent_get_slot, ":food_amount", ":agent_id", slot_agent_food_amount),
               (val_add, ":hungry_cooldown", 1),
+              (assign, reg3, ":hungry_cooldown"),
+              (server_add_message_to_log, "@{reg3)"),
               (try_begin),
                 (eq, ":hungry_cooldown", 10),
                 (store_agent_hit_points, ":health_percent", ":agent_id", 0),
@@ -578,7 +580,10 @@ agent_hungry_system = (1, 0, 0, [],
                 (try_end),
 
                 (val_add, ":health_percent", 20),
-                (val_min, ":health_percent", max_hit_points_percent),
+                (try_begin),
+                 (ge, ":health_percent", max_hit_points_percent),
+                 (assign, ":health_percent", max_hit_points_percent),
+                (try_end),
     
                 (agent_set_slot, ":agent_id", slot_agent_food_amount, ":food_amount"),
                 (multiplayer_send_3_int_to_player, ":player_id", server_event_agent_set_slot, ":agent_id", slot_agent_food_amount, ":food_amount"),
