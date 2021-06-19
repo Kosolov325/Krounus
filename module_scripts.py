@@ -9802,6 +9802,17 @@ scripts.extend([
           (player_slot_eq, ":player_id", ":pdoor_slot_id", ":target_door_id"),
           (assign, ":giveable", 1),
         (try_end),
+
+         (try_for_prop_instances, ":instance"), #loop
+           (scene_prop_slot_eq, ":instance", slot_scene_prop_loaded, 1),
+           (scene_prop_slot_eq, ":instance", slot_scene_prop_rent_room, 1),
+           (scene_prop_slot_eq, ":instance", slot_scene_prop_pdoor_id, ":target_door_id"),
+           (scene_prop_get_slot, ":owner", ":instance", slot_scene_prop_pdoor_owner),
+           (player_get_unique_id, ":player_guid", ":player_id"),
+           (eq, ":owner", ":player_guid"),
+           (assign, ":giveable", 1),
+          (try_end),
+    
       (try_end),
     
        (eq, ":giveable", 1),
@@ -9880,7 +9891,18 @@ scripts.extend([
          (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id_ow, slot_player_pdoor_ow_end),
           (player_slot_eq, ":player_id", ":pdoor_slot_id", ":target_door_id"),
           (assign, ":giveable", 1),
-        (try_end),
+         (try_end),
+
+          (eq, ":giveable", 0),
+          (try_for_prop_instances, ":instance"), #loop
+           (scene_prop_slot_eq, ":instance", slot_scene_prop_loaded, 1),
+           (scene_prop_slot_eq, ":instance", slot_scene_prop_rent_room, 1),
+           (scene_prop_slot_eq, ":instance", slot_scene_prop_pdoor_id, ":target_door_id"),
+           (scene_prop_get_slot, ":owner", ":instance", slot_scene_prop_pdoor_owner),
+           (player_get_unique_id, ":player_guid", ":player_id"),
+           (eq, ":owner", ":player_guid"),
+           (assign, ":giveable", 1),
+          (try_end), 
       (try_end),
     
        (eq, ":giveable", 1),
@@ -9930,8 +9952,8 @@ scripts.extend([
     (eq, ":amount", 1),
     (str_to_num, ":door_id", s1),
     (try_for_prop_instances, ":instance_id"),
-      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor_id, ":door_id"),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 1),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor_id, ":door_id"),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor_owner, 0),
       (scene_prop_get_slot, ":cost", ":instance_id", slot_scene_prop_pdoor_default_cost),
       (call_script, "script_cf_check_enough_gold", ":player_id", ":cost"),
@@ -10042,23 +10064,42 @@ scripts.extend([
           (scene_prop_slot_eq, ":instance_id", slot_scene_prop_rent_room, 0),
           (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@House Price: {reg2} Golds"),
      (try_end),
+    
 
      (try_begin),
       (assign, ":fail", 1),
+      (try_begin), #check if the player has the key
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_rent_room, 0),
        (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id, slot_player_pdoor_end),
         (player_slot_eq, ":player_id", ":pdoor_slot_id", reg1),
         (scene_prop_get_slot, ":owner", ":instance_id", slot_scene_prop_pdoor_owner),
    
-        (try_begin),
+        (try_begin), #if the player has the key, but the house was sold, remove his key
            (neq, ":owner", 0),
            (assign, ":fail", 0),
         (else_try),
           (player_set_slot, ":player_id", ":pdoor_slot_id", 0),
         (try_end),
-   
        (try_end),
+   
+      (else_try), #rent room stuff
+       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_rent_room, 1), 
+        (try_begin),
+           (try_for_range, ":pdoor_slot_id", slot_player_pdoor_id, slot_player_pdoor_end),
+             (player_slot_eq, ":player_id", ":pdoor_slot_id", reg1),
+             (assign, ":fail", 0),
+           (try_end),
 
-        (try_begin), 
+          (eq, ":fail", 1),
+          (scene_prop_get_slot, ":owner", ":instance_id", slot_scene_prop_pdoor_owner),
+          (player_get_unique_id, ":player_guid", ":player_id"),
+
+          (eq, ":owner",  ":player_guid"),
+          (assign, ":fail", 0),
+        (try_end),
+      (try_end),
+   
+        (try_begin),  #Check if the player is in faction at war, doesn't care if rent room or pdoor
          (player_get_slot, ":faction_id", ":player_id", slot_player_faction_id),
          (ge, ":faction_id", castle_factions_begin),
          (assign, ":peaceful_loop_end", factions_end),
@@ -10069,6 +10110,7 @@ scripts.extend([
            (assign, ":fail", 2),
          (try_end),
         (try_end),
+     (try_end),
    
       (try_begin),
        (eq, ":fail", 0),
@@ -10083,9 +10125,11 @@ scripts.extend([
          (eq, ":fail", 2),
          (multiplayer_send_string_to_player, ":player_id", server_event_script_message_announce, "@You can't do it while in war"),
          (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
+      (else_try),
+         (eq, ":fail", 3),
+         (multiplayer_send_string_to_player, ":player_id", server_event_script_message_announce, "@Ask the tavern keeper for keys"),
+         (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
       (try_end),
-   
-    (try_end),
    ]),
   
   ("cf_use_rotate_door", # server: handle opening and closing a rotating door
@@ -10098,15 +10142,30 @@ scripts.extend([
     (agent_get_player_id, ":player_id", ":agent_id"),
     (player_is_active, ":player_id"),
     (try_begin), #Koso (this will makes the usage of the door be switched for private housing system, instead of the default ones)
-      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor, 1), #If the door has val_1 great than 9, then do the switch
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 1),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor, 1),
       (scene_prop_get_slot, reg1, ":instance_id", slot_scene_prop_pdoor_id),
       (assign, reg0, ":instance_id"),
+      (call_script, "script_cf_use_pdoor", ":player_id", ":instance_id", ":left"),
+    (else_try),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_rent_room, 1),
       (try_begin),
-       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 0),
-       (send_message_to_url, pkjs_script_server + "/pdoorload" + pkjs_querystring + "&instanceid={reg0}&pdoorID={reg1}"),
+       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 1),
+       (scene_prop_get_slot, reg1, ":instance_id", slot_scene_prop_rent_room_id),
+       (assign, reg0, ":instance_id"),
+       (call_script, "script_cf_use_pdoor", ":player_id", ":instance_id", ":left"),
       (else_try),
-        (call_script, "script_cf_use_pdoor", ":player_id", ":instance_id", ":left"),
-     (try_end),
+        (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 0),
+        (scene_prop_get_slot, ":door_id", ":instance_id", slot_scene_prop_pdoor_id),
+         (try_for_prop_instances, ":instance"), #loop
+          (scene_prop_slot_eq, ":instance", slot_scene_prop_loaded, 1),
+          (scene_prop_slot_eq, ":instance", slot_scene_prop_pdoor, 1),
+          (scene_prop_slot_eq, ":instance", slot_scene_prop_pdoor_id, ":door_id"),
+          (scene_prop_get_slot, ":owner", ":instance", slot_scene_prop_pdoor_owner),
+          (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_owner, ":owner"),
+          (scene_prop_set_slot, ":instance_id", slot_scene_prop_loaded, 1),
+         (try_end),  
+      (try_end),
     (else_try), #Koso_end
     (player_get_slot, ":player_faction_id", ":player_id", slot_player_faction_id),
     (call_script, "script_scene_prop_get_owning_faction", ":instance_id"),
@@ -10180,37 +10239,55 @@ scripts.extend([
     (prop_instance_animate_to_position, ":instance_id", pos1, 100),
     ]),
 
-  ("cf_init_rotate_door", # server: set the inital position of a rotating door
+#Koso
+  ("cf_init_rotate_door", # server: set the inital position of a rotating door 
    [(store_script_param, ":instance_id", 1), # must be valid
     (store_script_param, ":left", 2),
 
-      (try_begin), #koso
-         (prop_instance_get_variation_id, ":val_1", ":instance_id"),
+    (prop_instance_get_variation_id, ":val_1", ":instance_id"),
+    (prop_instance_get_variation_id, ":val_2", ":instance_id"),
+    
+      (try_begin),
+         (eq, ":val_2", 0),
          (gt, ":val_1", 9),
          (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor, 1),
          (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_id, ":val_1"),
          (try_begin),
           (is_between, ":val_1", 10, 31),
           (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_default_cost, 500000),
+          (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 0),
+          (send_message_to_url, pkjs_script_server + "/pdoorload" + pkjs_querystring + "&instanceid={reg0}&pdoorID={reg1}"),
          (else_try),
           (is_between, ":val_1", 31, 51),
           (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_default_cost, 600000),
+          (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 0),
+          (send_message_to_url, pkjs_script_server + "/pdoorload" + pkjs_querystring + "&instanceid={reg0}&pdoorID={reg1}"),
          (try_end),
-      (try_end), #koso_end
-  
-          
-    (prop_instance_get_variation_id_2, ":bit_field", ":instance_id"),
-    (store_and, ":start_destroyed", ":bit_field", 0x10),
+      (else_try),
+       (gt, ":val_2", 0),
+       (gt, ":val_1", 9),
+       (scene_prop_set_slot, ":instance_id", slot_scene_prop_rent_room, 1),
+       (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_id, ":val_1"),
+       (scene_prop_set_slot, ":instance_id", slot_scene_prop_rent_room_id, ":val_2"),
+      (try_end),
+    
+    (try_begin),
+      (this_or_next|scene_prop_slot_eq, ":instance_id", slot_scene_prop_pdoor, 1),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_rent_room, 1),
+      (assign, ":val_2", 0),
+    (try_end), 
+    
+    (store_and, ":start_destroyed", ":val_2", 0x10),
     (try_begin),
       (eq, ":start_destroyed", 0x10),
       (call_script, "script_destroy_door", -1, ":instance_id"),
     (else_try),
-      (store_and, ":initial_position", ":bit_field", 0x1),
+      (store_and, ":initial_position", ":val_2", 0x1),
       (eq, ":initial_position", 0x1),
       (call_script, "script_cf_rotate_door", ":instance_id", ":left"),
     (try_end),
     ]),
-
+#Koso_end
   ("cf_hit_chest", # server: handle damaging and repairing a storage chest; should be called from ti_on_scene_prop_hit
    [(multiplayer_is_server),
     (store_script_param, ":instance_id", 1), # must be valid

@@ -346,6 +346,7 @@ slot_scene_prop_pdoor_owner           = 109
 slot_scene_prop_pdoor_default_cost    = 110
 slot_scene_prop_pdoor_id              = 111
 slot_scene_prop_rent_room             = 112
+slot_scene_prop_rent_room_id          = 113
 ########################################################
 ##  ITEM SLOTS             #############################
 ########################################################
