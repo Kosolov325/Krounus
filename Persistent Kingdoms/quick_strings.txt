@@ -1,4 +1,4 @@
-92
+95
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -69,6 +69,9 @@ qstr_buy_house_ buy_house_
 qstr_sell_house_ sell_house_
 qstr_id id
 qstr_That_s_your_ID:_{reg That's_your_ID:_{reg0}
+qstr_id_ id_
+qstr_Player_Name:{s1}_ID: Player_Name:{s1},_ID:{reg0}
+qstr_Match:_{reg1}} Match:_{reg1}}
 qstr_ERROR:_Inexistent_co ERROR:_Inexistent_command_or_something_went_wrong!
 qstr_Private_Housing_Syst Private_Housing_System:_-_Door_id:_{reg1}
 qstr_House_Price:_{reg2}_ House_Price:_{reg2}_Golds

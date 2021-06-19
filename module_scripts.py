@@ -472,7 +472,6 @@ scripts.extend([
       (try_end), #koso
 
       (try_begin), #koso
-         (str_clear, s1),
          (player_get_slot, reg1, ":player_id", slot_player_pdoor_id),
          (player_get_slot, reg2, ":player_id", slot_player_pdoor_id_2),
          (player_get_slot, reg3, ":player_id", slot_player_pdoor_id_3),
@@ -481,8 +480,7 @@ scripts.extend([
          (player_get_slot, reg6, ":player_id", slot_player_pdoor_id_2_ow),
          (player_get_slot, reg7, ":player_id", slot_player_pdoor_id_3_ow),
          (player_get_slot, reg8, ":player_id", slot_player_pdoor_id_4_ow),
-         (str_store_string, s1, "str_message_keys"),
-         (str_store_string_reg, s2, s1),
+         (str_store_string, s2, "str_message_keys"),
       (try_end),
     
       (player_get_unique_id, reg0, ":player_id"),
@@ -10040,6 +10038,32 @@ scripts.extend([
        (assign, reg0, ":player_id"),
        (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@ "),
        (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@That's your ID: {reg0}"),
+     (try_end),
+   (else_try),
+      (str_starts_with, s0, "@id ", 1),
+     (try_begin),
+        (str_store_substring, s0, s0, 3),
+        (assign, ":failure", 0),
+        (try_begin),
+         (str_is_empty, s0),
+         (assign, ":failure", 1),
+        (try_end),
+
+         (eq, ":failure", 0),
+         (assign, ":match", 0),
+         (try_for_players, ":players"),
+           (str_store_player_username, s1, ":players"),
+           (str_contains, s1, s0, 1),
+           (val_add, ":match", 1),
+           (assign, reg0, ":players"),
+           (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Player Name:{s1}, ID:{reg0}"),
+         (try_end),
+
+         (assign, reg1, ":match"),
+         (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Match: {reg1}}"),
+   
+         (eq, ":match", 0),
+         (assign, ":failure",1),
      (try_end),
    (else_try),
         (assign, ":failure", 1),
