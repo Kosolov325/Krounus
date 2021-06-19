@@ -496,6 +496,10 @@ scripts.extend([
 
       (store_agent_hit_points, reg4, ":agent_id", 0),
       (agent_get_slot, reg5, ":agent_id", slot_agent_food_amount),
+      (try_begin), #koso hungry fix
+        (eq, reg5, 0),
+        (assign, reg5, 1),
+      (try_end),
       (agent_get_slot, reg6, ":agent_id", slot_agent_poison_amount),
 
       (player_get_slot, reg7, ":player_id", slot_player_equip_head),
