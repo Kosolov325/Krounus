@@ -543,8 +543,8 @@ player_check_loop = (0, 0, 0.5, # server: check all players to see if any need a
     (try_end),
     ], [])
 
-agent_hungry_system = (0, 0, 1, # server: loop over all agents, doing all common repetitive checks together for each agent, to minimize the penalty of using try_for_agents
-   [(multiplayer_is_server),
+agent_hungry_system = (1, 0, 0, [],
+  [(multiplayer_is_server),
         (try_for_players, ":player_id"),
            (player_is_active,":player_id"),
            (player_get_agent_id, ":agent_id", ":player_id"),
@@ -587,7 +587,7 @@ agent_hungry_system = (0, 0, 1, # server: loop over all agents, doing all common
               (try_end),
            (try_end),
         (try_end),
-    ], [])
+          ])
 
 
 agent_check_loop = (0, 0, 0.5, # server: loop over all agents, doing all common repetitive checks together for each agent, to minimize the penalty of using try_for_agents
