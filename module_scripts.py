@@ -358,7 +358,7 @@ scripts.extend([
       (else_try),
         (multiplayer_send_string_to_player, ":player_id", server_event_script_message,  "@You are logged in as an admin, your stats will not be loaded, or saved when you leave."),
       (try_end),
-    (else_try),
+    (else_try), #koso
      (neg|agent_is_non_player, ":agent_id"),
      (agent_is_human, ":agent_id"),
      (agent_get_player_id, ":player_id", ":agent_id"),
@@ -4968,6 +4968,8 @@ scripts.extend([
         (player_set_slot, ":player_id", slot_player_faction_id, factions_begin),
       (try_end),
       (player_set_slot, ":player_id", slot_player_spawn_state, player_spawn_state_dead),
+      (player_set_slot, ":player_id", slot_player_spawn_food_amount, 35), #koso
+      (multiplayer_send_3_int_to_player, ":player_id", server_event_player_set_slot, ":player_id", slot_player_spawn_food_amount, 35), #koso
     (try_end),
     ]),
 
