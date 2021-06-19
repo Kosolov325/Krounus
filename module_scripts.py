@@ -10056,11 +10056,11 @@ scripts.extend([
            (str_contains, s1, s0, 1),
            (val_add, ":match", 1),
            (assign, reg0, ":players"),
-           (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Player Name:{s1}, ID:{reg0}"),
+           (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Player Name: {s1}, ID: {reg0}"),
          (try_end),
 
          (assign, reg1, ":match"),
-         (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Match: {reg1}}"),
+         (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@Match: {reg1}"),
    
          (eq, ":match", 0),
          (assign, ":failure",1),
