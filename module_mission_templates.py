@@ -249,7 +249,7 @@ agent_spawn = (ti_on_agent_spawn, 0, 0, [], # server and clients: set up new age
     ## PK.js SCRIPTS START ##
     (call_script, "script_pkjs_load_gear", ":agent_id"),
     ## PK.js SCRIPTS END ##
-
+    
     (try_begin),
       (multiplayer_is_server),
       (neg|agent_is_non_player, ":agent_id"),
