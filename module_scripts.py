@@ -364,6 +364,8 @@ scripts.extend([
      (agent_get_player_id, ":player_id", ":agent_id"),
      (player_get_slot, ":faction_id", ":player_id", slot_player_faction_id),
      (call_script, "script_initial_items",":agent_id", ":player_id", ":faction_id"),
+     (agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
+     (multiplayer_send_3_int_to_player, ":player_id", server_event_agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
     (try_end),
   ]),
 
