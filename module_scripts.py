@@ -10090,12 +10090,20 @@ scripts.extend([
              (assign, ":fail", 0),
            (try_end),
 
-          (eq, ":fail", 1),
-          (scene_prop_get_slot, ":owner", ":instance_id", slot_scene_prop_pdoor_owner),
-          (player_get_unique_id, ":player_guid", ":player_id"),
+          (try_begin),  
+           (eq, ":fail", 1),
+           (scene_prop_get_slot, ":owner", ":instance_id", slot_scene_prop_pdoor_owner),
+           (player_get_unique_id, ":player_guid", ":player_id"),
+ 
+           (eq, ":owner",  ":player_guid"),
+           (assign, ":fail", 0),
+          (try_end),
 
-          (eq, ":owner",  ":player_guid"),
-          (assign, ":fail", 0),
+          (try_begin),
+           (eq, ":fail", 1),
+           (assign, ":fail", 3),
+          (try_end),
+   
         (try_end),
       (try_end),
    
@@ -10245,7 +10253,7 @@ scripts.extend([
     (store_script_param, ":left", 2),
 
     (prop_instance_get_variation_id, ":val_1", ":instance_id"),
-    (prop_instance_get_variation_id, ":val_2", ":instance_id"),
+    (prop_instance_get_variation_id_2, ":val_2", ":instance_id"),
     
       (try_begin),
          (eq, ":val_2", 0),
