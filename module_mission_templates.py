@@ -246,15 +246,6 @@ agent_spawn = (ti_on_agent_spawn, 0, 0, [], # server and clients: set up new age
     (call_script, "script_on_agent_spawned", ":agent_id"),
     (call_script, "script_death_cam_off", ":agent_id"),
 
-    #koso
-    (try_begin),
-     (neg|agent_is_non_player, ":agent_id"),
-     (agent_get_player_id, ":player_id", ":agent_id"),
-     (agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
-     (player_set_slot, ":player_id", slot_player_spawn_food_amount, 35),
-     (multiplayer_send_3_int_to_player, ":player_id", server_event_agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
-    (try_end),
-
     ## PK.js SCRIPTS START ##
     (call_script, "script_pkjs_load_gear", ":agent_id"),
     ## PK.js SCRIPTS END ##
@@ -262,7 +253,7 @@ agent_spawn = (ti_on_agent_spawn, 0, 0, [], # server and clients: set up new age
     (try_begin),
       (multiplayer_is_server),
       (neg|agent_is_non_player, ":agent_id"),
-
+      (agent_get_player_id, ":player_id", ":agent_id"),
       (player_get_slot, ":first_spawn_occured", ":player_id", slot_player_first_spawn_occured),
       (neq, ":first_spawn_occured", 1),
       (player_set_slot, ":player_id", slot_player_first_spawn_occured, 1),
@@ -581,10 +572,13 @@ agent_hungry_system = (0, 0, 1, # server: loop over all agents, doing all common
                 (eq, ":hungry_cooldown", 30),
                 (store_agent_hit_points, ":health_percent", ":agent_id", 0),
                 (val_sub, ":food_amount", 10),
-                (val_max, ":food_amount", 0),
+                (try_begin),
+                  (lt, ":food_amount", 0),
+                  (assign, ":food_amount", 0),
+                (try_end),
 
                 (val_add, ":health_percent", 20),
-                (val_max, ":health_percent", max_hit_points_percent),
+                (val_min, ":health_percent", max_hit_points_percent),
     
                 (agent_set_slot, ":agent_id", slot_agent_food_amount, ":food_amount"),
                 (multiplayer_send_3_int_to_player, ":player_id", server_event_agent_set_slot, ":agent_id", slot_agent_food_amount, ":food_amount"),

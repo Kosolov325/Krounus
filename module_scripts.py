@@ -345,6 +345,8 @@ scripts.extend([
       (agent_is_human, ":agent_id"),
       (agent_get_player_id, ":player_id", ":agent_id"),
       (player_slot_eq, ":player_id", slot_player_first_spawn_occured, 0),
+      (agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
+      (multiplayer_send_3_int_to_player, ":player_id", server_event_agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
       (try_begin),
         (neg|player_is_admin, ":player_id"),
         (assign, reg0, ":player_id"),
@@ -359,6 +361,8 @@ scripts.extend([
      (agent_get_player_id, ":player_id", ":agent_id"),
      (player_get_slot, ":faction_id", ":player_id", slot_player_faction_id),
      (call_script, "script_initial_items",":agent_id", ":player_id", ":faction_id"),
+     (agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
+     (multiplayer_send_3_int_to_player, ":player_id", server_event_agent_set_slot, ":agent_id", slot_agent_food_amount, 35),
     (try_end),
   ]),
 
