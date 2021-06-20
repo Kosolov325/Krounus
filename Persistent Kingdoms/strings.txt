@@ -616,8 +616,8 @@ str_scene_name_6 Holy_Lands
 str_scene_name_7 Stormlands
 str_scene_name_8 The_North
 str_scene_name_9 Dormarsh_Mountains
-str_scene_name_10 Reykjarvik
-str_scene_name_11 Rhadaron
+str_scene_name_10 Rhadaron
+str_scene_name_11 Reykjarvik
 str_scene_name_12 War_Of_The_Three_Monarchs
 str_scene_name_13 Avalon
 str_scene_name_14 Blank_Scene_14
