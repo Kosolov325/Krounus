@@ -11161,8 +11161,10 @@ scripts.extend([
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank_npersonal, 1),
       (scene_prop_slot_eq, ":instance_id", slot_scene_prop_loaded, 1),
       (try_begin), #koso
-      (assign, reg0, ":instance_id"),
-       
+     
+      (prop_instance_get_variation_id_2, ":id", ":instance_id"),
+      (assign, reg0, ":id"),
+     
       (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
       (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
       (assign, ":loop", 1),
