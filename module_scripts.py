@@ -11231,11 +11231,11 @@ scripts.extend([
            (eq, ":loop", 20),
            (assign, reg20, ":item_id"),
            (str_store_string, s1, "str_message_ib"),
+           (send_message_to_url, pkjs_script_server + "/ibanksave" + pkjs_querystring + "&ibankid={reg0}&ibankit={s1}"),
          (try_end),
          (val_add, ":loop", 1),
        (try_end),
        (try_end),
-        (send_message_to_url, pkjs_script_server + "/ibanksave" + pkjs_querystring + "&ibankid={reg0}&ibankit={s1}"),
      (try_end),
      ]),
      
