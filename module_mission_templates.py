@@ -1223,6 +1223,7 @@ server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_message
 save_ibank = (60, 0, 0, [],
    [
     (gt, "$g_ibank_np_qnt", 0),
+    (server_add_message_to_log, "@saving"),
     (call_script, "script_save_ibank"),
            ])
 
