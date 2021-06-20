@@ -1,4 +1,4 @@
-99
+101
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -78,8 +78,10 @@ qstr_600.000 600.000
 qstr_This_house_{reg1}_is This_house_{reg1}_is_for_sale!
 qstr_Price_is_{s3}_Denars Price_is_{s3}_Denars
 qstr_{s1}_used_Door:_{reg {s1}_used_Door:_{reg1}
-qstr_You_used_rent_room:_ You_used_rent_room:_{reg1}
-qstr_You_used_house_s_doo You_used_house's_door:_{reg1}
+qstr_You_opened_the_door_ You_opened_the_door_from_room:_{reg1}
+qstr_You_closed_the_door_ You_closed_the_door_from_room:_{reg1}
+qstr_You_opened_the_door_f You_opened_the_door_from_house:_{reg1}
+qstr_You_closed_the_door_f You_closed_the_door_from_house:_{reg1}
 qstr_Ask_the_owner_for_ke Ask_the_owner_for_keys_to_access_this_house!
 qstr_You_can_t_do_it_whil You_can't_do_it_while_in_war!
 qstr_Ask_the_tavern_keepe Ask_the_tavern_keeper_for_keys_to_access_this_room!
