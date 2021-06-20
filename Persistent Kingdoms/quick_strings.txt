@@ -1,4 +1,4 @@
-103
+101
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -88,7 +88,6 @@ qstr_Ask_the_tavern_keepe Ask_the_tavern_keeper_for_keys_to_access_this_room!
 qstr_SERVER_ADDRESS/serverapi/pd SERVER_ADDRESS/serverapi/pdoorload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&pdoorID={reg1}
 qstr_You_ve_opened_a_Bank You've_opened_a_Bank_account_with_success!_Ibank_id:_{reg0}
 qstr_You_have_to_register You_have_to_register_a_Bank_account_on_any_bank_first
-qstr_saving_{s1} saving_{s1}
 qstr_SERVER_ADDRESS/serverapi/i SERVER_ADDRESS/serverapi/ibanksave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&ibankid={reg0}&ibankit={s1}
 qstr_SERVER_ADDRESS/serverapi/ib SERVER_ADDRESS/serverapi/ibankload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&ibankid={reg1}
 qstr_You_ve_been_paid_20_ You've_been_paid_20_denars_for_healing_others.
@@ -101,4 +100,3 @@ qstr_Time:_Night Time:_Night
 qstr_Cooking_Healing_and_ Cooking,_Healing_and_Repairing_give_you_now_an_extra_payment!
 qstr_Castles_are_far_supe Castles_are_far_superior_from_any_settlement,_only_the_strong_can_hold_it!
 qstr_You_feel_very_hungry You_feel_very_hungry...
-qstr_saving saving

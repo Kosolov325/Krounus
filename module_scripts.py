@@ -11235,7 +11235,6 @@ scripts.extend([
          (val_add, ":loop", 1),
        (try_end),
        (try_end),
-        (server_add_message_to_log, "@saving {s1}"),
         (send_message_to_url, pkjs_script_server + "/ibanksave" + pkjs_querystring + "&ibankid={reg0}&ibankit={s1}"),
      (try_end),
      ]),
