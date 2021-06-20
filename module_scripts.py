@@ -10101,7 +10101,7 @@ scripts.extend([
           (try_begin),
             (eq, ":owner", 0),
             (try_begin), #format money
-             (eq, reg2, 5000000),
+             (eq, reg2, 500000),
              (str_store_string, s3, "@500.000"),
             (else_try),
              (eq, reg2, 600000),
