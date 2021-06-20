@@ -47,12 +47,12 @@ qstr_^ ^
 qstr_/ /
 qstr_You_ve_been_paid_{re You've_been_paid_{reg5}_denars_for_your_cooking_work.
 qstr_You_ve_been_paid_200 You've_been_paid_200_denars_for_repairing_costs.
-qstr_You_removed_access_f You_removed_access_for_{s4}
+qstr_You_removed_access_f You_removed_access_for_{s5}
 qstr_You_can_t_give_keys_ You_can't_give_keys_for_{s2}_anymore_by_{s5}
-qstr_You_keys_for_{s2}_wa You_keys_for_{s2}_was_removed_by_{s5}
+qstr_You_keys_for:_{s2}_w You_keys_for:_{s2}_was_removed_by_{s4}
 qstr_You_gave_access_for_ You_gave_access_for_{s5}
-qstr_Now_you_can_give_key Now_you_can_give_keys_for_:{s2}_by_{s4}
-qstr_You_received_access_ You_received_access_for_:{s2}_by_{s4}
+qstr_Now_you_can_give_key Now_you_can_give_keys_for:_{s2}_by_{s4}
+qstr_You_received_access_ You_received_access_for:_{s2}_by_{s4}
 qstr_SERVER_ADDRESS/serverapi/p SERVER_ADDRESS/serverapi/pdoorsave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&pdoorID={s1}&pdoorOW={reg2}
 qstr__ _
 qstr_____________________ ------------------------------------------------------------------------------
