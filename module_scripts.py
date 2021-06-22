@@ -10962,8 +10962,6 @@ scripts.extend([
        (str_store_string, s1, "str_quest_7"),
        (str_store_string, s3, "str_quest_7_desc"),
       (try_end),
-       (str_store_string, s1, s1),
-       (str_store_string, s3, s3),
      ]),
    
   ("quest_completed",
@@ -10977,12 +10975,12 @@ scripts.extend([
     (try_end),
     
     (player_get_slot, ":quest", slot_player_quest, ":quest"),
-    (player_set_slot, ":player_id", slot_player_quest, 0),
     (str_clear, s1),
     (str_clear, s3),
     (call_script, "script_check_quest", ":quest"),
     (str_store_player_username, s2, ":player_id"),
     (server_add_message_to_log, "@{s2} has completed the Quest {s1}"),
+    (player_set_slot, ":player_id", slot_player_quest, 0),
       (try_for_players, ":players"),
         (player_is_active, ":players"),
         (multiplayer_send_2_int_to_player, ":players", server_event_script_message_set_color, 0x00b9cf),
