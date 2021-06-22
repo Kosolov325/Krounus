@@ -10962,7 +10962,7 @@ scripts.extend([
        (str_store_string, s1, "str_quest_7"),
        (str_store_string, s3, "str_quest_7_desc"),
       (try_end),
-       (str_store_string_reg, reg0, s1),
+       (assign, reg0, s1),
      ]),
    
   ("quest_completed",
