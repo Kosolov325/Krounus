@@ -10945,7 +10945,9 @@ scripts.extend([
        (str_store_string, s1, "str_quest_7"),
        (str_store_string, s3, "str_quest_7_desc"),  
       (try_end),
-      (display_message, "@NEW QUEST: {s1}, {s3}", 0x2FC626),
+      (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, 0x2FC626),
+      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@NEW QUEST: {s1}, {s3}"),
+      (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, script_message_color),
     (try_end),
 
      ]),
