@@ -259,6 +259,10 @@ scripts.extend([
           (eq, ":generate_needed", 1),
           (call_script, "script_new_ibank", ":player_id", 1),
      (try_end),
+
+    #koso
+    (player_slot_eq, ":player_id", slot_player_quest, 0),
+    (call_script, "script_new_quest", ":player_id"),
      
      (else_try),
       (eq, ":action", pkjs_action_load_fail_kick),
@@ -5221,6 +5225,12 @@ scripts.extend([
         (player_is_active, ":killer_player_id"),
         (player_get_slot, ":dead_faction_id", ":dead_player_id", slot_player_faction_id),
         (player_get_slot, ":killer_faction_id", ":killer_player_id", slot_player_faction_id),
+        (try_begin), #koso
+           (player_slot_eq, ":killer_player_id", slot_player_quest, 1),
+           (eq, ":dead_faction_id", "fac_outlaws"),
+           (neq, ":dead_faction_id", ":killer_faction_id"),
+           (call_script, "script_quest_completed", ":killer_player_id", 1, 3500),
+        (try_end),
         (try_begin), # calculate score.
           (lt, ":dead_faction_id", castle_factions_begin),
           (lt, ":killer_faction_id", castle_factions_begin),
@@ -10022,6 +10032,16 @@ scripts.extend([
       (str_equals, s0, "@help", 1),
       (call_script, "script_info", ":player_id"),
    (else_try),
+     (str_starts_with, s0, "@quest ", 1),
+   
+     (str_store_substring, s0, s0, 6),
+     (str_clear, s1),
+     (str_regex_get_matches, ":amount", s1, s0, "str_regex_target", 1),
+     (eq, ":amount", 1),
+     (str_to_num, reg1, s1),
+     (player_set_slot, ":player_id", slot_player_quest, reg1),
+     (call_script, "script_quest_completed", ":player_id", 1, 3500),
+   (else_try),
      (str_starts_with, s0, "@givekey ", 1),
      (assign, reg0, 1),
      (call_script, "script_cf_phs_give", ":player_id", 0, 0, 0),
@@ -10061,6 +10081,7 @@ scripts.extend([
          (eq, ":failure", 0),
          (assign, ":match", 0),
          (try_for_players, ":players"),
+           (player_is_active, ":players"),
            (str_store_player_username, s1, ":players"),
            (str_contains, s1, s0, 1),
            (val_add, ":match", 1),
@@ -10907,15 +10928,11 @@ scripts.extend([
     (prop_instance_set_position, ":platform_instance_id", pos1),
     ]),
 
-  ("new_quest",
-   [(store_script_param, ":player_id", 1),
-    
-    (try_begin),
-      (store_random_in_range, ":quest", 1, 8),
-      (player_set_slot, ":player_id", slot_player_quest, ":quest"),
-      (assign, s2, ":quest"),
-      (str_clear, s1),
-      (str_clear, s3),
+  #Koso start
+
+  ("check_quest",
+   [(store_script_param, ":quest", 1),
+
       (try_begin),
        (eq, ":quest", 1),
        (str_store_string, s1, "str_quest_1"),
@@ -10943,15 +10960,49 @@ scripts.extend([
       (else_try),
        (eq, ":quest", 7),
        (str_store_string, s1, "str_quest_7"),
-       (str_store_string, s3, "str_quest_7_desc"),  
+       (str_store_string, s3, "str_quest_7_desc"),
       (try_end),
-      (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, 0x2FC626),
-      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@NEW QUEST: {s1}, {s3}"),
+    
+     ]),
+   
+  ("quest_completed",
+   [(store_script_param, ":player_id", 1),
+    (store_script_param, ":gold_payment", 2),
+    (store_script_param, ":value",3),
+
+    (try_begin),
+      (eq, ":gold_payment", 1),
+      (call_script, "script_player_adjust_gold", ":player_id", ":value", 1),
+    (try_end),
+    
+    (player_get_slot, ":quest", slot_player_quest, ":quest"),
+    (player_set_slot, ":player_id", slot_player_quest, 0),
+    (call_script, "script_check_quest", ":quest"),
+    (str_store_player_username, s2, ":player_id"),
+    (server_add_message_to_log, "@{s2} has completed the Quest {s1}"),
+    (try_for_players, ":players"),
+      (player_is_active, ":players"),
+      (multiplayer_send_2_int_to_player, ":players", server_event_script_message_set_color, 0x00b9cf),
+      (multiplayer_send_string_to_player, ":players", server_event_script_message, "@{s2} has completed the Quest {s1}."),
+      (multiplayer_send_2_int_to_player, ":players", server_event_script_message_set_color, script_message_color),
+    (try_end),
+  ]),
+  ("new_quest",
+   [(store_script_param, ":player_id", 1),
+    
+    (try_begin),
+      (store_random_in_range, ":quest", 1, 8),
+      (player_set_slot, ":player_id", slot_player_quest, ":quest"),
+      (str_clear, s1),
+      (str_clear, s3),
+      (call_script, "script_check_quest", ":quest"),
+      (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, 0x58ea42),
+      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@NEW QUEST: {s1}. {s3}"),
       (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, script_message_color),
     (try_end),
 
      ]),
-  ("initial_items", #koso
+  ("initial_items", 
    [(store_script_param, ":agent_id", 1),
     (store_script_param, ":player_id", 2),
     (store_script_param, ":faction_id", 3),
