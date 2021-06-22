@@ -1,4 +1,4 @@
-101
+102
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -86,6 +86,7 @@ qstr_Ask_the_owner_for_ke Ask_the_owner_for_keys_to_access_this_house!
 qstr_You_can_t_do_it_whil You_can't_do_it_while_in_war!
 qstr_Ask_the_tavern_keepe Ask_the_tavern_keeper_for_keys_to_access_this_room!
 qstr_SERVER_ADDRESS/serverapi/pd SERVER_ADDRESS/serverapi/pdoorload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&pdoorID={reg1}
+qstr_NEW_QUEST:_{s1}_{s3} NEW_QUEST:_{s1},_{s3}
 qstr_You_ve_opened_a_Bank You've_opened_a_Bank_account_with_success!_Ibank_id:_{reg0}
 qstr_You_have_to_register You_have_to_register_a_Bank_account_on_any_bank_first
 qstr_SERVER_ADDRESS/serverapi/i SERVER_ADDRESS/serverapi/ibanksave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&ibankid={reg0}&ibankit={s1}

@@ -141,6 +141,8 @@ slot_player_pdoor_id_2_ow                  = 75
 slot_player_pdoor_id_3_ow                  = 76
 slot_player_pdoor_id_4_ow                  = 77
 slot_player_pdoor_ow_end                   = 78
+
+slot_player_quest                          = 79
 ########################################################
 ##  AGENT SLOTS            #############################
 ########################################################

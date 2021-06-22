@@ -1,5 +1,5 @@
 stringsfile version 1
-807
+821
 str_no_string NO_STRING!
 str_empty_string _
 str_yes Yes.
@@ -807,3 +807,17 @@ str_regex_string A
 str_regex_target (\w+)
 str_message_ib A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A{reg9}A{reg10}A{reg11}A{reg12}A{reg13}A{reg14}A{reg15}A{reg16}A{reg17}A{reg18}A{reg19}A{reg20}A
 str_message_keys A{reg1}A{reg2}A{reg3}A{reg4}A{reg5}A{reg6}A{reg7}A{reg8}A
+str_quest_1 Outlaw_Hunting
+str_quest_1_desc Outlaws_have_been_a_problem_in_these_lands._Kill_an_outlaw_within_the_area._-_Payment:_3,500_gold.
+str_quest_2 Robbery
+str_quest_2_desc Go_outlaw,_Picklock_5_chests_and_steal_1000_gold_from_a_different_faction._-_Payment:_25,000_gold.
+str_quest_3 Fishing_Supply
+str_quest_3_desc Fishing_stocks_are_quite_low_in_the_recent_days._Help_the_restock_by_becoming_a_serf,_a_fish_30_fresh_fish_from_the_areas,_salt_them,_and_sell_it_to_one_of_stocks!_-_Payment:_25,000
+str_quest_4 Marksman
+str_quest_4_desc Prove_yourself_as_an_archer._Get_5_shots_from_80_metters_in_a_war._-_Payment:_20.000_gold.
+str_quest_5 Norseman
+str_quest_5_desc Show_your_skills_in_battle._Kill_15_players_from_wars_with_your_enemies_using_axes._-_Payment:_1_Nordic_Long_Axe_to_Item_Bank_and_an_Huscarl_Shield.
+str_quest_6 Good_Samaritan
+str_quest_6_desc Donate_money_to_5_random_commoners!_Be_a_good_samaritan._-_Payment:_20.000_gold.
+str_quest_7 Blue_Blood
+str_quest_7_desc Become_Lord_of_2_different_Factions_with_5_people_or_more._-_Payment:_Royal_Great_Sword_and_a_Crown_on_your_item_bank.

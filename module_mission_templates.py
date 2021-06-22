@@ -227,6 +227,10 @@ player_joined = (ti_server_player_joined, 0, 0, [], # server: handle connecting 
     ## PK.js SCRIPTS START ##
     (call_script, "script_pkjs_load_player", ":player_id"),
     ## PK.js SCRIPTS END ##
+
+    #koso
+    (player_slot_eq, ":player_id", slot_player_quest, 0),
+    (call_script, "script_new_quest", ":player_id"),
     ])
 
 player_exit = (ti_on_player_exit, 0, 0, [], # server: save player values on exit
