@@ -10962,6 +10962,7 @@ scripts.extend([
        (str_store_string, s1, "str_quest_7"),
        (str_store_string, s3, "str_quest_7_desc"),
       (try_end),
+       (str_store_string_reg, s1, s1),
      ]),
    
   ("quest_completed",
@@ -10975,6 +10976,7 @@ scripts.extend([
     (try_end),
     
     (player_get_slot, ":quest", slot_player_quest, ":quest"),
+    (str_clear, s1),
     (call_script, "script_check_quest", ":quest"),
     (str_store_player_username, s2, ":player_id"),
     (server_add_message_to_log, "@{s2} has completed the Quest {s1}"),
