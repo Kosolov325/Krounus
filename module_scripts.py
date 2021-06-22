@@ -10962,6 +10962,8 @@ scripts.extend([
        (str_store_string, s1, "str_quest_7"),
        (str_store_string, s3, "str_quest_7_desc"),
       (try_end),
+       (str_store_string, s1, s1),
+       (str_store_string, s3, s3),
      ]),
    
   ("quest_completed",
@@ -10974,7 +10976,6 @@ scripts.extend([
       (call_script, "script_player_adjust_gold", ":player_id", ":value", 1),
     (try_end),
     
-    (try_begin),
     (player_get_slot, ":quest", slot_player_quest, ":quest"),
     (player_set_slot, ":player_id", slot_player_quest, 0),
     (str_clear, s1),
@@ -10988,7 +10989,6 @@ scripts.extend([
         (multiplayer_send_string_to_player, ":players", server_event_script_message, "@{s2} has completed the Quest {s1}."),
         (multiplayer_send_2_int_to_player, ":players", server_event_script_message_set_color, script_message_color),
       (try_end),
-    (try_end),
   ]),
   ("new_quest",
    [(store_script_param, ":player_id", 1),
