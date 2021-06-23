@@ -1,4 +1,4 @@
-105
+107
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -45,6 +45,7 @@ qstr_{s0}^Herding:_{reg10 {s0}^Herding:_{reg10}
 qstr_{s0}^Musician:_{reg1 {s0}^Musician:_{reg10}
 qstr_^ ^
 qstr_/ /
+qstr_{reg5}/1000_gold_rob {reg5}/1000_gold_robbed.
 qstr_You_ve_been_paid_{re You've_been_paid_{reg5}_denars_for_your_cooking_work.
 qstr_You_ve_been_paid_200 You've_been_paid_200_denars_for_repairing_costs.
 qstr_You_removed_access_f You_removed_access_for_{s5}
@@ -87,6 +88,7 @@ qstr_Ask_the_owner_for_ke Ask_the_owner_for_keys_to_access_this_house!
 qstr_You_can_t_do_it_whil You_can't_do_it_while_in_war!
 qstr_Ask_the_tavern_keepe Ask_the_tavern_keeper_for_keys_to_access_this_room!
 qstr_SERVER_ADDRESS/serverapi/pd SERVER_ADDRESS/serverapi/pdoorload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&pdoorID={reg1}
+qstr_You_used_the_pickloc You_used_the_picklock_in_{reg5}_chests.
 qstr_{s2}_has_completed_t {s2}_has_completed_the_Quest_{s1}
 qstr_{s2}_has_completed_th {s2}_has_completed_the_Quest_{s1}.
 qstr_NEW_QUEST:_{s1}._{s3 NEW_QUEST:_{s1}._{s3}
