@@ -145,6 +145,9 @@ slot_player_pdoor_ow_end                   = 78
 slot_player_quest                          = 79
 slot_player_quest_task_1                   = 80
 slot_player_quest_task_2                   = 81
+slot_player_quest_task_3                   = 83
+slot_player_quest_settlement               = 84
+slot_player_quest_switch                   = 85
 ########################################################
 ##  AGENT SLOTS            #############################
 ########################################################

@@ -315,6 +315,7 @@ g_loop_animal_herd_begin
 g_time_last_herd_animal_disappeared
 g_recent_nearby_deaths_factor
 g_edit_scene
+g_server_running_time
 g_ibank_pos_x
 g_ibank_pos_y
 g_herd_animal_count

@@ -36,7 +36,7 @@ scenes = [
   ("scene_9",sf_generate,"none","none",(0,0),(100,100),-100,"0x0000000330000500000fffff000077d7000002a200007ab4",[],[],"outer_terrain_plainsnow"),
   ("scene_10",sf_generate,"none","none",(0,0),(100,100),-100,"0x000000033007d119000d234800003b77000019490000433a",[],[],"outer_terrain_plainmont"),
   ("scene_11",sf_generate,"none","none",(0,0),(100,100),-100,"0x0000000130000500000d2348000077a300002bdf000074c1",[],[],"outer_terrain_plainmont"),
-  ("scene_12",sf_generate,"none","none",(0,0),(100,100),-100,"0x0000000130000500000d23470000358c00006ec700001183",[],[],"outer_terrain_plainmont"),
+  ("scene_12",sf_generate,"none","none",(0,0),(100,100),-100,"0x0000000130000500000d23470000358c00006ec700001183",[],[],"sea_outer_terrain_2"),
   ("scene_13",sf_generate,"none","none",(0,0),(100,100),-100,"0x0000000330000000000fffff000041ef00005ae800003c55",[],[],"outer_terrain_beach"),
   ("scene_14",sf_generate,"none","none",(0,0),(100,100),-100,"0x000000033007d119000d234800003b77000019490000433a",[],[],"outer_terrain_pw_1"),
   ("scene_15",sf_generate,"none","none",(0,0),(300,300),-100,"0x000000033000124c000acab40000280700000c9f00000ab5",[],[],"outer_terrain_pw_1"),

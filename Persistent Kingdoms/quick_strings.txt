@@ -1,4 +1,4 @@
-107
+122
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -19,7 +19,7 @@ qstr_You_are_logged_in_as You_are_logged_in_as_an_admin,_your_stats_will_not_be_
 qstr_SERVER_ADDRESS/serverapi SERVER_ADDRESS/serverapi/stripgear?serverID=SERVER_ID&apiKey=SERVER_API_KEY&guid={reg0}&pouchGold={reg1}
 qstr_null null
 qstr_The_player_{s0}_has_ The_player_{s0}_has_disconnect_with_these_items_inside_item_banking:{s1}
-qstr_SERVER_ADDRESS/serverapi/ SERVER_ADDRESS/serverapi/saveplayer?serverID=SERVER_ID&apiKey=SERVER_API_KEY&guid={reg0}&name={s0}&factionID={reg1}&classID={reg2}&pouchGold={reg3}&health={reg4}&food={reg5}&poison={reg6}&headArmour={reg7}&bodyArmour={reg8}&footArmour={reg9}&handArmour={reg10}&firstItem={reg11}&secondItem={reg12}&thirdItem={reg13}&forthItem={reg14}&firstAmmo={reg15}&secondAmmo={reg16}&thirdAmmo={reg17}&forthAmmo={reg18}&horse={reg19}&horseHealth={reg20}&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&ibankID={reg24}&ibank={s1}&keys={s2}&alive
+qstr_SERVER_ADDRESS/serverapi/ SERVER_ADDRESS/serverapi/saveplayer?serverID=SERVER_ID&apiKey=SERVER_API_KEY&guid={reg0}&name={s0}&factionID={reg1}&classID={reg2}&pouchGold={reg3}&health={reg4}&food={reg5}&poison={reg6}&headArmour={reg7}&bodyArmour={reg8}&footArmour={reg9}&handArmour={reg10}&firstItem={reg11}&secondItem={reg12}&thirdItem={reg13}&forthItem={reg14}&firstAmmo={reg15}&secondAmmo={reg16}&thirdAmmo={reg17}&forthAmmo={reg18}&horse={reg19}&horseHealth={reg20}&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&ibankID={reg24}&quest={reg25}&quest_task_1={reg26}&quest_task_2={reg27}&quest_task_3={reg28}&quest_settlement={reg29}&quest_switch={reg30}&ibank={s1}&keys={s2}&alive
 qstr_SERVER_ADDRESS/serverapi/s SERVER_ADDRESS/serverapi/saveplayer?serverID=SERVER_ID&apiKey=SERVER_API_KEY&guid={reg0}&name={s0}&factionID={reg1}&classID={reg2}
 qstr_SERVER_ADDRESS/serverapi/b SERVER_ADDRESS/serverapi/bankwithdraw?serverID=SERVER_ID&apiKey=SERVER_API_KEY&playerID={reg0}&guid={reg1}&amount={reg2}
 qstr_You_are_clicking_too You_are_clicking_too_quickly!
@@ -43,9 +43,11 @@ qstr_{s0}^Sailing:_{reg10 {s0}^Sailing:_{reg10}
 qstr_{s0}^Tailoring:_{reg {s0}^Tailoring:_{reg10}
 qstr_{s0}^Herding:_{reg10 {s0}^Herding:_{reg10}
 qstr_{s0}^Musician:_{reg1 {s0}^Musician:_{reg10}
+qstr_You_became_lord_of_1 You_became_lord_of_1/2_factions.
 qstr_^ ^
 qstr_/ /
 qstr_{reg5}/1000_gold_rob {reg5}/1000_gold_robbed.
+qstr_{reg6}/30_cooked. {reg6}/30_cooked.
 qstr_You_ve_been_paid_{re You've_been_paid_{reg5}_denars_for_your_cooking_work.
 qstr_You_ve_been_paid_200 You've_been_paid_200_denars_for_repairing_costs.
 qstr_You_removed_access_f You_removed_access_for_{s5}
@@ -64,7 +66,6 @@ qstr___/buy_house__door_i _'/buy_house_(door_id)'_buy_a_house.
 qstr___/sell_house__door_ _'/sell_house_(door_id)'_sell_a_house.
 qstr___/id__seek_for_some _'/id'_seek_for_someone's_id_or_yours.
 qstr_help help
-qstr_quest_ quest_
 qstr_givekey_ givekey_
 qstr_removekey_ removekey_
 qstr_buy_house_ buy_house_
@@ -91,18 +92,32 @@ qstr_SERVER_ADDRESS/serverapi/pd SERVER_ADDRESS/serverapi/pdoorload?serverID=SER
 qstr_You_used_the_pickloc You_used_the_picklock_in_{reg5}_chests.
 qstr_{s2}_has_completed_t {s2}_has_completed_the_Quest_{s1}
 qstr_{s2}_has_completed_th {s2}_has_completed_the_Quest_{s1}.
+qstr_{reg5}/10_Wood_Block {reg5}/10_Wood_Blocks
+qstr_{reg5}/10_Iron_Ores {reg5}/10_Iron_Ores
+qstr_{reg5}/10_Leather_Ro {reg5}/10_Leather_Rolls
+qstr_+2000_payment_from_t +2000_payment_from_the_Caravan
+qstr_The_Caravan_by_{s2}_ The_Caravan_by_{s2}_was_completed
+qstr_A_Caravan_has_starte A_Caravan_has_started,_you_may_kill_{s3}_and_steal_his_goods!
+qstr_Your_faction_s_carav Your_faction's_caravan_was_canceled.
+qstr_The_Caravan_by_{s2}_w The_Caravan_by_{s2}_was_canceled}
+qstr_Wait_{reg6}_more_min Wait_{reg6}_more_minutes_before_you_can_change_quests_again
 qstr_NEW_QUEST:_{s1}._{s3 NEW_QUEST:_{s1}._{s3}
 qstr_You_ve_opened_a_Bank You've_opened_a_Bank_account_with_success!_Ibank_id:_{reg0}
 qstr_You_have_to_register You_have_to_register_a_Bank_account_on_any_bank_first
 qstr_SERVER_ADDRESS/serverapi/i SERVER_ADDRESS/serverapi/ibanksave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&ibankid={reg0}&ibankit={s1}
 qstr_SERVER_ADDRESS/serverapi/ib SERVER_ADDRESS/serverapi/ibankload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&ibankid={reg1}
 qstr_You_ve_been_paid_20_ You've_been_paid_20_denars_for_healing_others.
+qstr_{reg5}/30_fished. {reg5}/30_fished.
 qstr_That_s..._a_lot_of_a That's..._a_lot_of_alcohol.._You_dont_feel_very..._well...
 qstr_[E]_Could_not_get_on [E]_Could_not_get_one_or_more_skybox_prop_instances!
 qstr_Time:_Day Time:_Day
 qstr_Time:_Sunrise Time:_Sunrise
 qstr_Time:_Sunset Time:_Sunset
 qstr_Time:_Night Time:_Night
+qstr_Your_faction_s_carava Your_faction's_caravan_was_failed..
+qstr_You_sucessuful_stole You_sucessuful_stole_the_caravan_by_player_{s2}
+qstr_You_killed_{reg5}/15 You_killed_{reg5}/15.
+qstr_{reg5}/5_Shots! {reg5}/5_Shots!
 qstr_Cooking_Healing_and_ Cooking,_Healing_and_Repairing_give_you_now_an_extra_payment!
 qstr_Castles_are_far_supe Castles_are_far_superior_from_any_settlement,_only_the_strong_can_hold_it!
 qstr_You_feel_very_hungry You_feel_very_hungry...
