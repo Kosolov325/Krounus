@@ -583,8 +583,8 @@ scripts.extend([
          "&firstAmmo={reg15}&secondAmmo={reg16}&thirdAmmo={reg17}&forthAmmo={reg18}" +
          "&horse={reg19}&horseHealth={reg20}" +
          "&xPosition={reg21}&yPosition={reg22}&zPosition={reg23}&ibankID={reg24}" +
-         "&quest={reg25}&quest_task_1={reg26}&quest_task_2={reg27}&quest_task_3={reg28}" +
-         "&quest_settlement={reg29}&quest_switch={reg30}&ibank={s1}&keys={s2}&alive"),
+         "&quest={reg25}&task1={reg26}&task2={reg27}&task3={reg28}" +
+         "&settlement={reg29}&switchs={reg30}&ibank={s1}&keys={s2}&alive"),
       (else_try),
         (neg|player_is_admin, ":player_id"),
         (send_message_to_url,
@@ -11355,7 +11355,7 @@ scripts.extend([
       (call_script, "script_check_quest", ":quest"),
       (try_begin),
         (eq, ":quest", 6),
-        (assign, ":end", 1),
+        (assign, ":end", 2),
         (try_for_range, ":loop", 1, ":end"),
          (store_random_in_range, ":settlement", castle_factions_begin, factions_end),
          (player_slot_eq, ":player_id", slot_player_faction_id, ":settlement"),
