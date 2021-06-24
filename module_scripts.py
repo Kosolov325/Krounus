@@ -263,9 +263,16 @@ scripts.extend([
      (try_end),
 
     #koso
-    (player_slot_eq, ":player_id", slot_player_quest, 0),
-    (call_script, "script_new_quest", ":player_id"),
-     
+    (try_begin),
+     (player_slot_eq, ":player_id", slot_player_quest, 0),
+     (call_script, "script_new_quest", ":player_id"),
+    (else_try),
+      (player_get_slot, ":quest", ":player_id", slot_player_quest),
+      (call_script, "script_check_quest", ":quest"),
+      (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, 0x58ea42),
+      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@CURRENT QUEST: {s1}. {s3}"),
+      (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, script_message_color),
+    (try_end),
      (else_try),
       (eq, ":action", pkjs_action_load_fail_kick),
       (assign, ":player_id", reg1),
