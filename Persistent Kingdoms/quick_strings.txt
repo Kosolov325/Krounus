@@ -1,4 +1,4 @@
-124
+123
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -118,7 +118,6 @@ qstr_Time:_Night Time:_Night
 qstr_Your_faction_s_carava Your_faction's_caravan_was_failed..
 qstr_You_sucessuful_stole You_sucessuful_stole_the_caravan_by_player_{s2}
 qstr_You_killed_{reg5}/15 You_killed_{reg5}/15.
-qstr_{reg1} {reg1}
 qstr_{reg5}/5_Shots! {reg5}/5_Shots!
 qstr_Cooking_Healing_and_ Cooking,_Healing_and_Repairing_give_you_now_an_extra_payment!
 qstr_Castles_are_far_supe Castles_are_far_superior_from_any_settlement,_only_the_strong_can_hold_it!

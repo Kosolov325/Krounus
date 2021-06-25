@@ -421,15 +421,14 @@ agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects f
       (agent_get_position, pos1, ":attacker_agent_id"),
       (agent_get_position, pos2, ":attacked_agent_id"),
       (get_distance_between_positions_in_meters, reg1, pos1, pos2),
-      (server_add_message_to_log, "@{reg1}"),
       (ge, reg1, 40),
       (player_get_slot, ":task1", ":attacker_id", slot_player_quest_task_1),
       (val_add, ":task1", 1),
       (assign, reg5, ":task1"),
-      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@{reg5}/5 Shots!"),
-      (player_set_slot, ":player_id", slot_player_quest_task_1, ":task1"),
+      (multiplayer_send_string_to_player, ":attacker_id", server_event_script_message, "@{reg5}/5 Shots!"),
+      (player_set_slot, ":attacker_id", slot_player_quest_task_1, ":task1"),
       (ge, ":task1", 5),
-      (call_script, "script_quest_completed", ":player_id", 1, 20000, 0, 0),
+      (call_script, "script_quest_completed", ":attacker_id", 1, 20000, 0, 0),
      (try_end),
     (try_end), #koso end
     ])
