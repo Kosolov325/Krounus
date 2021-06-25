@@ -9177,7 +9177,7 @@ scripts.extend([
             (eq, ":troop_id", "trp_serf"),
             (player_get_slot, ":task1", ":player_id", slot_player_quest_task_1),
             (player_get_slot, ":task2", ":player_id", slot_player_quest_task_2),
-            (val_add, ":task2", 2),
+            (val_add, ":task2", 1),
             (assign, reg6, ":task2"),
             (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@{reg6}/30 cooked."),
             (player_set_slot, ":player_id", slot_player_quest_task_2, ":task2"),
