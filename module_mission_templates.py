@@ -1390,6 +1390,7 @@ def common_triggers(self):
     server_announces, 
     agent_hungry_system,
     save_ibank,
+    new_quest,
     ]
 
 mission_templates = [
