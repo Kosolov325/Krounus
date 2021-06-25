@@ -229,7 +229,7 @@ scripts.extend([
        (neq, reg19, -1),
        (agent_set_hit_points, ":horse_agent_id", reg19, 0),
      (try_end),
-
+     
       #Koso
       (player_get_unique_id, reg1, ":player_id"),
       (str_store_player_username, s4, ":player_id"),
@@ -570,7 +570,7 @@ scripts.extend([
       (player_get_slot, reg28, ":player_id", slot_player_quest_task_3),
       (player_get_slot, reg29, ":player_id", slot_player_quest_settlement),
       (player_get_slot, reg30, ":player_id", slot_player_quest_switch),
-      (server_add_message_to_log, "@The player {s0} has disconnect with these items inside item banking:{s1}"), #koso
+      (server_add_message_to_log, "@The player {s0} has disconnect with these items inside item banking:{s1}"), #koso  
       (try_begin),
         (agent_is_alive, ":agent_id"),
         (neg|player_is_admin, ":player_id"),
@@ -11365,6 +11365,7 @@ scripts.extend([
         (player_set_slot, ":player_id", slot_player_quest_settlement, ":settlement"),
         (str_store_faction_name, s4,  ":settlement"),
       (try_end),
+      (player_set_slot, ":player_id", slot_player_quest, ":quest"),
       (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, 0x58ea42),
       (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@NEW QUEST: {s1}. {s3}"),
       (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, script_message_color),
