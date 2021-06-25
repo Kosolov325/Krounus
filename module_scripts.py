@@ -7952,7 +7952,8 @@ scripts.extend([
     (store_script_param, ":hardness", 5),
     (store_script_param, ":resource_imod", 6), # item mesh variation to match the visual appearance
     (store_script_param, ":regrow_interval", 7),
-
+    (store_script_param, ":player_id", 8),
+    
     (scene_prop_get_slot, ":state", ":instance_id", slot_scene_prop_state),
     (assign, ":break_effect", 0),
     (try_begin),
@@ -8021,6 +8022,8 @@ scripts.extend([
         (try_for_range, ":unused", 0, ":resource_count"),
           (call_script, "script_set_random_spawn_position", 200),
           (spawn_item, ":resource_item_id", ":resource_imod", "$g_spawn_item_prune_time"),
+          (call_script, "script_player_adjust_gold", ":player_id", 50, 1), #koso
+          (multiplayer_send_string_to_player,":player_id", server_event_script_message,  "@+50 gold for Woodcutting Work"),
         (try_end),
         (assign, ":break_effect", 1),
       (try_end),
@@ -9687,8 +9690,8 @@ scripts.extend([
        (scene_prop_slot_eq, ":instance_id", slot_scene_prop_reward, 1),         
        (ge, ":hit_points", ":full_hit_points"),
        (agent_get_player_id, ":player_id", ":agent_id"),
-       (call_script, "script_player_adjust_gold", ":player_id", 200, 1),
-       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@You've been paid 200 denars for repairing costs."),
+       (call_script, "script_player_adjust_gold", ":player_id", 500, 1),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@You've been paid 500 denars for repairing structures."),
        (scene_prop_set_slot, ":instance_id", slot_scene_prop_reward, 0),
        (try_end),
       (assign, reg1, 0),

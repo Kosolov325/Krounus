@@ -1,4 +1,4 @@
-124
+125
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -48,9 +48,10 @@ qstr_You_became_lord_of_1 You_became_lord_of_1/2_factions.
 qstr_^ ^
 qstr_/ /
 qstr_{reg5}/1000_gold_rob {reg5}/1000_gold_robbed.
+qstr_+50_gold_for_Woodcut +50_gold_for_Woodcutting_Work
 qstr_{reg6}/30_cooked. {reg6}/30_cooked.
 qstr_You_ve_been_paid_{re You've_been_paid_{reg5}_denars_for_your_cooking_work.
-qstr_You_ve_been_paid_200 You've_been_paid_200_denars_for_repairing_costs.
+qstr_You_ve_been_paid_500 You've_been_paid_500_denars_for_repairing_structures.
 qstr_You_removed_access_f You_removed_access_for_{s5}
 qstr_You_can_t_give_keys_ You_can't_give_keys_for_{s2}_anymore_by_{s5}
 qstr_You_keys_for:_{s2}_w You_keys_for:_{s2}_was_removed_by_{s4}

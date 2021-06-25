@@ -1297,6 +1297,20 @@ server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_message
         (try_end),
          ])
 
+new_quest_auto = (1, 0, 0, [],
+   [
+    (try_for_players, ":players"),
+      (player_is_active, ":players"),
+      (player_slot_eq, ":players", slot_player_quest, 0),
+      (player_get_slot, ":time", ":players", slot_player_quest_time),
+      (val_add, ":time", 1),
+      (player_set_slot, ":players", slot_player_quest_time, ":time"),
+      (eq, ":time", 60),
+      (call_script, "script_new_quest", ":players"),
+      (player_set_slot, ":players", slot_player_quest_time, 0),
+    (try_end),
+           ])
+
 new_quest = (60, 0, 0, [],
    [
     (val_add, "$g_server_running_time", 1),
@@ -1390,6 +1404,7 @@ def common_triggers(self):
     agent_hungry_system,
     save_ibank,
     new_quest,
+    new_quest_auto,
     ]
 
 mission_templates = [

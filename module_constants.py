@@ -148,6 +148,7 @@ slot_player_quest_task_2                   = 81
 slot_player_quest_task_3                   = 83
 slot_player_quest_settlement               = 84
 slot_player_quest_switch                   = 85
+slot_player_quest_time                  = 86
 ########################################################
 ##  AGENT SLOTS            #############################
 ########################################################
