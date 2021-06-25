@@ -11330,7 +11330,6 @@ scripts.extend([
      (try_end),
       (store_random_in_range, ":quest", 1, 8),
       (assign, reg1, ":quest"),
-      (server_add_message_to_log, "@{reg1}"),
       (player_set_slot, ":player_id", slot_player_quest, 0),
       (player_set_slot, ":player_id", slot_player_quest_task_1, 0),
       (player_set_slot, ":player_id", slot_player_quest_task_2, 0),

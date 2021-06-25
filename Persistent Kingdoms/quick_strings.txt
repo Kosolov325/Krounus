@@ -1,4 +1,4 @@
-125
+124
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -102,7 +102,6 @@ qstr_The_Caravan_by_{s2}_ The_Caravan_by_{s2}_was_completed
 qstr_A_Caravan_has_starte A_Caravan_has_started,_you_may_kill_{s3}_and_steal_his_goods!
 qstr_Your_faction_s_carav Your_faction's_caravan_was_canceled.
 qstr_The_Caravan_by_{s2}_w The_Caravan_by_{s2}_was_canceled}
-qstr_{reg1} {reg1}
 qstr_NEW_QUEST:_{s1}._{s3 NEW_QUEST:_{s1}._{s3}
 qstr_Wait_{reg6}_more_min Wait_{reg6}_more_minutes_before_you_can_change_quests_again
 qstr_You_ve_opened_a_Bank You've_opened_a_Bank_account_with_success!_Ibank_id:_{reg0}
