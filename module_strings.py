@@ -1171,7 +1171,7 @@ Poisonous herbs can also sometimes be found, which are then applied to the blade
   ("quest_5", "Norseman"),
   ("quest_5_desc", "Show your skills in battle. Kill 15 players from wars with your enemies using two handed axes. The factions must have 3 men at least. - Payment: Long Axe, Huscarl Shield and Warlord Helmet to your Item Bank."),
   ("quest_6", "Caravan traders"),
-  ("quest_6_desc", "NEW QUEST: Caravan Traders. Become a serf under a Faction with 2 serfs at least plus 3 other players. Buy from that Faction stocks 10 Wood Blocks, 10 Iron Ores, 10 Leather Rolls, and sell them all at {s4}. - Payment: 40.000 gold + 2.000 gold to your faction members."),
+  ("quest_6_desc", "NEW QUEST: Caravan Traders. Become a serf under a Faction with 2 serfs at least plus 3 other players. Buy from that Faction stocks 10 Wood Blocks, 10 Iron Ores, 10 Leather Rolls, and sell them all at {s3}. - Payment: 40.000 gold + 2.000 gold to your faction members."),
   ("quest_7", "Blue Blood"),
   ("quest_7_desc", "Become Lord of 2 different Factions with 5 people or more. - Payment: Royal Great Sword and a Crown on your item bank."),
  ]
