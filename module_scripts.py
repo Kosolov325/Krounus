@@ -11343,7 +11343,7 @@ scripts.extend([
         (assign, ":end", 3),
         (try_for_range, ":loop", 1, ":end"),
          (val_add, ":end", 1),
-         (store_random_in_range, ":settlement", castle_factions_begin, factions_end),
+         (store_random_in_range, ":settlement", 2, 9),
          (val_abs, ":loop"), #prevent warnings
          (neg|player_slot_eq, ":player_id", slot_player_faction_id, ":settlement"),
          (assign, ":end", 1),
@@ -11389,7 +11389,7 @@ scripts.extend([
         (assign, ":end", 3),
         (try_for_range, ":loop", 1, ":end"),
          (val_add, ":end", 1),
-         (store_random_in_range, ":settlement", castle_factions_begin, factions_end),
+         (store_random_in_range, ":settlement", 2, 9),
          (val_abs, ":loop"), #prevent warnings
          (neg|player_slot_eq, ":player_id", slot_player_faction_id, ":settlement"),
          (assign, ":end", 1),
