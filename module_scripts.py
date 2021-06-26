@@ -11340,7 +11340,7 @@ scripts.extend([
       (call_script, "script_check_quest", ":quest"),
       (try_begin),
         (eq, ":quest", 6),
-        (assign, ":end", 2),
+        (assign, ":end", 3),
         (try_for_range, ":loop", 1, ":end"),
          (store_random_in_range, ":settlement", castle_factions_begin, factions_end),
          (player_slot_eq, ":player_id", slot_player_faction_id, ":settlement"),
