@@ -484,7 +484,7 @@ scripts.extend([
          (else_try),
            (eq, ":loop", 20),
            (assign, reg20, ":item_id"),
-           (str_store_string, s1, "str_message_ib"),
+           (str_store_string, s1, "str_message_ib_personal"),
          (try_end),
          (val_add, ":loop", 1),
        (try_end),
@@ -11566,6 +11566,8 @@ scripts.extend([
            (eq, ":loop", 20),
            (str_to_num, ":item_id", s20),
            (scene_prop_set_slot, ":instance_id", ":inventory_slot", ":item_id"),
+           (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank_npersonal, 0), #stop in personal banks
+           (assign, ":inventory_end", slot_scene_prop_inventory_begin),
          (else_try),
            (eq, ":loop", 21),
            (str_to_num, ":item_id", s21),
