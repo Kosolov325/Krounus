@@ -385,6 +385,8 @@ agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects f
     (try_begin), #koso start
       (agent_get_player_id, ":attacker_id", ":attacker_agent_id"),
       (agent_get_player_id, ":attacked_id", ":attacked_agent_id"),
+     (agent_is_human, ":attacked_agent_id"),
+     (agent_is_human, ":attacker_agent_id"),
     (try_begin),
       (player_slot_eq, ":attacker_id", slot_player_quest, 5),
       (this_or_next|eq, reg0, "itm_sarranid_two_handed_axe_a"),
