@@ -1,4 +1,4 @@
-124
+125
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -99,6 +99,7 @@ qstr_{reg5}/10_Iron_Ores {reg5}/10_Iron_Ores
 qstr_{reg5}/10_Leather_Ro {reg5}/10_Leather_Rolls
 qstr_+2000_payment_from_t +2000_payment_from_the_Caravan
 qstr_The_Caravan_by_{s2}_ The_Caravan_by_{s2}_was_completed
+qstr_A_caravan_by_{s3}_ha A_caravan_by_{s3}_has_started.
 qstr_A_Caravan_has_starte A_Caravan_has_started,_you_may_kill_{s3}_and_steal_his_goods!
 qstr_Your_faction_s_carav Your_faction's_caravan_was_canceled.
 qstr_The_Caravan_by_{s2}_w The_Caravan_by_{s2}_was_canceled}
