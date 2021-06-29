@@ -8738,8 +8738,8 @@ scripts.extend([
     (try_begin),
       (eq, ":faction_id", "fac_commoners"),
       (try_begin), #koso start
-       (prop_instance_get_variation_id, ":val1", ":instance_id"),
-        (eq, ":val1", 100),
+       (prop_instance_get_variation_id_2, ":val2", ":instance_id"),
+        (eq, ":val2", 104),
         (player_slot_ge, ":player_id", slot_player_dueler, 0),
         (assign, ":fail", 1),
       (try_end), #koso end
