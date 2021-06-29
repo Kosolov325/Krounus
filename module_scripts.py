@@ -231,6 +231,9 @@ scripts.extend([
      (try_end),
      
       #Koso
+      (try_begin),
+      (player_slot_eq, ":player_id", slot_player_dueler, 0),
+     
       (player_get_unique_id, reg1, ":player_id"),
       (str_store_player_username, s4, ":player_id"),
       (call_script, "script_log_equipment", ":player_id"),
@@ -282,6 +285,8 @@ scripts.extend([
        (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@CURRENT QUEST: {s1}. {s3}"),
        (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, script_message_color),
       (try_end),
+    (try_end),
+      (player_set_slot, ":player_id", slot_player_dueler, 0),
     (try_end),
      (else_try),
       (eq, ":action", pkjs_action_load_fail_kick),
@@ -569,18 +574,26 @@ scripts.extend([
         (agent_fade_out, ":horse_agent_id"),
       (try_end),
 
+
       (agent_get_position, pos1, ":agent_id"),
       (position_get_x, reg21, pos1),
       (position_get_y, reg22, pos1),
       (position_get_z, reg23, pos1),
-
+         
       (player_get_slot, reg25, ":player_id", slot_player_quest),
       (player_get_slot, reg26, ":player_id", slot_player_quest_task_1),
       (player_get_slot, reg27, ":player_id", slot_player_quest_task_2),
       (player_get_slot, reg28, ":player_id", slot_player_quest_task_3),
       (player_get_slot, reg29, ":player_id", slot_player_quest_settlement),
       (player_get_slot, reg30, ":player_id", slot_player_quest_switch),
-      (server_add_message_to_log, "@The player {s0} has disconnect with these items inside item banking:{s1}"), #koso  
+    
+      (try_begin),
+       (this_or_next|eq, ":player_id", "$first_dueler"),
+       (eq, ":player_id", "$second_dueler"),
+      (else_try),
+      (server_add_message_to_log, "@The player {s0} has disconnect with these items inside item banking:{s1}"), #koso
+      (try_end),
+    
       (try_begin),
         (agent_is_alive, ":agent_id"),
         (neg|player_is_admin, ":player_id"),
@@ -5370,8 +5383,10 @@ scripts.extend([
           (neq, "$g_game_type", "mt_no_money"),
           (try_begin),
             (eq, ":dead_faction_id", "fac_commoners"),
+            (player_slot_eq, ":dead_player_id", slot_player_dueler, 0),
             (call_script, "script_player_drop_loot", ":dead_player_id", 1),
           (else_try),
+            (player_slot_eq, ":dead_player_id", slot_player_dueler, 0),
             (call_script, "script_player_drop_loot", ":dead_player_id", 0),
           (try_end),
       (try_end),
@@ -8722,6 +8737,12 @@ scripts.extend([
     (assign, ":fail", 0),
     (try_begin),
       (eq, ":faction_id", "fac_commoners"),
+      (try_begin), #koso start
+       (prop_instance_get_variation_id, ":val1", ":instance_id"),
+        (eq, ":val1", 100),
+        (player_slot_ge, ":player_id", slot_player_dueler, 0),
+        (assign, ":fail", 1),
+      (try_end), #koso end
     (else_try),
       (eq, ":faction_id", ":player_faction_id"),
       (player_slot_eq, ":player_id", slot_player_has_faction_door_key, 1),
@@ -11348,6 +11369,35 @@ scripts.extend([
         (try_end),
       (try_end),
   ]),
+
+  ("start_duel",
+   [(store_script_param, ":agent_id", 1),
+
+    (agent_get_player_id, ":player_id", ":agent_id"),
+    (try_begin),
+      (eq, "$duel_happening", 0),
+      (eq, "$duel_starting", 0),
+      (try_begin),
+        (eq, "$first_dueler", 0),
+        (neq, "$second_dueler", ":player_id"),
+        (assign, "$first_dueler", ":player_id"),
+        (player_set_slot, ":player_id", slot_player_dueler, 1),
+      (else_try),
+        (eq, "$second_dueler", 0),
+        (neq, "$first_dueler", ":player_id"),
+        (assign, "$second_dueler", ":player_id"),
+        (player_set_slot, ":player_id", slot_player_dueler, 2),
+        (assign, "$duel_starting", 1),
+      (try_end),
+    (else_try),
+      (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, quest_error_message),
+      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@A duel is already happening!"),
+      (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, script_message_color),
+      (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
+    (try_end),
+
+    ]),
+  
   ("quest_switcher",
    [(store_script_param, ":player_id", 1),
 

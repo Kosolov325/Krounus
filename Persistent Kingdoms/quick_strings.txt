@@ -1,4 +1,4 @@
-125
+129
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -101,6 +101,7 @@ qstr_+2000_payment_from_t +2000_payment_from_the_Caravan
 qstr_The_Caravan_by_{s2}_ The_Caravan_by_{s2}_was_completed
 qstr_A_caravan_by_{s3}_ha A_caravan_by_{s3}_has_started.
 qstr_A_Caravan_has_starte A_Caravan_has_started,_you_may_kill_{s3}_and_steal_his_goods!
+qstr_A_duel_is_already_ha A_duel_is_already_happening!
 qstr_Your_faction_s_carav Your_faction's_caravan_was_canceled.
 qstr_The_Caravan_by_{s2}_w The_Caravan_by_{s2}_was_canceled}
 qstr_NEW_QUEST:_{s1}._{s3 NEW_QUEST:_{s1}._{s3}
@@ -119,8 +120,11 @@ qstr_Time:_Sunset Time:_Sunset
 qstr_Time:_Night Time:_Night
 qstr_Your_faction_s_carava Your_faction's_caravan_was_failed..
 qstr_You_sucessuful_stole You_sucessuful_stole_the_caravan_by_player_{s2}
+qstr_You_ve_lost_the_duel You've_lost_the_duel.
+qstr_You_ve_won_the_duel! You've_won_the_duel!_+350_denars_was_added_to_your_pouch.
 qstr_You_killed_{reg5}/15 You_killed_{reg5}/15.
 qstr_{reg5}/5_Shots! {reg5}/5_Shots!
 qstr_Cooking_Healing_and_ Cooking,_Healing_and_Repairing_give_you_now_an_extra_payment!
 qstr_Castles_are_far_supe Castles_are_far_superior_from_any_settlement,_only_the_strong_can_hold_it!
 qstr_You_feel_very_hungry You_feel_very_hungry...
+qstr_Duel_starting_in_{re Duel_starting_in_{reg3}_seconds!

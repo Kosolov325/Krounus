@@ -297,6 +297,7 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
     (try_end),
 
     (try_begin),
+     (player_slot_eq, ":player_id", slot_player_dueler, 0),
      (player_slot_eq, ":player_id", slot_player_quest, 6),
      (agent_get_player_id, ":killer_id", ":killer_agent_id"),
      (player_slot_eq, ":killer_id", slot_player_faction_id, "fac_outlaws"),
@@ -326,12 +327,49 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
            (try_end),
      (try_end),
     (try_end),
-    
+
+
+
     (call_script, "script_client_check_show_respawn_time_counter", ":dead_agent_id"),
     (call_script, "script_death_cam", ":dead_agent_id"),
     (call_script, "script_apply_consequences_for_agent_death", ":dead_agent_id", ":killer_agent_id"),
     (multiplayer_is_server),
 
+    (try_begin),
+     (player_slot_gt, ":player_id", slot_player_dueler, 0),
+     (agent_set_slot, ":dead_agent_id", slot_agent_died_normally, 1),
+     (agent_set_slot, ":dead_agent_id", slot_agent_cannot_attack, 0),
+     (player_set_slot, ":player_id", slot_player_first_spawn_occured, 0),
+
+     (player_get_slot, ":duel", ":player_id", slot_player_dueler),
+     (try_begin),
+        (eq, ":duel", 1),
+        (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, quest_error_message),
+        (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You've lost the duel."),
+        (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, script_message_color),
+        (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
+    
+        (multiplayer_send_2_int_to_player, "$second_dueler", server_event_script_message_set_color, new_quest),
+        (multiplayer_send_string_to_player, "$second_dueler", server_event_script_message, "@You've won the duel! +350 denars was added to your pouch."),
+        (multiplayer_send_2_int_to_player, "$second_dueler", server_event_script_message_set_color, script_message_color),
+        (call_script, "script_pkjs_load_player", "$second_dueler"),
+        (call_script, "script_player_adjust_gold", "$second_dueler", 350, 1),
+     (else_try),
+        (eq, ":duel", 2),
+        (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, quest_error_message),
+        (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You've lost the duel."),
+        (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, script_message_color),
+        (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
+    
+        (multiplayer_send_2_int_to_player, "$first_dueler", server_event_script_message_set_color, new_quest),
+        (multiplayer_send_string_to_player, "$first_dueler", server_event_script_message, "@You've won the duel! +350 denars was added to your pouch."),
+        (multiplayer_send_2_int_to_player, "$first_dueler", server_event_script_message_set_color, script_message_color),
+        (call_script, "script_player_adjust_gold", "$first_dueler", 350, 1),
+     (try_end),
+     (assign,  "$first_dueler", 0),
+     (assign, "$second_dueler", 0),
+     (assign, "$duel_happening", 0),
+    (else_try),
     ## PK.js SCRIPTS START ##
     (call_script, "script_pkjs_strip_gear", ":dead_agent_id", ":killer_agent_id"),
     ## PK.js SCRIPTS END ##
@@ -339,7 +377,7 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
     (call_script, "script_setup_agent_for_respawn", ":dead_agent_id"),
     (call_script, "script_check_animal_killed", ":dead_agent_id", ":killer_agent_id"),
     (call_script, "script_check_spawn_bots", ":dead_agent_id"),
-
+    (try_end),
     ])
 
 agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects for special weapons, hitting animals, and when overloaded by armor
@@ -1338,6 +1376,94 @@ save_ibank = (60, 0, 0, [],
     (call_script, "script_save_ibank"),
            ])
 
+duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Custom server announcements system
+       [
+        (val_add,"$duel_spawn_timer",1),
+        (try_begin),
+         (assign, reg3, 5),
+         (val_sub, reg3, "$duel_spawn_timer"),
+         (multiplayer_send_2_int_to_player, "$first_dueler", server_event_script_message_set_color, quest_color_message),
+         (multiplayer_send_string_to_player, "$first_dueler", server_event_script_message, "@Duel starting in {reg3} seconds!"),
+         (multiplayer_send_2_int_to_player, "$first_dueler", server_event_script_message_set_color, script_message_color),
+        
+         (multiplayer_send_2_int_to_player, "$second_dueler", server_event_script_message_set_color, quest_color_message),
+         (multiplayer_send_string_to_player, "$second_dueler", server_event_script_message, "@Duel starting in {reg3} seconds!"),
+         (multiplayer_send_2_int_to_player, "$second_dueler", server_event_script_message_set_color, script_message_color), 
+        (try_end),
+         (eq, "$duel_spawn_timer", 5),
+         (try_begin),
+           (player_slot_eq, "$first_dueler", slot_player_dueler, 1),
+           (player_slot_eq, "$second_dueler", slot_player_dueler, 2),
+           (player_get_agent_id, ":first_id", "$first_dueler"),
+           (player_get_agent_id, ":second_id", "$second_dueler"),
+           (agent_get_position, pos1, ":first_id"),
+           (agent_get_position, pos2, ":second_id"),
+
+           (call_script, "script_pkjs_save_player_and_gear", "$first_dueler"),
+           (call_script, "script_pkjs_save_player_and_gear", "$second_dueler"),
+        
+           (agent_get_troop_id, ":ft_id", ":first_id"),
+           (agent_get_troop_id, ":st_id", ":second_id"),
+
+           (try_for_range, ":slot", 1, 5),
+            (agent_equip_item, ":first_id", "itm_no_item", ":slot"),
+            (agent_equip_item, ":second_id", "itm_no_item", ":slot"),
+           (try_end),
+        
+           (call_script, "script_change_armor", ":first_id", "itm_no_head"),
+           (call_script, "script_change_armor", ":first_id", "itm_no_hand"),
+           (call_script, "script_change_armor", ":first_id", "itm_no_body"),
+           (call_script, "script_change_armor", ":first_id", "itm_no_foot"),
+           (call_script, "script_change_armor", ":first_id", "itm_no_horse"),
+
+           (call_script, "script_change_armor", ":second_id", "itm_no_head"),
+           (call_script, "script_change_armor", ":second_id", "itm_no_hand"),
+           (call_script, "script_change_armor", ":second_id", "itm_no_body"),
+           (call_script, "script_change_armor", ":second_id", "itm_no_foot"),
+           (call_script, "script_change_armor", ":second_id", "itm_no_horse"),
+        
+           (store_attribute_level, ":f_strengh", ":ft_id", ca_strength),
+           (store_attribute_level, ":s_strengh", ":st_id", ca_strength),
+        
+           (try_begin),
+             (ge, ":f_strengh", 15),
+             (agent_equip_item, ":first_id", "itm_heavy_practice_sword", 1),
+           (else_try),
+             (agent_equip_item, ":first_id", "itm_practice_sword", 1),
+             (agent_equip_item, ":first_id", "itm_practice_shield", 2),
+           (try_end),
+
+           (try_begin),
+             (ge, ":s_strengh", 15),
+             (agent_equip_item, ":second_id", "itm_heavy_practice_sword", 1),
+           (else_try),
+             (agent_equip_item, ":second_id", "itm_practice_sword", 1),
+             (agent_equip_item, ":second_id", "itm_practice_shield", 2),
+           (try_end),
+
+           (call_script, "script_change_armor", ":first_id", "itm_no_head"),
+           (call_script, "script_change_armor", ":first_id", "itm_no_hand"),
+
+           (call_script, "script_change_armor", ":second_id", "itm_no_head"),
+           (call_script, "script_change_armor", ":second_id", "itm_no_hand"),
+        
+           (entry_point_get_position, pos1, 101),
+           (entry_point_get_position, pos2, 102),
+           (agent_set_position, ":first_id", pos1),
+           (agent_set_position, ":second_id", pos2),
+           (assign, "$duel_starting", 0),
+           (assign, "$duel_happening", 1),
+           (assign, "$duel_spawn_timer"),
+         (else_try),
+          (assign, "$duel_starting", 0),
+          (player_set_slot, "$first_dueler", slot_player_dueler, 0),
+          (player_set_slot, "$second_dueler", slot_player_dueler, 0),
+          (assign, "$first_dueler", 0),
+          (assign, "$second_dueler", 0),
+          (assign, "$duel_spawn_timer", 0),
+         (try_end),
+         ])
+
 def common_triggers(self):
 	return [(ti_before_mission_start, 0, 0, [(assign, "$g_game_type", "mt_" + self)], []),
     before_mission_start_setup,
@@ -1415,6 +1541,7 @@ def common_triggers(self):
     save_ibank,
     new_quest,
     new_quest_auto,
+    duel_starting,
     ]
 
 mission_templates = [

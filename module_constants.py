@@ -150,6 +150,7 @@ slot_player_quest_settlement               = 84
 slot_player_quest_switch                   = 85
 slot_player_quest_time                  = 86
 
+slot_player_dueler                      = 88
 quest_color_message  = 0xFFF626
 quest_error_message  = 0xFFFF4422
 new_quest = 0x58ea42

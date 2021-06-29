@@ -259,6 +259,8 @@ g_presentation_obj_animation_menu_end
 g_dbg_presentation_overlays_end
 g_dbg_presentation_registers_end
 g_ibank_qnt
+first_dueler
+second_dueler
 g_actual_ghost_mode
 g_spawn_item_prune_time
 g_mute_all_players
@@ -315,6 +317,8 @@ g_loop_animal_herd_begin
 g_time_last_herd_animal_disappeared
 g_recent_nearby_deaths_factor
 g_edit_scene
+duel_happening
+duel_starting
 g_server_running_time
 g_ibank_pos_x
 g_ibank_pos_y
@@ -340,5 +344,6 @@ g_fire_place_instance_no
 g_fish_school_instance_no
 g_herd_animal_spawn_instance_no
 g_targeting_corpses
+duel_spawn_timer
 g_test_ship_collision_prop
 g_test_unlinked_prop
