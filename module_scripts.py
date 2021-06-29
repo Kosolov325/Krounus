@@ -8740,7 +8740,7 @@ scripts.extend([
       (try_begin), #koso start
        (prop_instance_get_variation_id_2, ":val2", ":instance_id"),
         (eq, ":val2", 104),
-        (player_slot_ge, ":player_id", slot_player_dueler, 0),
+        (player_slot_gt, ":player_id", slot_player_dueler, 0),
         (assign, ":fail", 1),
       (try_end), #koso end
     (else_try),
@@ -11817,7 +11817,7 @@ scripts.extend([
      (player_set_slot, ":player_id", slot_player_ibank_id, ":instance_id"),
      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You've opened a Bank account with success! Ibank id: {reg0}"),
      (eq, ":fill", 1),
-     (call_script, "script_cf_fill_ibank", reg0),
+     (call_script, "script_cf_fill_ibank", reg0, 0),
     (try_end),
      ]),
 
