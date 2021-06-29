@@ -1446,6 +1446,9 @@ duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Cu
 
            (call_script, "script_change_armor", ":second_id", "itm_no_head"),
            (call_script, "script_change_armor", ":second_id", "itm_no_hand"),
+
+           (agent_set_hit_points, ":first_id", 100, 0),
+           (agent_set_hit_points, ":second_id", 100, 0),
         
            (entry_point_get_position, pos1, 101),
            (entry_point_get_position, pos2, 102),
