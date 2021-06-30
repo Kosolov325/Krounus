@@ -286,8 +286,9 @@ scripts.extend([
        (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, script_message_color),
       (try_end),
     (try_end),
-      (player_set_slot, ":player_id", slot_player_dueler, 0),
+     
     (try_end),
+      (player_set_slot, ":player_id", slot_player_dueler, 0),
      (else_try),
       (eq, ":action", pkjs_action_load_fail_kick),
       (assign, ":player_id", reg1),

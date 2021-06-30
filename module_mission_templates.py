@@ -349,7 +349,6 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
         (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You've lost the duel."),
         (multiplayer_send_2_int_to_player, ":player_id", server_event_script_message_set_color, script_message_color),
         (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
-        (player_set_slot, ":player_id", slot_player_dueler, 0),
     
         (multiplayer_send_2_int_to_player, "$second_dueler", server_event_script_message_set_color, new_quest),
         (multiplayer_send_string_to_player, "$second_dueler", server_event_script_message, "@You've won the duel! +350 denars was added to your pouch."),
