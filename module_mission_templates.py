@@ -340,7 +340,8 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
      (agent_set_slot, ":dead_agent_id", slot_agent_died_normally, 1),
      (agent_set_slot, ":dead_agent_id", slot_agent_cannot_attack, 0),
      (player_set_slot, ":player_id", slot_player_first_spawn_occured, 0),
-
+     (player_set_slot, ":player_id", slot_player_spawn_state, player_spawn_state_dead),
+    
      (player_get_slot, ":duel", ":player_id", slot_player_dueler),
      (try_begin),
         (eq, ":duel", 1),
@@ -364,6 +365,7 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
         (multiplayer_send_2_int_to_player, "$first_dueler", server_event_script_message_set_color, new_quest),
         (multiplayer_send_string_to_player, "$first_dueler", server_event_script_message, "@You've won the duel! +350 denars was added to your pouch."),
         (multiplayer_send_2_int_to_player, "$first_dueler", server_event_script_message_set_color, script_message_color),
+        (call_script, "script_pkjs_load_player", "$first_dueler"),
         (call_script, "script_player_adjust_gold", "$first_dueler", 350, 1),
      (try_end),
      (assign,  "$first_dueler", 0),
@@ -1406,8 +1408,8 @@ duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Cu
            (agent_get_troop_id, ":st_id", ":second_id"),
 
            (try_for_range, ":slot", 1, 5),
-            (agent_equip_item, ":first_id", "itm_no_item", ":slot"),
-            (agent_equip_item, ":second_id", "itm_no_item", ":slot"),
+            (agent_equip_item, ":first_id", -1, ":slot"),
+            (agent_equip_item, ":second_id", -1, ":slot"),
            (try_end),
         
            (call_script, "script_change_armor", ":first_id", "itm_no_head"),
@@ -1427,25 +1429,27 @@ duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Cu
         
            (try_begin),
              (ge, ":f_strengh", 15),
-             (agent_equip_item, ":first_id", "itm_heavy_practice_sword", 1),
+             (agent_equip_item, ":first_id", "itm_heavy_practice_sword"),
            (else_try),
-             (agent_equip_item, ":first_id", "itm_practice_sword", 1),
-             (agent_equip_item, ":first_id", "itm_practice_shield", 2),
+             (agent_equip_item, ":first_id", "itm_practice_sword"),
+             (agent_equip_item, ":first_id", "itm_practice_shield"),
            (try_end),
 
            (try_begin),
              (ge, ":s_strengh", 15),
-             (agent_equip_item, ":second_id", "itm_heavy_practice_sword", 1),
+             (agent_equip_item, ":second_id", "itm_heavy_practice_sword"),
            (else_try),
-             (agent_equip_item, ":second_id", "itm_practice_sword", 1),
-             (agent_equip_item, ":second_id", "itm_practice_shield", 2),
+             (agent_equip_item, ":second_id", "itm_practice_sword"),
+             (agent_equip_item, ":second_id", "itm_practice_shield"),
            (try_end),
 
-           (call_script, "script_change_armor", ":first_id", "itm_no_head"),
-           (call_script, "script_change_armor", ":first_id", "itm_no_hand"),
+           (call_script, "script_change_armor", ":first_id", "itm_arena_tunic"),
+           (call_script, "script_change_armor", ":first_id", "itm_leather_gauntlet"),
+           (call_script, "script_change_armor", ":first_id", "itm_leather_boots"),
 
-           (call_script, "script_change_armor", ":second_id", "itm_no_head"),
-           (call_script, "script_change_armor", ":second_id", "itm_no_hand"),
+           (call_script, "script_change_armor", ":second_id", "itm_arena_tunic"),
+           (call_script, "script_change_armor", ":second_id", "itm_leather_gauntlet"),
+           (call_script, "script_change_armor", ":second_id", "itm_leather_boots"),
 
            (agent_set_hit_points, ":first_id", 100, 0),
            (agent_set_hit_points, ":second_id", 100, 0),

@@ -1,4 +1,4 @@
-129
+132
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -49,6 +49,7 @@ qstr_^ ^
 qstr_/ /
 qstr_{reg5}/1000_gold_rob {reg5}/1000_gold_robbed.
 qstr_+50_gold_for_Woodcut +50_gold_for_Woodcutting_Work
+qstr_You_can_t_do_it_whil You_can't_do_it_while_in_queue
 qstr_{reg6}/30_cooked. {reg6}/30_cooked.
 qstr_You_ve_been_paid_{re You've_been_paid_{reg5}_denars_for_your_cooking_work.
 qstr_You_ve_been_paid_500 You've_been_paid_500_denars_for_repairing_structures.
@@ -88,7 +89,7 @@ qstr_You_opened_the_door_ You_opened_the_door_from_room:_{reg1}
 qstr_You_closed_the_door_f You_closed_the_door_from_house:_{reg1}
 qstr_You_opened_the_door_f You_opened_the_door_from_house:_{reg1}
 qstr_Ask_the_owner_for_ke Ask_the_owner_for_keys_to_access_this_house!
-qstr_You_can_t_do_it_whil You_can't_do_it_while_in_war!
+qstr_You_can_t_do_it_while You_can't_do_it_while_in_war!
 qstr_Ask_the_tavern_keepe Ask_the_tavern_keeper_for_keys_to_access_this_room!
 qstr_SERVER_ADDRESS/serverapi/pd SERVER_ADDRESS/serverapi/pdoorload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&pdoorID={reg1}
 qstr_You_used_the_pickloc You_used_the_picklock_in_{reg5}_chests.
@@ -101,6 +102,8 @@ qstr_+2000_payment_from_t +2000_payment_from_the_Caravan
 qstr_The_Caravan_by_{s2}_ The_Caravan_by_{s2}_was_completed
 qstr_A_caravan_by_{s3}_ha A_caravan_by_{s3}_has_started.
 qstr_A_Caravan_has_starte A_Caravan_has_started,_you_may_kill_{s3}_and_steal_his_goods!
+qstr_You_were_removed_fro You_were_removed_from_the_queue!
+qstr_You_re_now_in_a_queu You're_now_in_a_queue_for_duel!
 qstr_A_duel_is_already_ha A_duel_is_already_happening!
 qstr_Your_faction_s_carav Your_faction's_caravan_was_canceled.
 qstr_The_Caravan_by_{s2}_w The_Caravan_by_{s2}_was_canceled}
