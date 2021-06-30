@@ -13153,6 +13153,7 @@ scripts.extend([
        (ge, ":food_amount", max_food_amount),
        (agent_get_player_id, ":player_id", ":agent_id"),
        (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@You are full enough!"),
+       (multiplayer_send_int_to_player, ":player_id", server_event_play_sound, "snd_failure"),
     (else_try),
     (call_script, "script_cf_agent_consume_item", ":agent_id", ":item_id", 1),
     (agent_get_player_id, ":player_id", ":agent_id"),
