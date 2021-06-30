@@ -355,6 +355,9 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
         (multiplayer_send_2_int_to_player, "$second_dueler", server_event_script_message_set_color, script_message_color),
     
         (player_get_agent_id, ":winner", "$second_dueler"),
+          (try_for_range, ":slot", 1, 5),
+            (agent_equip_item, ":winner", -1, ":slot"),
+           (try_end),
         (player_set_slot, "$second_dueler", slot_player_first_spawn_occured, 0),
         (call_script, "script_pkjs_load_gear", ":winner"),
         (call_script, "script_player_adjust_gold", "$second_dueler", 350, 1),
@@ -371,6 +374,9 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
         (multiplayer_send_2_int_to_player, "$first_dueler", server_event_script_message_set_color, script_message_color),
     
         (player_get_agent_id, ":winner", "$first_dueler"),
+          (try_for_range, ":slot", 1, 5),
+            (agent_equip_item, ":winner", -1, ":slot"),
+           (try_end),
         (player_set_slot, "$first_dueler", slot_player_first_spawn_occured, 0),
         (call_script, "script_pkjs_load_gear", ":winner"),
         (call_script, "script_player_adjust_gold", "$first_dueler", 350, 1),
