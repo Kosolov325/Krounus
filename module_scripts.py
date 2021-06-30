@@ -13148,6 +13148,12 @@ scripts.extend([
     (agent_is_alive, ":agent_id"),
     (agent_get_action_dir, ":direction", ":agent_id"),
     (eq, ":direction", 0),
+    (try_begin),
+       (agent_get_slot, ":food_amount", ":agent_id", slot_agent_food_amount),
+       (ge, ":food_amount", max_food_amount),
+       (agent_get_player_id, ":player_id", ":agent_id"),
+       (multiplayer_send_string_to_player,":player_id", server_event_script_message, "@You are full enough!"),
+    (else_try),
     (call_script, "script_cf_agent_consume_item", ":agent_id", ":item_id", 1),
     (agent_get_player_id, ":player_id", ":agent_id"),
     (try_begin), #koso
@@ -13179,6 +13185,7 @@ scripts.extend([
     (agent_set_slot, ":agent_id", slot_agent_food_amount, ":food_amount"),
     (player_is_active, ":player_id"),
     (multiplayer_send_3_int_to_player, ":player_id", server_event_agent_set_slot, ":agent_id", slot_agent_food_amount, ":food_amount"),
+    (try_end),
     ]),
 
   ("check_agent_health", # server: check for armor encumbrance, poison, and passive healing effects
