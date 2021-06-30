@@ -353,7 +353,10 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
         (multiplayer_send_2_int_to_player, "$second_dueler", server_event_script_message_set_color, new_quest),
         (multiplayer_send_string_to_player, "$second_dueler", server_event_script_message, "@You've won the duel! +350 denars was added to your pouch."),
         (multiplayer_send_2_int_to_player, "$second_dueler", server_event_script_message_set_color, script_message_color),
-        (call_script, "script_pkjs_load_player", "$second_dueler"),
+    
+        (player_get_agent_id, ":winner", "$second_dueler"),
+        (player_set_slot, "$second_dueler", slot_player_first_spawn_occured, 0),
+        (call_script, "script_pkjs_load_gear", ":winner"),
         (call_script, "script_player_adjust_gold", "$second_dueler", 350, 1),
      (else_try),
         (eq, ":duel", 2),
@@ -365,7 +368,10 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
         (multiplayer_send_2_int_to_player, "$first_dueler", server_event_script_message_set_color, new_quest),
         (multiplayer_send_string_to_player, "$first_dueler", server_event_script_message, "@You've won the duel! +350 denars was added to your pouch."),
         (multiplayer_send_2_int_to_player, "$first_dueler", server_event_script_message_set_color, script_message_color),
-        (call_script, "script_pkjs_load_player", "$first_dueler"),
+    
+        (player_get_agent_id, ":winner", "$first_dueler"),
+        (player_set_slot, "$first_dueler", slot_player_first_spawn_occured, 0),
+        (call_script, "script_pkjs_load_gear", ":winner"),
         (call_script, "script_player_adjust_gold", "$first_dueler", 350, 1),
      (try_end),
      (assign,  "$first_dueler", 0),
@@ -1396,13 +1402,15 @@ duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Cu
          (try_begin),
            (player_slot_eq, "$first_dueler", slot_player_dueler, 1),
            (player_slot_eq, "$second_dueler", slot_player_dueler, 2),
-           (player_get_agent_id, ":first_id", "$first_dueler"),
-           (player_get_agent_id, ":second_id", "$second_dueler"),
-           (agent_get_position, pos1, ":first_id"),
-           (agent_get_position, pos2, ":second_id"),
-
            (call_script, "script_pkjs_save_player_and_gear", "$first_dueler"),
            (call_script, "script_pkjs_save_player_and_gear", "$second_dueler"),
+
+           (player_get_agent_id, ":first_id", "$first_dueler"),
+           (player_get_agent_id, ":second_id", "$second_dueler"),
+
+        
+           (agent_get_position, pos1, ":first_id"),
+           (agent_get_position, pos2, ":second_id"),
         
            (agent_get_troop_id, ":ft_id", ":first_id"),
            (agent_get_troop_id, ":st_id", ":second_id"),
@@ -1460,7 +1468,7 @@ duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Cu
            (agent_set_position, ":second_id", pos2),
            (assign, "$duel_starting", 0),
            (assign, "$duel_happening", 1),
-           (assign, "$duel_spawn_timer"),
+           (assign, "$duel_spawn_timer", 0),
          (else_try),
           (assign, "$duel_starting", 0),
           (player_set_slot, "$first_dueler", slot_player_dueler, 0),
