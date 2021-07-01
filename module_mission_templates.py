@@ -399,6 +399,13 @@ agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects f
    [(store_trigger_param_1, ":attacked_agent_id"),
     (store_trigger_param_2, ":attacker_agent_id"),
     (store_trigger_param_3, ":damage_dealt"),
+    (try_begin),
+     (agent_get_player_id, ":attacker_player_id", ":attacker_agent_id"),
+     (agent_get_player_id, ":attacked_player_id", ":attacked_agent_id"),
+     (player_slot_eq, ":attacker_player_id", slot_player_faction_id, "fac_commoners"),
+     (player_slot_eq, ":attacked_player_id", slot_player_faction_id, "fac_commoners"),
+     (set_trigger_result, 0),
+    (else_try),
     (try_begin), # check if damage should bleed through the armor due to unmet requirements
       (agent_slot_ge, ":attacked_agent_id", slot_agent_armor_damage_through, 5),
       (agent_get_slot, ":damage_through_multiplier", ":attacked_agent_id", slot_agent_armor_damage_through),
@@ -494,6 +501,7 @@ agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects f
       (call_script, "script_quest_completed", ":attacker_id", 1, 20000, 0, 0),
      (try_end),
     (try_end), #koso end
+    (try_end),
     ])
 
 item_picked_up = (ti_on_item_picked_up, 0, 0, [], # handle agents picking up an item
@@ -1473,13 +1481,13 @@ duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Cu
              (agent_equip_item, ":second_id", "itm_practice_shield"),
            (try_end),
 
-           (call_script, "script_change_armor", ":first_id", "itm_arena_tunic"),
+           (call_script, "script_change_armor", ":first_id", "itm_linen_tunic"),
            (call_script, "script_change_armor", ":first_id", "itm_leather_gauntlet"),
-           (call_script, "script_change_armor", ":first_id", "itm_leather_boots"),
+           (call_script, "script_change_armor", ":first_id", "itm_wrapping_boots"),
 
-           (call_script, "script_change_armor", ":second_id", "itm_arena_tunic"),
+           (call_script, "script_change_armor", ":second_id", "itm_linen_tunic"),
            (call_script, "script_change_armor", ":second_id", "itm_leather_gauntlet"),
-           (call_script, "script_change_armor", ":second_id", "itm_leather_boots"),
+           (call_script, "script_change_armor", ":second_id", "itm_wrapping_boots"),
 
            (agent_set_hit_points, ":first_id", 100, 0),
            (agent_set_hit_points, ":second_id", 100, 0),
