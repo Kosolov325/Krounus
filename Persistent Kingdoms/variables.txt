@@ -258,6 +258,7 @@ g_presentation_obj_animation_menu_begin
 g_presentation_obj_animation_menu_end
 g_dbg_presentation_overlays_end
 g_dbg_presentation_registers_end
+winner
 g_ibank_qnt
 first_dueler
 second_dueler

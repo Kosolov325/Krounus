@@ -168,8 +168,15 @@ scripts.extend([
       (eq, ":action", pkjs_action_load_gear),
       (assign, ":player_id", reg1),
 
-      (call_script, "script_player_adjust_gold", ":player_id", reg2, 0),
 
+      
+      (call_script, "script_player_adjust_gold", ":player_id", reg2, 0),
+      (try_begin),
+       (eq, ":player_id", "$winner"),
+       (call_script, "script_player_adjust_gold", ":player_id", 350, 1),
+       (assign, "$winner", 0),
+      (try_end),
+     
       (player_get_agent_id, ":agent_id", ":player_id"),
 
       (try_begin),
