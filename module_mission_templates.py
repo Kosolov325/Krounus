@@ -1430,10 +1430,6 @@ duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Cu
         (try_end),
          (eq, "$duel_spawn_timer", 5),
          (try_begin),
-           (player_slot_eq, "$first_dueler", slot_player_dueler, 1),
-           (player_slot_eq, "$second_dueler", slot_player_dueler, 2),
-           (call_script, "script_pkjs_save_player_and_gear", "$first_dueler"),
-           (call_script, "script_pkjs_save_player_and_gear", "$second_dueler"),
 
            (player_get_agent_id, ":first_id", "$first_dueler"),
            (player_get_agent_id, ":second_id", "$second_dueler"),

@@ -615,8 +615,8 @@ str_scene_name_5 Realm_Divided
 str_scene_name_6 Nothern_Star
 str_scene_name_7 Holy_Lands
 str_scene_name_8 Stormlands
-str_scene_name_9 The_North
-str_scene_name_10 Dormash_Mountains
+str_scene_name_9 Dormash_Mountains
+str_scene_name_10 The_North
 str_scene_name_11 Reykjarvik
 str_scene_name_12 Rhadaron
 str_scene_name_13 War_of_the_three_monarchs
