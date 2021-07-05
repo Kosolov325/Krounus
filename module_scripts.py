@@ -11377,10 +11377,10 @@ scripts.extend([
       (try_end),
   ]),
 
-  ("start_duel",
+  ("cf_start_duel",
    [(store_script_param, ":agent_id", 1),
-
     (agent_get_player_id, ":player_id", ":agent_id"),
+    (multiplayer_is_server),
     (try_begin),
       (eq, "$duel_happening", 0),
       (eq, "$duel_starting", 0),

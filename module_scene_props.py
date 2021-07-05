@@ -555,7 +555,7 @@ def spr_process_resource_triggers(script_name, use_string):
       (prop_instance_get_variation_id, ":val1", ":instance_id"),
       (try_begin),
         (eq, ":val1", 100),
-        (call_script, "script_start_duel", ":agent_id"),
+        (call_script, "script_cf_start_duel", ":agent_id"),
       (else_try),
        (neg|scene_prop_slot_ge, ":instance_id", slot_scene_prop_stock_count_update_time, ":time"),
        (call_script, script_name, ":agent_id", ":instance_id", 0),
