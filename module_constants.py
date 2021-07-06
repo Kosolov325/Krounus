@@ -148,7 +148,6 @@ slot_player_quest_task_2                   = 81
 slot_player_quest_task_3                   = 83
 slot_player_quest_settlement               = 84
 slot_player_quest_switch                   = 85
-slot_player_quest_time                  = 86
 
 slot_player_dueler                      = 88
 quest_color_message  = 0xFFF626
@@ -228,10 +227,6 @@ slot_agent_walk_mode                  = 73
 
 #Kosolov 
 slot_agent_reward                    = 74
-slot_agent_druken_time               = 75
-slot_agent_druken                    = 76
-slot_agent_drunk_amount              = 77
-slot_agent_druken_amnt_time          = 78
 slot_agent_hungry_time_damage        = 0
 slot_agent_hungry_time               = 0
 ########################################################

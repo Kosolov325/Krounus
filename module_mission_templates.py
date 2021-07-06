@@ -297,6 +297,7 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
     (try_end),
 
     (try_begin),
+     (neg|agent_is_non_player, ":dead_agent_id"),
      (player_slot_eq, ":player_id", slot_player_dueler, 0),
      (player_slot_eq, ":player_id", slot_player_quest, 6),
      (agent_get_player_id, ":killer_id", ":killer_agent_id"),
@@ -336,6 +337,7 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
     (multiplayer_is_server),
 
     (try_begin),
+     (neg|agent_is_non_player, ":dead_agent_id"),
      (player_slot_gt, ":player_id", slot_player_dueler, 0),
      (agent_set_slot, ":dead_agent_id", slot_agent_died_normally, 1),
      (agent_set_slot, ":dead_agent_id", slot_agent_cannot_attack, 0),
@@ -355,11 +357,12 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
         (multiplayer_send_2_int_to_player, "$second_dueler", server_event_script_message_set_color, script_message_color),
     
         (player_get_agent_id, ":winner", "$second_dueler"),
-          (try_for_range, ":slot", 1, 5),
-            (agent_equip_item, ":winner", -1, ":slot"),
-           (try_end),
+            (agent_equip_item, ":winner", -1),
+            (agent_equip_item, ":winner", -1),
+            (agent_equip_item, ":winner", -1),
+            (agent_equip_item, ":winner", -1),
         (player_set_slot, "$second_dueler", slot_player_first_spawn_occured, 0),
-        (assign, "$winner", ":winner"),
+        (assign, "$winner", "$second_dueler"),
         (call_script, "script_pkjs_load_gear", ":winner"),
      (else_try),
         (eq, ":duel", 2),
@@ -374,11 +377,12 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
         (multiplayer_send_2_int_to_player, "$first_dueler", server_event_script_message_set_color, script_message_color),
     
         (player_get_agent_id, ":winner", "$first_dueler"),
-          (try_for_range, ":slot", 1, 5),
-            (agent_equip_item, ":winner", -1, ":slot"),
-           (try_end),
-        (player_set_slot, "$first_dueler", slot_player_first_spawn_occured, 0),
-         (assign, "$winner", ":winner"),
+            (agent_equip_item, ":winner", -1),
+            (agent_equip_item, ":winner", -1),
+            (agent_equip_item, ":winner", -1),
+            (agent_equip_item, ":winner", -1),
+         (player_set_slot, "$first_dueler", slot_player_first_spawn_occured, 0),
+         (assign, "$winner", "$first_dueler"),
         (call_script, "script_pkjs_load_gear", ":winner"),
      (try_end),
      (assign,  "$first_dueler", 0),
@@ -400,6 +404,7 @@ agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects f
     (store_trigger_param_2, ":attacker_agent_id"),
     (store_trigger_param_3, ":damage_dealt"),
     (try_begin),
+     (neg|agent_is_non_player, ":attacked_agent_id"),
      (agent_get_player_id, ":attacker_player_id", ":attacker_agent_id"),
      (agent_get_player_id, ":attacked_player_id", ":attacked_agent_id"),
      (player_slot_eq, ":attacker_player_id", slot_player_faction_id, "fac_commoners"),
@@ -1327,22 +1332,6 @@ skybox_update_interval = (5, 0, 0, [], [
   (call_script, "script_skybox_send_info_to_players"),
 ])
 
-#koso
-agent_is_druken = (1, 0, 0, [],
-      [
-        (try_for_players, ":player_id"),
-           (player_is_active,":player_id"),
-           (player_get_agent_id, ":agent_id", ":player_id"),
-           (gt, ":agent_id", -1),
-           (agent_is_alive, ":agent_id"),
-           (try_begin),
-             (agent_slot_gt, ":agent_id", slot_agent_drunk_amount, 0),
-             (call_script, "script_agent_druken_amount", ":player_id", ":agent_id"),
-           (try_end),
-           (agent_slot_eq, ":agent_id", slot_agent_druken, 1),
-           (call_script, "script_agent_is_druken", ":player_id", ":agent_id"),
-          (try_end),
-              ])
 
 server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_messages",1),],#Custom server announcements system
        [
@@ -1382,20 +1371,6 @@ server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_message
             (val_add,"$server_message",1),             
         (try_end),
          ])
-
-new_quest_auto = (1, 0, 0, [],
-   [
-    (try_for_players, ":players"),
-      (player_is_active, ":players"),
-      (player_slot_eq, ":players", slot_player_quest, 0),
-      (player_get_slot, ":time", ":players", slot_player_quest_time),
-      (val_add, ":time", 1),
-      (player_set_slot, ":players", slot_player_quest_time, ":time"),
-      (eq, ":time", 60),
-      (call_script, "script_new_quest", ":players"),
-      (player_set_slot, ":players", slot_player_quest_time, 0),
-    (try_end),
-           ])
 
 new_quest = (60, 0, 0, [],
    [
@@ -1576,12 +1551,10 @@ def common_triggers(self):
     skybox_update_interval,
 
     #kosolov
-    agent_is_druken,
     server_announces, 
     agent_hungry_system,
     save_ibank,
     new_quest,
-    new_quest_auto,
     duel_starting,
     ]
 

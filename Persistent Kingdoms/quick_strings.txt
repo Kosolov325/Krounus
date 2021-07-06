@@ -1,4 +1,4 @@
-139
+138
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -117,7 +117,6 @@ qstr_SERVER_ADDRESS/serverapi/ib SERVER_ADDRESS/serverapi/ibankload?serverID=SER
 qstr_You_ve_been_paid_20_ You've_been_paid_20_denars_for_healing_others.
 qstr_{reg5}/30_fished. {reg5}/30_fished.
 qstr_You_are_full_enough! You_are_full_enough!
-qstr_That_s..._a_lot_of_a That's..._a_lot_of_alcohol.._You_dont_feel_very..._well...
 qstr_[E]_Could_not_get_on [E]_Could_not_get_one_or_more_skybox_prop_instances!
 qstr_Time:_Day Time:_Day
 qstr_Time:_Sunrise Time:_Sunrise
