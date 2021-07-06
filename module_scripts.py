@@ -352,7 +352,6 @@ scripts.extend([
         
        (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_owner, reg2),
        (scene_prop_set_slot, ":instance_id", slot_scene_prop_loaded, 1),
-     (try_end),
      (else_try),
       (eq, ":action", action_faction_load),
        (try_begin),

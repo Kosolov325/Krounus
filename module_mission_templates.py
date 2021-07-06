@@ -1394,6 +1394,7 @@ save_stuff = (60, 0, 0, [],
      (gt, "$g_ibank_np_qnt", 0),
      (call_script, "script_save_ibank"),
     (try_end),
+    
     (try_begin),
       (call_script, "script_save_facs"),
     (try_end),
@@ -1563,7 +1564,7 @@ def common_triggers(self):
     #kosolov
     server_announces, 
     agent_hungry_system,
-    save_ibank,
+    save_stuff,
     new_quest,
     duel_starting,
     ]
