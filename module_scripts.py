@@ -17238,7 +17238,11 @@ def chest_load_out(load_out_id, *item_lists):
       for i, item_id in enumerate(item_lists[0]))
   result.append((else_try))
   return lazy.block(result)
-    
+
+def random_pick(load_out_id, *item_list):
+   result = [(eq, ":load_out_id", load_out_id)]
+    if len(item_lists) > 1:
+    result.extend([(try_begin)])
 scripts.extend([
 
   ("scene_fill_chests_starting_inventory",
@@ -17325,7 +17329,10 @@ scripts.extend([
           ["itm_full_helm", "itm_scale_armor", "itm_iron_greaves", "itm_scale_gauntlets", "itm_two_handed_cleaver"],
           ["itm_vaegir_mask", "itm_vaegir_elite_armor", "itm_mail_boots", "itm_scale_gauntlets", "itm_two_handed_battle_axe"],
           ["itm_bishop_helm", "itm_bishop_armor", "itm_bishop_chausses", "itm_bishop_gloves", "itm_bishop_mitre", "itm_bishop_crosier"]),
-
+        chest_load_out(120, ["itm_wood_block", "itm_branch"] * 2),
+        chest_load_out(121, ["itm_iron_ore"] * 3),
+        chest_load_out(122, ["itm_flour_sack", "itm_wheat_sheaf"], * 2),
+        
         (assign, reg0, ":load_out_id"),
         (display_message, "str_error_load_out_id_reg0_not_defined"),
       (try_end),
