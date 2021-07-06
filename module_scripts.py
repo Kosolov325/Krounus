@@ -168,16 +168,14 @@ scripts.extend([
       (eq, ":action", pkjs_action_load_gear),
       (assign, ":player_id", reg1),
 
+       (call_script, "script_player_adjust_gold", ":player_id", reg2, 0),
 
-      
       (try_begin),
        (eq, ":player_id", "$winner"),
-       (call_script, "script_player_adjust_gold", ":player_id", reg2 + 350, 1),
+       (call_script, "script_player_adjust_gold", ":player_id", 350, 1),
        (assign, "$winner", 0),
-      (else_try),
-       (call_script, "script_player_adjust_gold", ":player_id", reg2, 0),
       (try_end),
-     
+      
       (player_get_agent_id, ":agent_id", ":player_id"),
 
       (try_begin),
@@ -354,6 +352,17 @@ scripts.extend([
         
        (scene_prop_set_slot, ":instance_id", slot_scene_prop_pdoor_owner, reg2),
        (scene_prop_set_slot, ":instance_id", slot_scene_prop_loaded, 1),
+     (try_end),
+     (else_try),
+      (eq, ":action", action_faction_load),
+       (try_begin),
+         (eq, reg3, 1),
+         (faction_set_name, reg1, s0),
+         (faction_set_color, reg1, s1),
+         (faction_set_slot, reg1, slot_faction_banner_mesh, reg2),
+         (call_script, "script_redraw_castle_banners", redraw_faction_banners, reg1),
+       (try_end),
+       (faction_set_slot, reg1, slot_faction_loaded, 1),
      (try_end),
    ]),
 
@@ -12082,6 +12091,29 @@ scripts.extend([
        (try_end),
      (try_end),
      ]),
+
+  ("load_facs",
+   [
+    (try_for_range, ":faction_id", castle_factions_begin, factions_end),
+      (faction_slot_eq, ":faction_id", slot_faction_is_active, 1),
+      (faction_slot_eq, ":faction_id", slot_faction_loaded, 0),
+      (assign, reg2, ":faction_id"),
+      (send_message_to_url, pkjs_script_server + "/factionLoad" + pkjs_querystring + "&factionid={reg2}"),
+    (try_end),
+    ]),
+
+  ("save_facs",
+      [
+    (try_for_range, ":faction_id", castle_factions_begin, factions_end),
+      (faction_slot_eq, ":faction_id", slot_faction_is_active, 1),
+      (faction_slot_eq, ":faction_id", slot_faction_loaded, 1),
+      (assign, reg0, ":faction_id"),
+      (faction_get_slot, reg1, ":faction_id", slot_faction_banner_mesh),
+      (str_store_faction_name, s0, ":faction_id"),
+      (faction_get_color, s1, ":faction_id"),
+      (send_message_to_url, pkjs_script_server + "/factionSave" + pkjs_querystring + "&factionid={reg0}&name{s0}&mesh{reg1}&color{s1}"),
+    (try_end),
+    ]),
      
   ("cf_use_inventory", # server: reply with inventory contents of a scene prop when requested by a player
    [(store_script_param, ":agent_id", 1), # must be valid
@@ -17239,10 +17271,15 @@ def chest_load_out(load_out_id, *item_lists):
   result.append((else_try))
   return lazy.block(result)
 
-def random_pick(load_out_id, *item_list):
-   result = [(eq, ":load_out_id", load_out_id)]
-    if len(item_lists) > 1:
-    result.extend([(try_begin)])
+#rabdomoic pick kosolov
+def random_pick(load_out_id, item_lists, qnt):
+  result = [(eq, ":load_out_id", load_out_id)]
+  for i in range(qnt):
+    for item_id in sorted(item_lists):
+     result.extend([(scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + i, item_id)]) 
+  result.append((else_try))
+  return lazy.block(result)
+
 scripts.extend([
 
   ("scene_fill_chests_starting_inventory",
@@ -17261,7 +17298,7 @@ scripts.extend([
       (prop_instance_get_variation_id_2, ":load_out_id", ":instance_id"),
       (gt, ":load_out_id", 0),
       (try_begin),
-
+    
         chest_load_out(1, ["itm_bread"] * 3, ["itm_bread"] * 5, ["itm_cooked_fish"] * 4, ["itm_cooked_meat"] * 2),
         chest_load_out(2, ["itm_bread"] * 10, ["itm_bread"] * 16, ["itm_cooked_fish"] * 7, ["itm_cooked_meat"] * 6, ["itm_carrot"] * 3),
         chest_load_out(3, ["itm_bread"] * 5 + ["itm_cooked_fish"] * 5 + ["itm_cooked_meat"] * 5 + ["itm_meat_pie"] * 3,
@@ -17329,12 +17366,36 @@ scripts.extend([
           ["itm_full_helm", "itm_scale_armor", "itm_iron_greaves", "itm_scale_gauntlets", "itm_two_handed_cleaver"],
           ["itm_vaegir_mask", "itm_vaegir_elite_armor", "itm_mail_boots", "itm_scale_gauntlets", "itm_two_handed_battle_axe"],
           ["itm_bishop_helm", "itm_bishop_armor", "itm_bishop_chausses", "itm_bishop_gloves", "itm_bishop_mitre", "itm_bishop_crosier"]),
-        chest_load_out(120, ["itm_wood_block", "itm_branch"] * 2),
+        chest_load_out(120, ["itm_wood_block", "itm_branch"] * 2), #koso
         chest_load_out(121, ["itm_iron_ore"] * 3),
-        chest_load_out(122, ["itm_flour_sack", "itm_wheat_sheaf"], * 2),
-        
+        chest_load_out(122, ["itm_flour_sack", "itm_wheat_sheaf"] * 2),
+        random_pick(123, ["itm_leather_cap", "itm_rusty_sword", "itm_chipped_falchion", "itm_bent_lance", "itm_studded_leather_coat", "itm_heraldic_mail_with_tabard"] +
+        ["itm_mace_2", "itm_leather_armor", "itm_morningstar", "itm_leather_jerkin", "itm_club_with_spike_head", "itm_sword_medieval_b_small"] +
+        ["itm_medium_mercenary_armor", "itm_bishop_gloves", "itm_gauntlets", "itm_fighting_pick", "itm_sword_medieval_d_long", "itm_demi_gauntlets"] +
+        ["itm_bardiche", "itm_faradon_warhammer", "itm_faradon_iberianmace", "itm_faradon_twohanded1", "itm_danish_greatsword"] +
+        ["itm_iron_ore", "itm_lock_pick", "itm_repair_hammer", "itm_horse_armor", "itm_saddle_horse", "itm_warhorn", "itm_brigandine_red"] +
+        ["itm_dejawolf_kettlehat_1", "itm_north_bascinet", "itm_tab_shield_small_round_b", "itm_silver_nugget", "itm_silver_bar"] +
+        ["itm_hatchet", "itm_rus_helm", "itm_hide_boots", "itm_old_hide_boots", "itm_light_mercenary_armor", "itm_medium_mercenary_armor"] +
+        ["itm_heavy_mercenary_armor", "itm_gold_nugget", "itm_leather_roll", "itm_flour_sack"], 3),
         (assign, reg0, ":load_out_id"),
         (display_message, "str_error_load_out_id_reg0_not_defined"),
+      (try_end),
+      (eq, ":load_out_id", 123), #koso
+      (store_random_in_range, ":prob", 0, 2),
+      (try_begin),
+        (eq, ":prob", 1),
+        (prop_instance_get_starting_position, pos0, ":instance_id"),
+        (prop_instance_get_position, pos1, ":instance_id"),
+        (eq, pos0, pos1),
+        (position_move_y, pos1, -10000),
+        (position_move_z, pos1, -10000),
+        (prop_instance_set_position, ":instance_id", pos1),
+      (else_try),
+        (eq, ":prob", 0),
+        (prop_instance_get_starting_position, pos0, ":instance_id"),
+        (prop_instance_get_position, pos1, ":instance_id"),
+        (neq, pos0, pos1),
+        (prop_instance_set_position, ":instance_id", pos0),
       (try_end),
     (try_end),
     ]),

@@ -35,6 +35,9 @@ action_ibank_save                           = 12
 action_ibank_load                           = 13
 action_pdoor_save                           = 15
 action_pdoor_load                           = 16
+action_faction_save                         = 18
+action_faction_load                         = 19
+
 ## PK.js SCRIPTS END ##
 
 ########################################################
@@ -426,6 +429,7 @@ slot_faction_poll_type                = 25 # listed below, starting with poll_ty
 slot_faction_poll_value_1             = 26
 slot_faction_poll_value_2             = 27
 slot_faction_poll_target_unique_id    = 28 # when targeting a player, store their unique id to prevent accidentally harming another player reusing their id after they quit
+slot_faction_loaded                   = 29 #koso
 
 poll_type_change_scene                = 0
 poll_type_kick_player                 = 1

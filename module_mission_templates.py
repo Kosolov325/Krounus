@@ -159,6 +159,7 @@ before_mission_start_setup = (ti_before_mission_start, 0, 0, [], # set up basic 
     (call_script, "script_scene_set_day_time"),
     (call_script, "script_scene_setup_factions_castles"),
     (call_script, "script_setup_all_linked_scene_props"),
+    (call_script, "script_load_facs"), #koso
     (try_begin),
       (multiplayer_is_server),
       (call_script, "script_setup_castle_money_chests"),
@@ -452,8 +453,11 @@ agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects f
     
     (call_script, "script_log_hit", ":attacked_agent_id", ":attacker_agent_id", ":damage_dealt", reg0, 0),
     (try_begin), #koso start
+     (neg|multiplayer_is_server),
      (neg|agent_is_non_player, ":attacked_agent_id"),
      (neg|agent_is_non_player, ":attacker_agent_id"),
+     (agent_is_human, ":attacker_agent_id"),
+     (agent_is_human, ":attacked_agent_id"),
      (agent_get_player_id, ":attacker_id", ":attacker_agent_id"),
      (agent_get_player_id, ":attacked_id", ":attacked_agent_id"),
     (try_begin),
@@ -1376,6 +1380,7 @@ new_quest = (60, 0, 0, [],
    [
     (val_add, "$g_server_running_time", 1),
     (eq,  "$g_server_running_time", 60),
+    (call_script, "script_scene_fill_chests_starting_inventory"),
     (try_for_players, ":players"),
      (player_is_active, ":players"),
       (player_slot_eq, ":players", slot_player_quest_switch, 4),
@@ -1383,10 +1388,15 @@ new_quest = (60, 0, 0, [],
     (try_end),
     (assign, "$g_server_running_time", 0),
            ])
-save_ibank = (60, 0, 0, [],
+save_stuff = (60, 0, 0, [],
    [
-    (gt, "$g_ibank_np_qnt", 0),
-    (call_script, "script_save_ibank"),
+    (try_begin),
+     (gt, "$g_ibank_np_qnt", 0),
+     (call_script, "script_save_ibank"),
+    (try_end),
+    (try_begin),
+      (call_script, "script_save_facs"),
+    (try_end),
            ])
 
 duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Custom server announcements system
