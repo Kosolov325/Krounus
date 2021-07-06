@@ -212,6 +212,7 @@ after_mission_start_setup = (ti_after_mission_start, 0, 0, [], # spawn and move 
     ## PK.js SCRIPTS END ##
 
     (call_script, "script_load_facs"), #koso
+    
     #Koso announcements messages
     (assign, "$server_message_interval", 5),
     (assign, "$allow_server_messages", 1),

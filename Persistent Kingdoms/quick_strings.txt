@@ -114,7 +114,7 @@ qstr_You_ve_opened_a_Bank You've_opened_a_Bank_account_with_success!_Ibank_id:_{
 qstr_You_have_to_register You_have_to_register_a_Bank_account_on_any_bank_first
 qstr_SERVER_ADDRESS/serverapi/i SERVER_ADDRESS/serverapi/ibanksave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&ibankid={reg0}&ibankit={s1}
 qstr_SERVER_ADDRESS/serverapi/f SERVER_ADDRESS/serverapi/factionLoad?serverID=SERVER_ID&apiKey=SERVER_API_KEY&factionid={reg2}
-qstr_SERVER_ADDRESS/serverapi/fa SERVER_ADDRESS/serverapi/factionSave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&factionid={reg0}&name{s0}&mesh{reg1}&color{s1}
+qstr_SERVER_ADDRESS/serverapi/fa SERVER_ADDRESS/serverapi/factionSave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&factionid={reg0}&mesh={reg1}&name={s0}&color={s1}
 qstr_SERVER_ADDRESS/serverapi/ib SERVER_ADDRESS/serverapi/ibankload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&ibankid={reg1}
 qstr_You_ve_been_paid_20_ You've_been_paid_20_denars_for_healing_others.
 qstr_{reg5}/30_fished. {reg5}/30_fished.
