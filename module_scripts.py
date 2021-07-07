@@ -12115,7 +12115,7 @@ scripts.extend([
       (str_store_faction_name, s0, ":faction_id"),
       (str_encode_url, s0),
       (assign, reg2, 1),
-      (send_message_to_url, pkjs_script_server + "/factionSave" + pkjs_querystring + "&factionid={reg0}&mesh={reg1}&name={s0}&saved={reg2}"),
+      (send_message_to_url, pkjs_script_server + "/factionSave" + pkjs_querystring + "&factionID={reg0}&Mesh={reg1}&Name={s0}&Saved={reg2}"),
     (try_end),
     ]),
      
