@@ -1377,14 +1377,16 @@ server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_message
         (try_end),
          ])
 
-clock = (60, 0, 0, [(multiplayer_is_server)],
+clock = (60, 0, 0, [],
    [
     (try_begin),
+     (multiplayer_is_server),
      (gt, "$g_ibank_np_qnt", 0),
      (call_script, "script_save_ibank"),
     (try_end),
     
     (try_begin),
+      (multiplayer_is_server),
       (call_script, "script_save_facs"),
     (try_end),
 
