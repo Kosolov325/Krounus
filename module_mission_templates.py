@@ -1397,6 +1397,7 @@ save_stuff = (60, 0, 0, [],
     (try_end),
     
     (try_begin),
+      (server_add_message_to_log, "@Saving"),
       (call_script, "script_save_facs"),
     (try_end),
            ])

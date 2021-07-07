@@ -1,4 +1,4 @@
-143
+141
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -11,8 +11,6 @@ qstr_Player_{s1}___GUID:_ Player_{s1}__(GUID:_{reg4})_withdrew_{reg2}_gold._{reg
 qstr_Deposited_{reg2}_gol Deposited_{reg2}_gold._You_now_have_{reg3}_gold_in_the_bank.
 qstr_Player_{s1}___GUID:_{ Player_{s1}__(GUID:_{reg5})_deposited_{reg2}_gold._{reg3}_gold_in_the_bank.
 qstr_{s0} {s0}
-qstr_Loading_{reg1} Loading_{reg1}
-qstr_{reg1} {reg1}
 qstr_SERVER_ADDRESS/serve SERVER_ADDRESS/serverapi/ping?serverID=SERVER_ID&apiKey=SERVER_API_KEY
 qstr_Attempting_to_connec Attempting_to_connect_with_the_script_server.
 qstr_SERVER_ADDRESS/server SERVER_ADDRESS/serverapi/loadplayer?serverID=SERVER_ID&apiKey=SERVER_API_KEY&playerID={reg0}&guid={reg1}&ip={s0}&name={s1}&admin
@@ -116,7 +114,6 @@ qstr_You_ve_opened_a_Bank You've_opened_a_Bank_account_with_success!_Ibank_id:_{
 qstr_You_have_to_register You_have_to_register_a_Bank_account_on_any_bank_first
 qstr_SERVER_ADDRESS/serverapi/i SERVER_ADDRESS/serverapi/ibanksave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&ibankid={reg0}&ibankit={s1}
 qstr_SERVER_ADDRESS/serverapi/f SERVER_ADDRESS/serverapi/factionLoad?serverID=SERVER_ID&apiKey=SERVER_API_KEY&factionid={reg2}
-qstr_{reg0}{reg1}{s0}{s1} {reg0}{reg1}{s0}{s1}
 qstr_SERVER_ADDRESS/serverapi/fa SERVER_ADDRESS/serverapi/factionSave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&factionid={reg0}&mesh={reg1}&name={s0}&color={s1}
 qstr_SERVER_ADDRESS/serverapi/ib SERVER_ADDRESS/serverapi/ibankload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&ibankid={reg1}
 qstr_You_ve_been_paid_20_ You've_been_paid_20_denars_for_healing_others.
@@ -141,4 +138,5 @@ qstr_Smith_weaponry_and_a Smith_weaponry_and_armors_in_the_local_shops_and_repai
 qstr_Keep_your_important_ Keep_your_important_items_safe_in_the_Item_Banking._Go_to_the_main_bank_of_the_map,_usually_close_to_the_commoner_spawn_to_access_it.
 qstr_Commoner_drop_10%_of Commoner_drop_10%_of_their_money_pouch,_while_in_faction_members_drop_half_of_their_money._Consider_that_when_you_go_out_serfing.
 qstr_You_feel_very_hungry You_feel_very_hungry...
+qstr_Saving Saving
 qstr_Duel_starting_in_{re Duel_starting_in_{reg3}_seconds!
