@@ -1384,11 +1384,8 @@ clock = (60, 0, 0, [],
      (gt, "$g_ibank_np_qnt", 0),
      (call_script, "script_save_ibank"),
     (try_end),
-    
-    (try_begin),
-      (multiplayer_is_server),
-      (call_script, "script_save_facs"),
-    (try_end),
+
+    (call_script, "script_save_facs"),
 
     (val_add, "$g_server_running_time", 1),
     (eq,  "$g_server_running_time", 60),
