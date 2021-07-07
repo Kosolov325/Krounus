@@ -359,6 +359,7 @@ scripts.extend([
        (try_begin),
          (eq, ":saved", 1),
          (faction_set_name, ":faction_id", s0),
+         (faction_set_slot, ":faction_id", slot_faction_name_is_custom, 1),
          (faction_set_slot, ":faction_id", slot_faction_banner_mesh, reg2),
          (call_script, "script_faction_set_color_from_banner", ":faction_id", reg2),
          (call_script, "script_faction_redraw_heraldic_items", ":faction_id"),
