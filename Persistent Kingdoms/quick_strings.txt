@@ -1,4 +1,4 @@
-140
+141
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -114,6 +114,7 @@ qstr_You_ve_opened_a_Bank You've_opened_a_Bank_account_with_success!_Ibank_id:_{
 qstr_You_have_to_register You_have_to_register_a_Bank_account_on_any_bank_first
 qstr_SERVER_ADDRESS/serverapi/i SERVER_ADDRESS/serverapi/ibanksave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&ibankid={reg0}&ibankit={s1}
 qstr_SERVER_ADDRESS/serverapi/f SERVER_ADDRESS/serverapi/factionLoad?serverID=SERVER_ID&apiKey=SERVER_API_KEY&factionid={reg2}
+qstr_{reg0}{reg1}{s0}{s1} {reg0}{reg1}{s0}{s1}
 qstr_SERVER_ADDRESS/serverapi/fa SERVER_ADDRESS/serverapi/factionSave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&factionid={reg0}&mesh={reg1}&name={s0}&color={s1}
 qstr_SERVER_ADDRESS/serverapi/ib SERVER_ADDRESS/serverapi/ibankload?serverID=SERVER_ID&apiKey=SERVER_API_KEY&instanceid={reg0}&ibankid={reg1}
 qstr_You_ve_been_paid_20_ You've_been_paid_20_denars_for_healing_others.

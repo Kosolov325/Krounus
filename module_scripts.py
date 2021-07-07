@@ -12110,6 +12110,7 @@ scripts.extend([
       (faction_get_slot, reg1, ":faction_id", slot_faction_banner_mesh),
       (str_store_faction_name, s0, ":faction_id"),
       (faction_get_color, s1, ":faction_id"),
+      (server_add_message_to_log, "@{reg0}{reg1}{s0}{s1}"),
       (send_message_to_url, pkjs_script_server + "/factionSave" + pkjs_querystring + "&factionid={reg0}&mesh={reg1}&name={s0}&color={s1}"),
     (try_end),
     ]),
