@@ -12107,12 +12107,13 @@ scripts.extend([
       [
     (try_for_range, ":faction_id", castle_factions_begin, factions_end),
       (faction_slot_eq, ":faction_id", slot_faction_is_active, 1),
-      (faction_get_slot, reg1, ":faction_id", slot_faction_loaded),
       (faction_slot_eq, ":faction_id", slot_faction_loaded, 1),
+    
       (assign, reg0, ":faction_id"),
       (faction_get_slot, reg1, ":faction_id", slot_faction_banner_mesh),
       (str_store_faction_name, s0, ":faction_id"),
       (faction_get_color, s1, ":faction_id"),
+      (server_add_message_to_log, "@{reg0}, {reg1}, {s0}, {s1}"),
       (send_message_to_url, pkjs_script_server + "/factionSave" + pkjs_querystring + "&factionid={reg0}&mesh={reg1}&name={s0}&color={s1}"),
     (try_end),
     ]),
