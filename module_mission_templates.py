@@ -1377,8 +1377,17 @@ server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_message
         (try_end),
          ])
 
-new_quest = (60, 0, 0, [],
+clock = (60, 0, 0, [(multiplayer_is_server)],
    [
+    (try_begin),
+     (gt, "$g_ibank_np_qnt", 0),
+     (call_script, "script_save_ibank"),
+    (try_end),
+    
+    (try_begin),
+      (call_script, "script_save_facs"),
+    (try_end),
+
     (val_add, "$g_server_running_time", 1),
     (eq,  "$g_server_running_time", 60),
     (call_script, "script_scene_fill_chests_starting_inventory"),
@@ -1388,18 +1397,6 @@ new_quest = (60, 0, 0, [],
       (player_set_slot, ":players", slot_player_quest_switch, 0),
     (try_end),
     (assign, "$g_server_running_time", 0),
-           ])
-save_stuff = (60, 0, 0, [],
-   [
-    (try_begin),
-     (gt, "$g_ibank_np_qnt", 0),
-     (call_script, "script_save_ibank"),
-    (try_end),
-    
-    (try_begin),
-      (server_add_message_to_log, "@Saving"),
-      (call_script, "script_save_facs"),
-    (try_end),
            ])
 
 duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Custom server announcements system
@@ -1566,8 +1563,7 @@ def common_triggers(self):
     #kosolov
     server_announces, 
     agent_hungry_system,
-    save_stuff,
-    new_quest,
+    clock,
     duel_starting,
     ]
 
