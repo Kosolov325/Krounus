@@ -158,6 +158,7 @@ before_mission_start_setup = (ti_before_mission_start, 0, 0, [], # set up basic 
     (call_script, "script_initialize_scene_globals"),
     (call_script, "script_scene_set_day_time"),
     (call_script, "script_scene_setup_factions_castles"),
+    (call_script, "script_load_facs"), #koso
     (call_script, "script_setup_all_linked_scene_props"),
     (try_begin),
       (multiplayer_is_server),
@@ -211,7 +212,6 @@ after_mission_start_setup = (ti_after_mission_start, 0, 0, [], # spawn and move 
     (call_script, "script_pkjs_ping"),
     ## PK.js SCRIPTS END ##
 
-    (call_script, "script_load_facs"), #koso
     
     #Koso announcements messages
     (assign, "$server_message_interval", 5),
