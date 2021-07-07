@@ -365,6 +365,8 @@ scripts.extend([
          (call_script, "script_redraw_castle_banners", redraw_faction_banners, ":faction_id"),
        (try_end),
        (faction_set_slot, ":faction_id", slot_faction_loaded, 1),
+       (faction_get_slot, reg1, ":faction_id", slot_faction_loaded),
+       (server_add_message_to_log, "@{reg1}"),
      (try_end),
    ]),
 
@@ -12108,6 +12110,8 @@ scripts.extend([
       [
     (try_for_range, ":faction_id", castle_factions_begin, factions_end),
       (faction_slot_eq, ":faction_id", slot_faction_is_active, 1),
+      (faction_get_slot, reg1, ":faction_id", slot_faction_loaded),
+      (server_add_message_to_log, "@{reg1}"),
       (faction_slot_eq, ":faction_id", slot_faction_loaded, 1),
       (assign, reg0, ":faction_id"),
       (faction_get_slot, reg1, ":faction_id", slot_faction_banner_mesh),
