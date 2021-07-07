@@ -356,6 +356,7 @@ scripts.extend([
       (eq, ":action", action_faction_load),
       (assign, ":faction_id", reg1),
       (assign, ":saved", reg3),
+      (server_add_message_to_log, "@Loading {reg1}"),
        (try_begin),
          (eq, ":saved", 1),
          (faction_set_name, ":faction_id", s0),
