@@ -11482,6 +11482,12 @@ scripts.extend([
        (try_end),
      (try_end),
       (store_random_in_range, ":quest", 1, 8),
+      (try_begin),
+       (eq, ":quest", 4),
+       (val_add, ":quest", 2),
+       (eq, ":quest", 5),
+       (val_add, ":quest", 1),
+      (try_end),
       (assign, reg1, ":quest"),
       (player_set_slot, ":player_id", slot_player_quest, 0),
       (player_set_slot, ":player_id", slot_player_quest_task_1, 0),
@@ -11533,6 +11539,13 @@ scripts.extend([
 
     (try_begin),
       (store_random_in_range, ":quest", 1, 8),
+      (try_begin),
+       (eq, ":quest", 4),
+       (val_add, ":quest", 2),
+       (eq, ":quest", 5),
+       (val_add, ":quest", 1),
+      (try_end),
+    
       (assign, reg1, ":quest"),
       (player_set_slot, ":player_id", slot_player_quest, 0),
       (player_set_slot, ":player_id", slot_player_quest_task_1, 0),
@@ -12557,13 +12570,20 @@ scripts.extend([
         (agent_get_troop_id, ":troop_id", ":agent_id"),
         (store_skill_level, ":labouring", "skl_labouring", ":troop_id"),
         (try_begin),
-          (this_or_next|neq, ":troop_id", "trp_serf"),#koso
-          (this_or_next|neq,":troop_id", "trp_master_smith"),
-          (this_or_next|neq,":troop_id", "trp_engineer"),
-          (neq, ":troop_id", "trp_craftsman"),
-          (lt, ":labouring", 1),
-          (assign, ":fail", 1),
-          (multiplayer_send_2_int_to_player, ":player_id", server_event_preset_message, "str_craft_not_skilled", preset_message_error),
+         (prop_instance_get_scene_prop_kind, ":kind", ":instance_id"),
+          (try_begin),
+           (eq, ":kind", "spr_pw_hand_cart"),
+           (this_or_next|neq, ":troop_id", "trp_serf"),#koso
+           (this_or_next|neq, ":troop_id", "trp_master_smith"),
+           (this_or_next|neq, ":troop_id", "trp_engineer"),
+           (neq, ":troop_id", "trp_craftsman"),
+           (assign, ":fail", 1),
+           (multiplayer_send_2_int_to_player, ":player_id", server_event_preset_message, "str_craft_not_skilled", preset_message_error),
+          (else_try),
+           (lt, ":labouring", 1),
+           (assign, ":fail", 1),
+           (multiplayer_send_2_int_to_player, ":player_id", server_event_preset_message, "str_craft_not_skilled", preset_message_error),
+          (try_end),
         (try_end),
       (try_end),
       (eq, ":fail", 0),
@@ -17276,6 +17296,26 @@ def chest_load_out(load_out_id, *item_lists):
   result.append((else_try))
   return lazy.block(result)
 
+
+#passive fill koso
+def yuri_guloso(load_out_id, *item_lists):
+  result = [(eq, ":load_out_id", load_out_id)]
+  if len(item_lists) > 1:
+    s = []
+    result.extend([(scene_prop_get_slot, ":count", ":instance_id", slot_scene_prop_inventory_count),
+    (store_add, ":end", ":count", slot_scene_prop_inventory_begin),
+    (try_for_range, ":inv_slot", slot_scene_prop_inventory_begin, ":end")])
+    result.append((scene_prop_get_slot, ":slot", ":instance_id", ":inv_slot"))
+    result.append((eq, ":slot", 0))
+    result.append((s.append(":inv_slot")))
+    result.extend([(try_end)])
+    if len(s) > 1:
+      for item_list in enumerate(item_lists):
+        for j, item_id in enumerate(item_list):
+          result.extend([(scene_prop_set_slot, ":instance_id", s[j], item_id)])
+  result.append((else_try))
+  return lazy.block(result)
+ 
 #rabdomoic pick kosolov
 def random_pick(load_out_id, item_lists, qnt):
   result = [(eq, ":load_out_id", load_out_id)]
@@ -17371,9 +17411,9 @@ scripts.extend([
           ["itm_full_helm", "itm_scale_armor", "itm_iron_greaves", "itm_scale_gauntlets", "itm_two_handed_cleaver"],
           ["itm_vaegir_mask", "itm_vaegir_elite_armor", "itm_mail_boots", "itm_scale_gauntlets", "itm_two_handed_battle_axe"],
           ["itm_bishop_helm", "itm_bishop_armor", "itm_bishop_chausses", "itm_bishop_gloves", "itm_bishop_mitre", "itm_bishop_crosier"]),
-        chest_load_out(120, ["itm_wood_block", "itm_branch"] * 2), #koso
-        chest_load_out(121, ["itm_iron_ore"] * 3),
-        chest_load_out(122, ["itm_flour_sack", "itm_wheat_sheaf"] * 2),
+        yuri_guloso(120, ["itm_wood_block", "itm_branch"] * 2), #koso
+        yuri_guloso(121, ["itm_iron_ore"] * 3),
+        yuri_guloso(122, ["itm_flour_sack", "itm_wheat_sheaf"] * 2),
         random_pick(123, ["itm_leather_cap", "itm_rusty_sword", "itm_chipped_falchion", "itm_bent_lance", "itm_studded_leather_coat", "itm_heraldic_mail_with_tabard"] +
         ["itm_mace_2", "itm_leather_armor", "itm_morningstar", "itm_leather_jerkin", "itm_club_with_spike_head", "itm_sword_medieval_b_small"] +
         ["itm_medium_mercenary_armor", "itm_bishop_gloves", "itm_gauntlets", "itm_fighting_pick", "itm_sword_medieval_d_long", "itm_demi_gauntlets"] +

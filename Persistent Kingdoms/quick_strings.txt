@@ -1,4 +1,4 @@
-140
+138
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -128,8 +128,6 @@ qstr_Your_faction_s_carava Your_faction's_caravan_was_failed..
 qstr_You_sucessuful_stole You_sucessuful_stole_the_caravan_by_player_{s2}
 qstr_You_ve_lost_the_duel You've_lost_the_duel.
 qstr_You_ve_won_the_duel! You've_won_the_duel!_+350_denars_was_added_to_your_pouch.
-qstr_You_killed_{reg5}/15 You_killed_{reg5}/15.
-qstr_{reg5}/5_Shots! {reg5}/5_Shots!
 qstr_Cooking_Repairing_or Cooking,_Repairing_or_Healing_others_now_gives_you_payments.
 qstr_Fishing_now_is_way_m Fishing_now_is_way_more_profitable._Catch_some_fishes_and_cook_them_to_get_paid.
 qstr_You_can_now_duel_on_ You_can_now_duel_on_the_Arena_Grounds._Go_to_the_general_arena_of_the_map,_win_duels,_and_get_some_payment_for_entertaining_the_public!
