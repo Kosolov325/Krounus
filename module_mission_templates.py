@@ -296,9 +296,6 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
             (player_set_team_no, ":player_id", 3),
             (agent_set_slot, ":dead_agent_id", slot_agent_reward, 0),
         (try_end),
-    (try_end),
-
-    (try_begin),
      (neg|agent_is_non_player, ":dead_agent_id"),
      (player_slot_eq, ":player_id", slot_player_dueler, 0),
      (player_slot_eq, ":player_id", slot_player_quest, 6),
@@ -331,14 +328,13 @@ agent_killed = (ti_on_agent_killed_or_wounded, 0, 0, [], # server and clients: h
      (try_end),
     (try_end),
 
-
-
     (call_script, "script_client_check_show_respawn_time_counter", ":dead_agent_id"),
     (call_script, "script_death_cam", ":dead_agent_id"),
     (call_script, "script_apply_consequences_for_agent_death", ":dead_agent_id", ":killer_agent_id"),
     (multiplayer_is_server),
 
     (try_begin),
+     (eq, "$duel_happening", 1),
      (neg|agent_is_non_player, ":dead_agent_id"),
      (player_slot_gt, ":player_id", slot_player_dueler, 0),
      (agent_set_slot, ":dead_agent_id", slot_agent_died_normally, 1),
@@ -1312,15 +1308,16 @@ server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_message
 clock = (60, 0, 0, [],
    [
     (multiplayer_is_server),
+    (val_add, "$g_server_running_time", 1),
+    (eq,  "$g_server_running_time", 60),
+    
     (try_begin),
      (gt, "$g_ibank_np_qnt", 0),
      (call_script, "script_save_ibank"),
     (try_end),
-
+    
     (call_script, "script_save_facs"),
 
-    (val_add, "$g_server_running_time", 1),
-    (eq,  "$g_server_running_time", 60),
     (call_script, "script_scene_fill_chests_starting_inventory"),
     (try_for_players, ":players"),
      (player_is_active, ":players"),
