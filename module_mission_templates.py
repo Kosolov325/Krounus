@@ -643,13 +643,26 @@ player_check_loop = (0, 0, 0.5, # server: check all players to see if any need a
     (try_end),
     ], [])
 
-agent_hungry_system = (1, 0, 0, [],
-  [
-          (try_for_players, ":player_id"),
-           (player_is_active,":player_id"),
-           (player_get_agent_id, ":agent_id", ":player_id"),
-           (gt, ":agent_id", -1),
-           (agent_is_alive, ":agent_id"),
+agent_check_loop = (0, 0, 0.5, # server: loop over all agents, doing all common repetitive checks together for each agent, to minimize the penalty of using try_for_agents
+   [(multiplayer_is_server),
+    (try_begin), # if the loop was not restarted
+      (gt, "$g_loop_agent_last_checked", -2),
+      (assign, ":agent_id", -1),
+      (try_for_agents, ":loop_agent_id"), # find the next agent id greater than the previous checked
+        (eq, ":agent_id", -1),
+        (gt, ":loop_agent_id", "$g_loop_agent_last_checked"),
+        (assign, ":agent_id", ":loop_agent_id"),
+      (try_end),
+      (try_begin),
+        (gt, ":agent_id", -1), # if a next agent id was found
+        (assign, "$g_loop_agent_last_checked", ":agent_id"),
+
+         #Kosolov Health anti "abusing" + Drunk System
+         (try_begin),
+           (neg|agent_is_non_player, ":agent_id"),
+           (agent_is_human, ":agent_id"),
+           (agent_is_alive, ":agent_id"), #koso drunk system
+           (agent_get_player_id, ":player_id", ":agent_id"),
            (try_begin),
              (agent_slot_eq, ":agent_id", slot_agent_food_amount, 0),
              (agent_get_slot, ":hungry_time", ":agent_id", slot_agent_hungry_time_damage),
@@ -690,29 +703,6 @@ agent_hungry_system = (1, 0, 0, [],
                 (agent_set_slot, ":agent_id", slot_agent_hungry_time, 0),
               (try_end),
            (try_end),
-        (try_end),
-          ])
-
-
-agent_check_loop = (0, 0, 0.5, # server: loop over all agents, doing all common repetitive checks together for each agent, to minimize the penalty of using try_for_agents
-   [(multiplayer_is_server),
-    (try_begin), # if the loop was not restarted
-      (gt, "$g_loop_agent_last_checked", -2),
-      (assign, ":agent_id", -1),
-      (try_for_agents, ":loop_agent_id"), # find the next agent id greater than the previous checked
-        (eq, ":agent_id", -1),
-        (gt, ":loop_agent_id", "$g_loop_agent_last_checked"),
-        (assign, ":agent_id", ":loop_agent_id"),
-      (try_end),
-      (try_begin),
-        (gt, ":agent_id", -1), # if a next agent id was found
-        (assign, "$g_loop_agent_last_checked", ":agent_id"),
-
-         #Kosolov Health anti "abusing"
-         (try_begin),
-           (neg|agent_is_non_player, ":agent_id"),
-           (agent_is_human, ":agent_id"),
-           (agent_is_alive, ":agent_id"),
            (store_agent_hit_points, ":hp", ":agent_id", 0),
            (is_between, ":hp", 1, 30),
            (agent_set_slot,  ":agent_id", slot_agent_reward, 1),
@@ -1321,8 +1311,8 @@ server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_message
 
 clock = (60, 0, 0, [],
    [
+    (multiplayer_is_server),
     (try_begin),
-     (multiplayer_is_server),
      (gt, "$g_ibank_np_qnt", 0),
      (call_script, "script_save_ibank"),
     (try_end),
@@ -1503,7 +1493,6 @@ def common_triggers(self):
 
     #kosolov
     server_announces, 
-    agent_hungry_system,
     clock,
     duel_starting,
     ]
