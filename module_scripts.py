@@ -12572,6 +12572,7 @@ scripts.extend([
         (agent_get_troop_id, ":troop_id", ":agent_id"),
         (store_skill_level, ":labouring", "skl_labouring", ":troop_id"),
         (try_begin),
+          (neq, ":troop_id", "trp_serf"),
           (lt, ":labouring", 1),
           (assign, ":fail", 1),
           (multiplayer_send_2_int_to_player, ":player_id", server_event_preset_message, "str_craft_not_skilled", preset_message_error),
