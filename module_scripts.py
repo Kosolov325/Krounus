@@ -17336,6 +17336,7 @@ scripts.extend([
       (scene_prop_get_instance, ":instance_id", ":scene_prop_id", ":instance_no"),
       (prop_instance_get_variation_id_2, ":load_out_id", ":instance_id"),
       (gt, ":load_out_id", 0),
+      (scene_prop_slot_eq, ":instance_id", slot_scene_prop_ibank, 0),
       (try_begin),
         (gt, ":load_out_id", 100),
         (try_begin),
