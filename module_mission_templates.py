@@ -1315,8 +1315,8 @@ duel_starting = (1, 0, 0, [(multiplayer_is_server),(eq,"$duel_starting",1),],#Cu
            (agent_get_troop_id, ":st_id", ":second_id"),
 
            (try_for_range, ":slot", 1, 5),
-            (agent_equip_item, ":first_id", 0, ":slot"),
-            (agent_equip_item, ":second_id", 0, ":slot"),
+            (agent_equip_item, ":first_id", -1, ":slot"),
+            (agent_equip_item, ":second_id", -1, ":slot"),
            (try_end),
         
            (call_script, "script_change_armor", ":first_id", "itm_no_head"),
