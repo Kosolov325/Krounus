@@ -17321,9 +17321,7 @@ def random_pick(load_out_id, item_list, qnt):
   result = [(eq, ":load_out_id", load_out_id)]
   for i in range(qnt):
     item_id = sorted(item_list)
-    I = 0
-    result.extend([(store_random_in_range, I, 0, len(item_list))])
-    result.extend([(scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + i, item_id[I])]) 
+    result.append((scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + i, item_id[i]))
   result.append((else_try))
   return lazy.block(result)
 
