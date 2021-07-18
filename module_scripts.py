@@ -17317,11 +17317,13 @@ def chest_load_out(load_out_id, *item_lists):
 
  
 #rabdomoic pick kosolov
-def random_pick(load_out_id, item_lists, qnt):
+def random_pick(load_out_id, item_list, qnt):
   result = [(eq, ":load_out_id", load_out_id)]
   for i in range(qnt):
-    for item_id in sorted(item_lists):
-     result.extend([(scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + i, item_id)]) 
+    item_id = sorted(item_list)
+    I = 0
+    result.extend([(store_random_in_range, I, 0, len(item_list))])
+    result.extend([(scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + i, item_id[I])]) 
   result.append((else_try))
   return lazy.block(result)
 
@@ -17454,6 +17456,7 @@ scripts.extend([
           ["itm_full_helm", "itm_scale_armor", "itm_iron_greaves", "itm_scale_gauntlets", "itm_two_handed_cleaver"],
           ["itm_vaegir_mask", "itm_vaegir_elite_armor", "itm_mail_boots", "itm_scale_gauntlets", "itm_two_handed_battle_axe"],
           ["itm_bishop_helm", "itm_bishop_armor", "itm_bishop_chausses", "itm_bishop_gloves", "itm_bishop_mitre", "itm_bishop_crosier"]),
+    
         random_pick(123, ["itm_leather_cap", "itm_rusty_sword", "itm_chipped_falchion", "itm_bent_lance", "itm_studded_leather_coat", "itm_heraldic_mail_with_tabard"] +
         ["itm_mace_2", "itm_leather_armor", "itm_morningstar", "itm_leather_jerkin", "itm_club_with_spike_head", "itm_sword_medieval_b_small"] +
         ["itm_medium_mercenary_armor", "itm_bishop_gloves", "itm_gauntlets", "itm_fighting_pick", "itm_sword_medieval_d_long", "itm_demi_gauntlets"] +
