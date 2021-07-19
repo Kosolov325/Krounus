@@ -74,6 +74,7 @@ def setAmmo(items, current_item):
 
 ## PK.js SCRIPTS END ##
 
+      
 scripts.extend([
 
   ## PK.js SCRIPTS START ##
@@ -17315,16 +17316,6 @@ def chest_load_out(load_out_id, *item_lists):
   result.append((else_try))
   return lazy.block(result)
 
- 
-#rabdomoic pick kosolov
-def random_pick(load_out_id, item_list, qnt):
-  result = [(eq, ":load_out_id", load_out_id)]
-  for i in range(qnt):
-    item_id = sorted(item_list)
-    result.append((scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + i, item_id[i]))
-  result.append((else_try))
-  return lazy.block(result)
-
 scripts.extend([
 
   ("scene_fill_chests_starting_inventory",
@@ -17363,28 +17354,37 @@ scripts.extend([
        (else_try),
          (assign, ":fill", 1),
        (try_end),
-        (eq, ":fill", 0),
-        (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
-        (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
-        (assign, ":item_1_placed", 0),
-        (assign, ":item_2_placed", 0),
-        (try_for_range, ":inventory_slot", slot_scene_prop_inventory_begin, ":inventory_end"),
-         (scene_prop_get_slot, ":slot", ":instance_id", ":inventory_slot"),
-         (try_begin),
-           (eq, ":slot", 0),
-           (neq, ":item_1_placed", ":times"),
-           (scene_prop_set_slot, ":instance_id", ":inventory_slot", ":item_1"),
-           (val_add, ":item_1_placed", 1),
-          (else_try),
-           (eq, ":slot", 0),
+        (this_or_next|eq, ":fill", 0),
+        (eq, ":load_out_id", 123),
+        (try_begin),
+          (eq, ":load_out_id", 123),
+           (try_for_range, reg1, 0, 4),
+            (store_random_in_range, s1, 0, random_pick_len),
+            (scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + reg1, random_pick[s1]),
+           (try_end),
+        (else_try),
+         (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
+         (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
+         (assign, ":item_1_placed", 0),
+         (assign, ":item_2_placed", 0),
+         (try_for_range, ":inventory_slot", slot_scene_prop_inventory_begin, ":inventory_end"),
+          (scene_prop_get_slot, ":slot", ":instance_id", ":inventory_slot"),
+          (try_begin),
+            (eq, ":slot", 0),
+            (neq, ":item_1_placed", ":times"),
+            (scene_prop_set_slot, ":instance_id", ":inventory_slot", ":item_1"),
+            (val_add, ":item_1_placed", 1),
+           (else_try),
+            (eq, ":slot", 0),
+            (eq, ":item_1_placed", ":times"),
+            (neq, ":item_2_placed", ":times"),
+            (scene_prop_set_slot, ":instance_id", ":inventory_slot", ":item_2"),
+            (val_add, ":item_2_placed", 1),
+          (try_end),
            (eq, ":item_1_placed", ":times"),
-           (neq, ":item_2_placed", ":times"),
-           (scene_prop_set_slot, ":instance_id", ":inventory_slot", ":item_2"),
-           (val_add, ":item_2_placed", 1),
-         (try_end),
-          (eq, ":item_1_placed", ":times"),
-          (eq, ":item_2_placed", ":times"),
-          (assign, ":inventory_end", slot_scene_prop_inventory_begin),
+           (eq, ":item_2_placed", ":times"),
+           (assign, ":inventory_end", slot_scene_prop_inventory_begin),
+          (try_end),
          (try_end),
        (else_try),
         chest_load_out(1, ["itm_bread"] * 3, ["itm_bread"] * 5, ["itm_cooked_fish"] * 4, ["itm_cooked_meat"] * 2),
@@ -17455,14 +17455,6 @@ scripts.extend([
           ["itm_vaegir_mask", "itm_vaegir_elite_armor", "itm_mail_boots", "itm_scale_gauntlets", "itm_two_handed_battle_axe"],
           ["itm_bishop_helm", "itm_bishop_armor", "itm_bishop_chausses", "itm_bishop_gloves", "itm_bishop_mitre", "itm_bishop_crosier"]),
     
-        random_pick(123, ["itm_leather_cap", "itm_rusty_sword", "itm_chipped_falchion", "itm_bent_lance", "itm_studded_leather_coat", "itm_heraldic_mail_with_tabard"] +
-        ["itm_mace_2", "itm_leather_armor", "itm_morningstar", "itm_leather_jerkin", "itm_club_with_spike_head", "itm_sword_medieval_b_small"] +
-        ["itm_medium_mercenary_armor", "itm_bishop_gloves", "itm_gauntlets", "itm_fighting_pick", "itm_sword_medieval_d_long", "itm_demi_gauntlets"] +
-        ["itm_bardiche", "itm_faradon_warhammer", "itm_faradon_iberianmace", "itm_faradon_twohanded1", "itm_danish_greatsword"] +
-        ["itm_iron_ore", "itm_lock_pick", "itm_repair_hammer", "itm_horse_armor", "itm_saddle_horse", "itm_warhorn", "itm_brigandine_red"] +
-        ["itm_dejawolf_kettlehat_1", "itm_north_bascinet", "itm_tab_shield_small_round_b", "itm_silver_nugget", "itm_silver_bar"] +
-        ["itm_hatchet", "itm_rus_helm", "itm_hide_boots", "itm_old_hide_boots", "itm_light_mercenary_armor", "itm_medium_mercenary_armor"] +
-        ["itm_heavy_mercenary_armor", "itm_gold_nugget", "itm_leather_roll", "itm_flour_sack"], 3),
         (assign, reg0, ":load_out_id"),
         (display_message, "str_error_load_out_id_reg0_not_defined"),
       (try_end),
