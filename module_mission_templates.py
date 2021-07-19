@@ -1254,8 +1254,9 @@ server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_message
              (eq,"$server_message",7), 
              (str_store_string,s1,"@Commoner drop 10% of their money pouch, while in faction members drop half of their money. Consider that when you go out serfing."),  
              (assign,"$server_message",0),
-            (try_end),  
-	    (try_for_players, ":player"), 
+            (try_end),
+            (get_max_players, ":max_players"),
+	    (try_for_range, ":player", 1, ":max_players"), 
              (player_is_active,":player"),
              (multiplayer_send_string_to_player,":player",server_event_script_message,s1),  
             (try_end),
@@ -1265,11 +1266,10 @@ server_announces = (1, 0, 0, [(multiplayer_is_server),(eq,"$allow_server_message
         (try_end),
          ])
 
-clock = (60, 0, 0, [],
+clock = (600, 0, 0, [(multiplayer_is_server),],
    [
-    (multiplayer_is_server),
     (val_add, "$g_server_running_time", 1),
-    (eq,  "$g_server_running_time", 60),
+    (eq,  "$g_server_running_time", 6),
     
     (try_begin),
      (gt, "$g_ibank_np_qnt", 0),
