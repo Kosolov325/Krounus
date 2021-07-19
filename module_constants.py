@@ -16,7 +16,6 @@ random_pick = ["itm_leather_cap", "itm_rusty_sword", "itm_chipped_falchion", "it
         "itm_hatchet", "itm_rus_helm", "itm_hide_boots", "itm_old_hide_boots", "itm_light_mercenary_armor", "itm_medium_mercenary_armor",
         "itm_heavy_mercenary_armor", "itm_gold_nugget", "itm_leather_roll", "itm_flour_sack"]
 
-random_pick_len = len(random_pick) + 1
 ## PK.js SCRIPTS START ##
 
 pkjs_script_server = "@SERVER_ADDRESS/serverapi"
