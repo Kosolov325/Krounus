@@ -17316,6 +17316,12 @@ def chest_load_out(load_out_id, *item_lists):
   result.append((else_try))
   return lazy.block(result)
 
+def random_pick_set(i):
+  
+  b = sorted(random_pick)
+  result = [(scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + i, b[0])]
+  return lazy.block(result)
+
 scripts.extend([
 
   ("scene_fill_chests_starting_inventory",
@@ -17352,25 +17358,22 @@ scripts.extend([
          (assign, ":item_2", "itm_wheat_sheaf"),
          (assign, ":times", 2),
        (else_try),
+         (eq, ":load_out_id", 123),
+         (try_for_range, reg1, 1, 4),
+             random_pick_set(reg1),
+         (try_end),
+         (assign, ":fill", 1),
+       (else_try),
          (assign, ":fill", 1),
        (try_end),
-        (this_or_next|eq, ":fill", 0),
-        (eq, ":load_out_id", 123),
-        (try_begin),
-          (eq, ":load_out_id", 123),
-           (try_for_range, reg1, 0, 4),
-            (store_random_in_range, reg2, 0, 46),
-            (assign, pos1, reg2),
-            (scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + reg1, random_pick[pos1]),
-           (try_end),
-        (else_try),
+         (eq, ":fill", 0),
          (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
          (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
          (assign, ":item_1_placed", 0),
          (assign, ":item_2_placed", 0),
          (try_for_range, ":inventory_slot", slot_scene_prop_inventory_begin, ":inventory_end"),
           (scene_prop_get_slot, ":slot", ":instance_id", ":inventory_slot"),
-          (try_begin),
+           (try_begin),
             (eq, ":slot", 0),
             (neq, ":item_1_placed", ":times"),
             (scene_prop_set_slot, ":instance_id", ":inventory_slot", ":item_1"),
@@ -17381,12 +17384,11 @@ scripts.extend([
             (neq, ":item_2_placed", ":times"),
             (scene_prop_set_slot, ":instance_id", ":inventory_slot", ":item_2"),
             (val_add, ":item_2_placed", 1),
-          (try_end),
+           (try_end),
            (eq, ":item_1_placed", ":times"),
            (eq, ":item_2_placed", ":times"),
            (assign, ":inventory_end", slot_scene_prop_inventory_begin),
           (try_end),
-         (try_end),
        (else_try),
         chest_load_out(1, ["itm_bread"] * 3, ["itm_bread"] * 5, ["itm_cooked_fish"] * 4, ["itm_cooked_meat"] * 2),
         chest_load_out(2, ["itm_bread"] * 10, ["itm_bread"] * 16, ["itm_cooked_fish"] * 7, ["itm_cooked_meat"] * 6, ["itm_carrot"] * 3),
