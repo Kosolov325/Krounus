@@ -17376,6 +17376,7 @@ scripts.extend([
           (troop_get_slot, reg1, "trp_randomic_items", slot_array_items + reg1),
           (scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + reg0, reg1),
          (try_end),
+         (assign, ":fill", 1),
        (else_try),
          (assign, ":fill", 1),
        (try_end),
