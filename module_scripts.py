@@ -30,7 +30,6 @@ def initialize_random_items():
 
   for i,item_id in enumerate(randomic_items):
     script.extend([
-              (val_add, slot_array_items, 1),
               (troop_set_slot, "trp_randomic_items", slot_array_items + i, item_id),
     ])
 
