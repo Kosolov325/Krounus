@@ -23,14 +23,25 @@ import math
 
 scripts = []
 
-def initialize_random_items():
+def initialize_random_items(): #koso
+  randomic_items = ["itm_leather_cap", "itm_rusty_sword", "itm_chipped_falchion", "itm_bent_lance", "itm_studded_leather_coat", "itm_heraldic_mail_with_tabard",
+        "itm_mace_2", "itm_leather_armor", "itm_morningstar", "itm_leather_jerkin", "itm_club_with_spike_head", "itm_sword_medieval_b_small",
+        "itm_medium_mercenary_armor", "itm_bishop_gloves", "itm_gauntlets", "itm_fighting_pick", "itm_sword_medieval_d_long", "itm_demi_gauntlets",
+        "itm_bardiche", "itm_faradon_warhammer", "itm_faradon_iberianmace", "itm_faradon_twohanded1", "itm_danish_greatsword",
+        "itm_iron_ore", "itm_lock_pick", "itm_repair_hammer", "itm_horse_armor", "itm_saddle_horse", "itm_warhorn", "itm_brigandine_red",
+        "itm_dejawolf_kettlehat_1", "itm_north_bascinet", "itm_tab_shield_small_round_b", "itm_silver_nugget", "itm_silver_bar",
+        "itm_hatchet", "itm_rus_helm", "itm_hide_boots", "itm_old_hide_boots", "itm_light_mercenary_armor", "itm_medium_mercenary_armor",
+        "itm_heavy_mercenary_armor", "itm_gold_nugget", "itm_leather_roll", "itm_flour_sack"]
+ 
   script = [
     (try_begin),
     ]
 
   for i,item_id in enumerate(randomic_items):
     script.extend([
-              (troop_set_slot, "trp_randomic_items", slot_array_items + i, item_id),
+              (assign, reg3, item_id),
+              (server_add_message_to_log, "@Saved in array: {reg3}"),
+              (troop_set_slot, "trp_randomic_items", slot_array_count + i, item_id),
     ])
 
   script.extend([
@@ -3845,7 +3856,7 @@ scripts.extend([
     (troop_set_slot, "trp_inactive_players_array", slot_player_array_size, 0),
     (troop_set_slot, "trp_last_chat_message", slot_last_chat_message_event_type, 0),
     (troop_set_slot, "trp_last_chat_message", slot_last_chat_message_not_recieved, 0),
-    (troop_set_slot, "trp_randomic_items", slot_array_items, 0),
+    (troop_set_slot, "trp_randomic_items", slot_array_count, 0),
     initialize_random_items(),
     (str_clear, s0),
     (try_for_range, ":chat_overlay_troop_id", chat_overlay_ring_buffer_begin, chat_overlay_ring_buffer_end),
@@ -17372,9 +17383,13 @@ scripts.extend([
        (else_try),
          (eq, ":load_out_id", 123),
          (try_for_range, reg0, 0, 4),
-          (store_random_in_range, reg1, 0, len(randomic_items)),
-          (troop_get_slot, reg1, "trp_randomic_items", slot_array_items + reg1),
-          (scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + reg0, reg1),
+          (store_random_in_range, reg1, 0, 46),
+          (server_add_message_to_log, "@Sorted: {reg1}"),
+          (store_add, ":array_slot", slot_array_count, reg1),
+          (troop_get_slot, ":item_id", "trp_randomic_items", ":array_slot"),
+          (assign, reg2, ":item_id"),
+          (server_add_message_to_log, "@Item_id: {reg2}"),
+          (scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + reg0, ":item_id"),
          (try_end),
          (assign, ":fill", 1),
        (else_try),
