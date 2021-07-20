@@ -30,8 +30,8 @@ def initialize_random_items():
 
   for i,item_id in enumerate(randomic_items):
     script.extend([
-              (troop_set_slot, "trp_randomic_items", slot_array_items + i, item_id),
               (val_add, slot_array_items, 1),
+              (troop_set_slot, "trp_randomic_items", slot_array_items + i, item_id),
     ])
 
   script.extend([
@@ -3844,9 +3844,10 @@ scripts.extend([
     (try_end),
     (faction_set_slot, factions_end, slot_faction_poll_end_time, 0),
     (troop_set_slot, "trp_inactive_players_array", slot_player_array_size, 0),
-    initialize_random_items(),
     (troop_set_slot, "trp_last_chat_message", slot_last_chat_message_event_type, 0),
     (troop_set_slot, "trp_last_chat_message", slot_last_chat_message_not_recieved, 0),
+    (troop_set_slot, "trp_randomic_items", slot_array_items, 0),
+    initialize_random_items(),
     (str_clear, s0),
     (try_for_range, ":chat_overlay_troop_id", chat_overlay_ring_buffer_begin, chat_overlay_ring_buffer_end),
       (troop_set_name, ":chat_overlay_troop_id", s0),
@@ -17376,7 +17377,6 @@ scripts.extend([
           (troop_get_slot, reg1, "trp_randomic_items", slot_array_items + reg1),
           (scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + reg0, reg1),
          (try_end),
-         (assign, ":fill", 1),
        (else_try),
          (assign, ":fill", 1),
        (try_end),
