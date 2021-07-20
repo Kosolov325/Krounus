@@ -23,6 +23,23 @@ import math
 
 scripts = []
 
+def initialize_random_items():
+  script = [
+    (try_begin),
+    ]
+
+  for i,item_id in enumerate(randomic_items):
+    script.extend([
+              (troop_set_slot, "trp_randomic_items", slot_array_items + i, item_id),
+              (val_add, slot_array_items, 1),
+    ])
+
+  script.extend([
+      (try_end),
+  ])
+
+  return lazy.block(script)
+
 ## PK.js SCRIPTS START ##
 def setArmour(slot, current_item):
   script = [
@@ -3827,6 +3844,7 @@ scripts.extend([
     (try_end),
     (faction_set_slot, factions_end, slot_faction_poll_end_time, 0),
     (troop_set_slot, "trp_inactive_players_array", slot_player_array_size, 0),
+    initialize_random_items(),
     (troop_set_slot, "trp_last_chat_message", slot_last_chat_message_event_type, 0),
     (troop_set_slot, "trp_last_chat_message", slot_last_chat_message_not_recieved, 0),
     (str_clear, s0),
@@ -17316,12 +17334,6 @@ def chest_load_out(load_out_id, *item_lists):
   result.append((else_try))
   return lazy.block(result)
 
-def random_pick_set(i):
-  
-  b = sorted(random_pick)
-  result = [(scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + i, b[0])]
-  return lazy.block(result)
-
 scripts.extend([
 
   ("scene_fill_chests_starting_inventory",
@@ -17359,8 +17371,10 @@ scripts.extend([
          (assign, ":times", 2),
        (else_try),
          (eq, ":load_out_id", 123),
-         (try_for_range, reg1, 1, 4),
-             random_pick_set(reg1),
+         (try_for_range, reg0, 0, 4),
+          (store_random_in_range, reg1, 0, len(randomic_items)),
+          (troop_get_slot, reg1, "trp_randomic_items", slot_array_items + reg1),
+          (scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_begin + reg0, reg1),
          (try_end),
          (assign, ":fill", 1),
        (else_try),

@@ -7,7 +7,7 @@
 
 
 #Random 
-random_pick = ["itm_leather_cap", "itm_rusty_sword", "itm_chipped_falchion", "itm_bent_lance", "itm_studded_leather_coat", "itm_heraldic_mail_with_tabard",
+randomic_items = ["itm_leather_cap", "itm_rusty_sword", "itm_chipped_falchion", "itm_bent_lance", "itm_studded_leather_coat", "itm_heraldic_mail_with_tabard",
         "itm_mace_2", "itm_leather_armor", "itm_morningstar", "itm_leather_jerkin", "itm_club_with_spike_head", "itm_sword_medieval_b_small",
         "itm_medium_mercenary_armor", "itm_bishop_gloves", "itm_gauntlets", "itm_fighting_pick", "itm_sword_medieval_d_long", "itm_demi_gauntlets",
         "itm_bardiche", "itm_faradon_warhammer", "itm_faradon_iberianmace", "itm_faradon_twohanded1", "itm_danish_greatsword",
@@ -15,6 +15,8 @@ random_pick = ["itm_leather_cap", "itm_rusty_sword", "itm_chipped_falchion", "it
         "itm_dejawolf_kettlehat_1", "itm_north_bascinet", "itm_tab_shield_small_round_b", "itm_silver_nugget", "itm_silver_bar",
         "itm_hatchet", "itm_rus_helm", "itm_hide_boots", "itm_old_hide_boots", "itm_light_mercenary_armor", "itm_medium_mercenary_armor",
         "itm_heavy_mercenary_armor", "itm_gold_nugget", "itm_leather_roll", "itm_flour_sack"]
+
+slot_array_items = 0
 
 ## PK.js SCRIPTS START ##
 
