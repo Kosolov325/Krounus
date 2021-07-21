@@ -40,7 +40,6 @@ def initialize_random_items(): #koso
   for i,item_id in enumerate(randomic_items):
     script.extend([
               (assign, reg3, item_id),
-              (server_add_message_to_log, "@Saved in array: {reg3}"),
               (troop_set_slot, "trp_randomic_items", slot_array_count + i, item_id),
     ])
 

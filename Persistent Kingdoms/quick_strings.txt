@@ -1,4 +1,4 @@
-138
+137
 qstr_Connection_successfu Connection_successfully_made_with_the_script_server.
 qstr_Connection_to_script Connection_to_script_server_denied._Invalid_server_id_/_api_key.
 qstr_Player_name_already_ Player_name_already_taken._Use_a_different_one!
@@ -47,7 +47,6 @@ qstr_{s0}^Musician:_{reg1 {s0}^Musician:_{reg10}
 qstr_You_became_lord_of_1 You_became_lord_of_1/2_factions.
 qstr_^ ^
 qstr_/ /
-qstr_Saved_in_array:_{reg Saved_in_array:_{reg3}
 qstr_{reg5}/1000_gold_rob {reg5}/1000_gold_robbed.
 qstr_+50_gold_for_Woodcut +50_gold_for_Woodcutting_Work
 qstr_You_can_t_do_it_whil You_can't_do_it_while_in_queue
