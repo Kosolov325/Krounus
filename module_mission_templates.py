@@ -1274,16 +1274,28 @@ clock = (600, 0, 0, [(multiplayer_is_server),],
     (try_begin),
      (gt, "$g_ibank_np_qnt", 0),
      (call_script, "script_save_ibank"),
+     (server_add_message_to_log, "@Ibank From Private Housing Saved"),
     (try_end),
     
-    (call_script, "script_save_facs"),
+    (try_begin),
+     (call_script, "script_save_facs"),
+     (server_add_message_to_log, "@Factions Names Saved"),
+    (try_end),
+    
+    (try_begin),
+     (call_script, "script_scene_fill_chests_starting_inventory"),
+     (server_add_message_to_log, "@Random Chest Filling done"),
+    (try_end),
 
-    (call_script, "script_scene_fill_chests_starting_inventory"),
-    (try_for_players, ":players"),
-     (player_is_active, ":players"),
+    (try_begin),
+     (try_for_players, ":players"),
+      (player_is_active, ":players"),
       (player_slot_eq, ":players", slot_player_quest_switch, 4),
       (player_set_slot, ":players", slot_player_quest_switch, 0),
+     (try_end),
+     (server_add_message_to_log, "@Quest Switchs reset time done."),
     (try_end),
+    
     (assign, "$g_server_running_time", 0),
            ])
 
