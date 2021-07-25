@@ -29,13 +29,17 @@ def initialize_random_items(): #koso
         "itm_medium_mercenary_armor", "itm_bishop_gloves", "itm_fighting_pick", "itm_sword_medieval_d_long", "itm_demi_gauntlets",
         "itm_bardiche", "itm_faradon_warhammer", "itm_faradon_iberianmace", "itm_faradon_twohanded1", "itm_danish_greatsword",
         "itm_iron_ore", "itm_lock_pick", "itm_repair_hammer", "itm_horse_armor", "itm_saddle", "itm_warhorn", "itm_brigandine_red",
-        "itm_dejawolf_kettlehat_1", "itm_north_bascinet", "itm_tab_shield_small_round_b", "itm_silver_nugget", "itm_silver_bar",
+        "itm_dejawolf_kettlehat_1", "itm_north_bascinet", "itm_tab_shield_small_round_b", "itm_silver_nugget",
         "itm_hatchet", "itm_rus_helm", "itm_hide_boots", "itm_old_hide_boots", "itm_light_mercenary_armor", "itm_medium_mercenary_armor",
         "itm_heavy_mercenary_armor", "itm_gold_nugget", "itm_leather_roll", "itm_flour_sack", "itm_aketon_green", "itm_arena_tunic", "itm_ankle_boots", "itm_arming_cap", "itm_arabian_sword_c", 
         "itm_arabian_sword_a", "itm_arrows", "itm_barbuta1", "itm_aketon", "itm_battle_fork", "itm_black_robe", "itm_black_hood", "itm_shirt_c", "itm_cwe_archer_armor_1", "itm_board", "itm_bolts", 
         "itm_steel_bolts", "itm_spiked_mace", "itm_spiked_club", "itm_crude_spear", "itm_fur_hat", "itm_medium_mercenary_armor", "itm_stick", "itm_staff", "itm_shirt_c", "itm_leather_gauntlet", 
-        "itm_sword_medieval_b_small", "itm_short_bow", "itm_bow_f_longbow_1", "itm_strong_bow", "itm_nomad_bow", "itm_war_bow1", "itm_nordic_warlord_helmet", "itm_tab_shield_round_e", "itm_hunting_bow", "itm_gauntlets"]
-   
+        "itm_sword_medieval_b_small", "itm_short_bow", "itm_bow_f_longbow_1", "itm_strong_bow", "itm_nomad_bow", "itm_war_bow1", "itm_nordic_warlord_helmet", "itm_tab_shield_round_e", "itm_hunting_bow", "itm_gauntlets", 
+        "surgeon_coif", "pilgrim_hood", "priest_coif", "padded_coif", "turban", "leather_warrior_cap", "nordic_veteran_archer_helmet", "skullcap", "vaegir_fur_helmet", "bishop_mitre",
+	"mail_coif", "footman_helmet", "sarranid_horseman_helmet", "nasal_helmet", "khergit_war_helmet", "vaegir_spiked_helmet", "helmet_with_neckguard", "flat_topped_helmet", "nordic_fighter_helmet",
+	"kettle_hat", "vaegir_lamellar_helmet", "spiked_helmet", "sarranid_mail_coif", "nordic_huscarl_helmet", "bascinet", "bascinet_2", "bascinet_3", "common_hood", "hood_c", "nomad_cap", "nomad_cap_b",
+ 	"head_wrappings", "straw_hat", "headcloth", "woolen_cap"
+]
   script = [
     (try_begin),
     ]
