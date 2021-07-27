@@ -185,6 +185,8 @@ scripts.extend([
      (else_try),
       (eq, ":action", pkjs_action_load_gear),
       (assign, ":player_id", reg1),
+	(player_set_slot, ":player_id", slot_player_has_faction_door_key, 1), #William -  Add keys by default
+  	(player_set_slot, ":player_id", slot_player_has_faction_item_key, 1),
 
        (call_script, "script_player_adjust_gold", ":player_id", reg2, 0),
 
@@ -411,6 +413,7 @@ scripts.extend([
 
   ("pkjs_load_gear", [
     (store_script_param, ":agent_id", 1),
+
 
     (try_begin),
       (neg|agent_is_non_player, ":agent_id"),
