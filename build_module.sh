@@ -3,6 +3,6 @@ if [ -d "Persistent Kingdoms" ]; then
   rm -R Persistent\ Kingdoms/
 fi
 mkdir Persistent\ Kingdoms/
-python -tt build_module.py -d
+python2 -tt build_module.py -d
 rm *.pyc
 echo "build complete"
