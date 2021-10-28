@@ -3,7 +3,7 @@ from header_operations import *
 from module_constants import *
 from header_parties import *
 from header_skills import *
-from header_mission_templates import *
+from header_mission_templates import 
 from header_items import *
 from header_triggers import *
 from header_terrain_types import *
@@ -15700,7 +15700,7 @@ scripts.extend([
         (multiplayer_send_int_to_player, ":requester_player_id", server_event_show_poll, ":poll_error"),
       (try_end),
       (eq, ":poll_error", 0),
-      (call_script, "script_cf_check_enough_gold", ":requester_player_id", 9999999), #how does that even work does it return boolean value and terminates/continues try block?
+      (call_script, "script_cf_check_enough_gold", ":requester_player_id", ":gold_cost"), #how does that even work does it return boolean value and terminates/continues try block?
       (call_script, "script_player_adjust_gold", ":requester_player_id", ":gold_cost", -1), #to be removed how does that even work i cant find docs
       (assign, ":voter_count", 0),
       (get_max_players, ":max_players"),
