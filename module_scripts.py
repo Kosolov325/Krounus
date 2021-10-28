@@ -3,7 +3,7 @@ from header_operations import *
 from module_constants import *
 from header_parties import *
 from header_skills import *
-from header_mission_templates import 
+from header_mission_templates import *
 from header_items import *
 from header_triggers import *
 from header_terrain_types import *
