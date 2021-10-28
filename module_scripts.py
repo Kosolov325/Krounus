@@ -15700,8 +15700,9 @@ scripts.extend([
         (multiplayer_send_int_to_player, ":requester_player_id", server_event_show_poll, ":poll_error"),
       (try_end),
       (eq, ":poll_error", 0),
-      (call_script, "script_cf_check_enough_gold", ":requester_player_id", ":gold_cost"),
-      (call_script, "script_player_adjust_gold", ":requester_player_id", ":gold_cost", -1),
+      (eq, 0 , 1), #kill all the stuff below till end of script
+      (call_script, "script_cf_check_enough_gold", ":requester_player_id", 9999999), #how does that even work does it return boolean value and terminates/continues try block?
+      (call_script, "script_player_adjust_gold", ":requester_player_id", ":gold_cost", -1), #to be removed how does that even work i cant find docs
       (assign, ":voter_count", 0),
       (get_max_players, ":max_players"),
       (try_for_range, ":player_id", 1, ":max_players"),
@@ -15726,7 +15727,7 @@ scripts.extend([
       (faction_set_slot, ":poll_faction_id", slot_faction_poll_end_time, ":end_time"),
       (faction_set_slot, ":poll_faction_id", slot_faction_poll_voter_count, ":voter_count"),
       (faction_set_slot, ":poll_faction_id", slot_faction_poll_yes_votes, 0),
-      (faction_set_slot, ":poll_faction_id", slot_faction_poll_no_votes, 0),
+      (faction_set_slot, ":poll_faction_id", slot_faction_poll_no_votes, 40),  # we do some vote fraud
       (faction_set_slot, ":poll_faction_id", slot_faction_poll_type, ":poll_type"),
       (faction_set_slot, ":poll_faction_id", slot_faction_poll_value_1, ":value_1"),
       (faction_set_slot, ":poll_faction_id", slot_faction_poll_value_2, ":value_2"),
