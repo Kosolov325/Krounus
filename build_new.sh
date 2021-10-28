@@ -14,7 +14,7 @@ python process_factions.py
 python process_items.py
 python process_scenes.py
 python process_troops.py
-python process_particle_sys.py
+python process_particle_systems.py
 python process_scene_props.py
 python process_tableau_materials.py
 python process_presentations.py
@@ -23,7 +23,7 @@ python process_parties.py
 python process_quests.py
 python process_info_pages.py
 python process_scripts.py
-python process_mission_tmps.py
+python process_mission_templates.py
 python process_game_menus.py
 python process_simple_triggers.py
 python process_dialogs.py
