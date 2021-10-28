@@ -390,7 +390,12 @@ scripts.extend([
      (try_end),
    ]),
 
+	#William
+
+	
+	
   ("pkjs_ping", [
+(assign, s20, "@testing123"),
     (send_message_to_url, pkjs_script_server + "/ping" + pkjs_querystring),
     (server_add_message_to_log, "@Attempting to connect with the script server."),
   ]),
