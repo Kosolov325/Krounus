@@ -112,7 +112,7 @@ qstr_The_Caravan_by_{s2}_w The_Caravan_by_{s2}_was_canceled}
 qstr_NEW_QUEST:_{s1}._{s3 NEW_QUEST:_{s1}._{s3}
 qstr_Wait_{reg6}_more_min Wait_{reg6}_more_minutes_before_you_can_change_quests_again
 qstr_You_ve_opened_a_Bank You've_opened_a_Bank_account_with_success!_Ibank_id:_{reg0}
-qstr_You_have_to_register You_have_to_register_a_Bank_account_on_any_bank_first
+qstr_You_have_to_register You_have_to_register_a_Bank_account_on_any_bank_first.
 qstr_SERVER_ADDRESS/serverapi/i SERVER_ADDRESS/serverapi/ibanksave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&ibankid={reg0}&ibankit={s1}
 qstr_SERVER_ADDRESS/serverapi/f SERVER_ADDRESS/serverapi/factionLoad?serverID=SERVER_ID&apiKey=SERVER_API_KEY&factionid={reg2}
 qstr_SERVER_ADDRESS/serverapi/fa SERVER_ADDRESS/serverapi/factionSave?serverID=SERVER_ID&apiKey=SERVER_API_KEY&factionID={reg0}&Mesh={reg1}&Name={s0}&Saved={reg2}

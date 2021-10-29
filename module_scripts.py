@@ -11931,7 +11931,7 @@ scripts.extend([
     (try_begin),
       (gt, ":instance_id", 0),
     (else_try),
-      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You have to register a Bank account on any bank first"), 
+      (multiplayer_send_string_to_player, ":player_id", server_event_script_message, "@You have to register a Bank account on any bank first."), 
       (assign, ":fail", 1),
     (try_end),
     (eq, ":fail", 0),
@@ -16631,8 +16631,8 @@ scripts.extend([
         (this_or_next | player_slot_eq, ":sender_player_id", slot_player_is_lord, 1),
         (player_slot_eq, ":sender_player_id", slot_player_is_marshal, 1),
 
-        (player_slot_eq, ":value_1", slot_player_is_marshal, 0),
-        (player_slot_eq, ":value_1", slot_player_is_lord, 0),
+        (player_slot_eq, ":value_1", slot_player_is_marshal, 1), #trying to give keys by default - William - Changed value 0 to value 1 (?)
+        (player_slot_eq, ":value_1", slot_player_is_lord, 1),
 
         (assign, ":key_slot", slot_player_has_faction_door_key),
       (else_try),
@@ -16647,7 +16647,7 @@ scripts.extend([
         (this_or_next | player_slot_eq, ":sender_player_id", slot_player_is_lord, 1),
         (player_slot_eq, ":sender_player_id", slot_player_is_marshal, 1),
 
-        (player_slot_eq, ":value_1", slot_player_is_marshal, 0),
+        (player_slot_eq, ":value_1", slot_player_is_marshal, 0), #here its probably to let people announce and other stuff
         (player_slot_eq, ":value_1", slot_player_is_lord, 0),
 
         (assign, ":key_slot", slot_player_has_faction_item_key),
