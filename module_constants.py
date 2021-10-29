@@ -21,7 +21,7 @@ randomic_items = ["itm_leather_cap", "itm_rusty_sword", "itm_chipped_falchion", 
 	"itm_mail_coif", "itm_footman_helmet", "itm_sarranid_horseman_helmet", "itm_nasal_helmet", "itm_khergit_war_helmet", "itm_vaegir_spiked_helmet", "itm_helmet_with_neckguard", "itm_flat_topped_helmet", "itm_nordic_fighter_helmet",
 	"itm_kettle_hat", "itm_vaegir_lamellar_helmet", "itm_spiked_helmet", "itm_sarranid_mail_coif", "itm_nordic_huscarl_helmet", "itm_bascinet", "itm_bascinet_2", "itm_bascinet_3", "itm_common_hood", "itm_hood_c", "itm_nomad_cap", "itm_nomad_cap_b",
  	"itm_head_wrappings", "itm_straw_hat", "itm_headcloth", "itm_woolen_cap", "itm_leather_roll", "itm_leather_roll", "itm_turban", "itm_turban", "itm_hatchet", "itm_hatchet", "itm_chipped_falchion", "itm_chipped_falchion", "itm_chipped_falchion",
-	"itm_chipped_falchion", "itm_short_bow", "itm_short_bow", "itm_short_bow", "itm_short_bow", "itm_short_bow", "itm_short_bow", "itm_arrows", "itm_arrows", "itm_arrows",	"itm_repair_hammer", "itm_repair_hammer", "itm_repair_hammer", "itm_repair_hammer",  
+	"itm_chipped_falchion", "itm_short_bow", "itm_short_bow", "itm_short_bow", "itm_short_bow", "itm_short_bow", "itm_short_bow", "itm_arrows", "itm_arrows", "itm_arrows",	"itm_repair_hammer", "itm_repair_hammer", "itm_repair_hammer", "itm_repair_hammer"  
 ]
 
 ranomic_items_size = len(randomic_items)
