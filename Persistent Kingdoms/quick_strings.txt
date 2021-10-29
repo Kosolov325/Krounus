@@ -11,7 +11,7 @@ qstr_Player_{s1}___GUID:_ Player_{s1}__(GUID:_{reg4})_withdrew_{reg2}_gold._{reg
 qstr_Deposited_{reg2}_gol Deposited_{reg2}_gold._You_now_have_{reg3}_gold_in_the_bank.
 qstr_Player_{s1}___GUID:_{ Player_{s1}__(GUID:_{reg5})_deposited_{reg2}_gold._{reg3}_gold_in_the_bank.
 qstr_{s0} {s0}
-qstr_testing123 testing123
+qstr_testing123 testing123 #test
 qstr_SERVER_ADDRESS/serve SERVER_ADDRESS/serverapi/ping?serverID=SERVER_ID&apiKey=SERVER_API_KEY
 qstr_Attempting_to_connec Attempting_to_connect_with_the_script_server.
 qstr_SERVER_ADDRESS/server SERVER_ADDRESS/serverapi/loadplayer?serverID=SERVER_ID&apiKey=SERVER_API_KEY&playerID={reg0}&guid={reg1}&ip={s0}&name={s1}&admin
