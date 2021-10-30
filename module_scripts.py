@@ -15932,7 +15932,7 @@ scripts.extend([
       (eq, ":poll_type", poll_type_faction_lord),
       (this_or_next|neg|player_is_active, ":value_1"),
       (eq, ":check_unique_id", ":target_unique_id"),
-      (call_script, "script_cf_faction_set_lord", ":value_1", ":target_unique_id", ":poll_faction_id"),
+      #lmao (call_script, "script_cf_faction_set_lord", ":value_1", ":target_unique_id", ":poll_faction_id"),
     (try_end),
     ]),
 
