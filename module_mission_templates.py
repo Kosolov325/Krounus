@@ -411,7 +411,7 @@ agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects f
       (agent_is_human, ":attacker_agent_id"),
       (neg|agent_is_human, ":attacked_agent_id"),
       (agent_get_rider, ":rider_agent", ":attacked_agent_id"),
-      (agent_get_player_id,"rider", "rider_agent"),
+      (agent_get_player_id,":rider", "rider_agent"),
       (agent_get_player_id, ":attacker_player_id", ":attacker_agent_id"),
       (player_is_active, ":rider"),
       (player_is_active, ":attacker_player_id"),  
