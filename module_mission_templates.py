@@ -409,6 +409,7 @@ agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects f
       (neg|is_between, reg0, scripted_items_begin, scripted_items_end),
       (neq, reg0, "itm_baton"),
       (agent_is_human, ":attacker_agent_id"),
+(server_add_message_to_log, "str_debug_0"),
       (neg|agent_is_human, ":attacked_agent_id"),
 (server_add_message_to_log, "str_debug_1"),
       (agent_get_rider, ":rider", ":attacked_agent_id"),
