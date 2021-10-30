@@ -15689,9 +15689,9 @@ scripts.extend([
         (player_slot_eq, ":value_1", slot_player_faction_id, ":poll_faction_id"),
         (try_begin),
           (neq, ":value_1", ":requester_player_id"),
-          (assign, ":gold_cost", 99999999),
+          (assign, ":gold_cost", poll_cost_faction_lord),
         (else_try),
-          (assign, ":gold_cost", 99999999),
+          (assign, ":gold_cost", poll_cost_self_faction_lord),
         (try_end),
         (str_store_player_username, s1, ":value_1"),
         (str_store_faction_name, s2, ":poll_faction_id"),
@@ -15705,8 +15705,8 @@ scripts.extend([
         (multiplayer_send_int_to_player, ":requester_player_id", server_event_show_poll, ":poll_error"),
       (try_end),
       (eq, ":poll_error", 0),
-      (call_script, "script_cf_check_enough_gold", ":requester_player_id", ":gold_cost"), #how does that even work does it return boolean value and terminates/continues try block?
-      (call_script, "script_player_adjust_gold", ":requester_player_id", ":gold_cost", -1), #to be removed how does that even work i cant find docs
+      (call_script, "script_cf_check_enough_gold", ":requester_player_id", ":gold_cost"), 
+      (call_script, "script_player_adjust_gold", ":requester_player_id", ":gold_cost", -1), 
       (assign, ":voter_count", 0),
       (get_max_players, ":max_players"),
       (try_for_range, ":player_id", 1, ":max_players"),
@@ -15932,7 +15932,8 @@ scripts.extend([
       (eq, ":poll_type", poll_type_faction_lord),
       (this_or_next|neg|player_is_active, ":value_1"),
       (eq, ":check_unique_id", ":target_unique_id"),
-      #lmao (call_script, "script_cf_faction_set_lord", ":value_1", ":target_unique_id", ":poll_faction_id"),
+      (eq, ":poll_result", poll_result_admin_yes),
+      (call_script, "script_cf_faction_set_lord", ":value_1", ":target_unique_id", ":poll_faction_id"),
     (try_end),
     ]),
 
