@@ -423,6 +423,8 @@ agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects f
      (else_try),
       (eq, ":fac_attacker", ":fac_attacked"),
      (else_try),
+      (eq, ":attacker_player_id", ":attacker_agent_id"),
+     (else_try),
       (assign, ":fail", 1),
      (try_end),
      (eq, ":fail", 0),
