@@ -6826,6 +6826,7 @@ scripts.extend([
     (try_end),
     (eq, ":fail", 0),
     (player_set_slot,":player_id",slot_player_has_faction_door_key, 1),
+    (player_set_slot,":player_id",slot_player_has_faction_item_key, 1),    
     ]),
 
   ("cf_check_troop_can_equip_item", # check the item has no hard requirements that prevent the troop or player from equipping it
