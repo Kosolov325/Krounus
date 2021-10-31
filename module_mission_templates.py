@@ -213,11 +213,11 @@ after_mission_start_setup = (ti_after_mission_start, 0, 0, [], # spawn and move 
     ## PK.js SCRIPTS END ##
 
     #MidZ war between facs
-    (try_begin),
-    (call_script, "script_cf_faction_change_relation", "fac_1", "fac_2", 0), 
-    (call_script, "script_cf_faction_change_relation", "fac_2", "fac_3", 0), 
-    (call_script, "script_cf_faction_change_relation", "fac_1", "fac_3", 0),
-    (try_end),
+    (try_for_range,":fac1", castle_factions_begin, factions_end - 1),
+	    (try_for_range, ":fac2", ":fac1"+ 1, factions_end),
+		    (call_script, "script_cf_faction_change_relation", "fac1", "fac2", 0), 
+		  (try_end),
+	  (try_end),
     
     #Koso announcements messages
     (assign, "$server_message_interval", 5),
