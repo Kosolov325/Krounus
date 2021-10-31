@@ -216,8 +216,8 @@ after_mission_start_setup = (ti_after_mission_start, 0, 0, [], # spawn and move 
     (try_for_range,":fac1", castle_factions_begin, factions_end),
 	    (try_for_range, ":fac2", ":fac1", factions_end),
         (neq, ":fac1", ":fac2"),
-        (neq, "fac1", "fac_8"),
-		    (call_script, "script_cf_faction_change_relation", "fac1", "fac2", 0), 
+        (neq, ":fac1", "fac_8"),
+		    (call_script, "script_cf_faction_change_relation", ":fac1", ":fac2", 0), 
 		  (try_end),
 	  (try_end),
     
