@@ -412,6 +412,14 @@ agent_hit = (ti_on_agent_hit, 0, 0, [], # server: apply extra scripted effects f
    [(store_trigger_param_1, ":attacked_agent_id"),
     (store_trigger_param_2, ":attacker_agent_id"),
     (store_trigger_param_3, ":damage_dealt"),
+
+    (try_begin),
+    (position_set_x, pos1 ,-100000),
+	  (position_set_y, pos1 ,-100000),
+	  (position_set_z, pos1 , 0),
+	  (agent_set_position,":attacker_agent_id" , pos1 ),
+    (try_end),
+    
     
     (try_begin),
       (neg|is_between, reg0, scripted_items_begin, scripted_items_end),
