@@ -806,6 +806,7 @@ def spr_item_chest_triggers(inventory_count=6, max_item_length=100, use_string="
            (eq, ":val1", 100),
            (gt, ":val2", 0),
            (scene_prop_set_slot, ":instance_id", slot_scene_prop_ibank, 1),
+           (scene_prop_set_slot, ":instance_id", slot_scene_prop_inventory_max_length, 300),
            (neq, ":val1", ":val2"),
            (scene_prop_set_slot, ":instance_id", slot_scene_prop_ibank_npersonal, 1),
            (val_add, "$g_ibank_np_qnt", 1),
