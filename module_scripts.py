@@ -469,7 +469,6 @@ scripts.extend([
       (neg|player_is_admin, ":player_id"),
       (player_slot_gt, ":player_id", slot_player_ibank_id, 0),
       (player_get_slot, ":instance_id", ":player_id", slot_player_ibank_id),
-      (assign, reg24, ":instance_id"),
        
       (scene_prop_get_slot, ":inventory_count", ":instance_id", slot_scene_prop_inventory_count),
       (store_add, ":inventory_end", ":inventory_count", slot_scene_prop_inventory_begin),
@@ -621,6 +620,7 @@ scripts.extend([
            (eq, ":loop", 48),
            (assign, reg48, ":item_id"),
            (str_store_string, s1, "str_message_ib_personal"),
+           (assign, reg24, ":instance_id"),
          (try_end),
          (val_add, ":loop", 1),
        (try_end),
